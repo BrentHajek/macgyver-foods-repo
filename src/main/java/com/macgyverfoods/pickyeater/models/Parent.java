@@ -1,5 +1,7 @@
 package com.macgyverfoods.pickyeater.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.*;
 
@@ -53,7 +55,7 @@ public class Parent {
         this.parentLastName = parentLastName;
         this.email = email;
         this.children = new HashSet<>();
-        new ArrayList<>(Arrays.asList(ingredients));
+        this.ingredients = new ArrayList<>(Arrays.asList(ingredients));
     }
 
     public Parent() {}
