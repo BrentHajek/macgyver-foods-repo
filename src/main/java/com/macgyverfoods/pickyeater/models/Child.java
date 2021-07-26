@@ -1,7 +1,12 @@
 package com.macgyverfoods.pickyeater.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
 public class Child {
@@ -10,15 +15,11 @@ public class Child {
     @GeneratedValue
     private Long id;
 
-    private String firstName;
-    private String lastName;
-    private String age;
+    @OneToOne
+    private SubChild subChild;
 
     @ManyToMany
     private Collection<Preference> preferences;
-
-    @ManyToMany
-    private Collection<Allergy> allergies;
 
     @ManyToOne
     private Parent parent;
@@ -27,39 +28,35 @@ public class Child {
         return id;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getAge() {
-        return age;
-    }
-
     public Collection<Preference> getPreferences() {
         return preferences;
     }
 
-    public Collection<Allergy> getAllergies() {
-        return allergies;
+    public SubChild getSubChild() {
+        return subChild;
     }
 
     public Parent getParent() {
         return parent;
     }
 
+    public Child(SubChild subChild, Preference...preferences) {
+        this.subChild = subChild;
+        this.preferences = new ArrayList<>(Arrays.asList(preferences));
+    }
+
     public Child() {}
 
-    public Child(String firstName, String lastName, String age, Collection<Preference> preferences,
-                 Collection<Allergy> allergies, Parent parent) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.preferences = preferences;
-        this.allergies = allergies;
-        this.parent = parent;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Child child = (Child) o;
+        return Objects.equals(id, child.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

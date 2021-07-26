@@ -1,7 +1,9 @@
 package com.macgyverfoods.pickyeater.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.*;
 
 @Entity
 public class Parent {
@@ -14,8 +16,11 @@ public class Parent {
     private String parentLastName;
     private String email;
 
-    @OneToMany (mappedBy = "parent")
-    private Collection<Child> children;
+    @OneToMany
+    private Set<Child> children;
+
+    @OneToMany
+    private Collection<Ingredient> ingredients;
 
     public Long getId() {
         return id;
@@ -37,16 +42,34 @@ public class Parent {
         return children;
     }
 
-    public Parent() {}
-
-    public Parent(String parentFirstName, String parentLastName, String email, Collection<Child> children) {
-        this.parentFirstName = parentFirstName;
-        this.parentLastName = parentLastName;
-        this.email = email;
-        this.children = children;
+    public Collection<Ingredient> getIngredients() {
+        return ingredients;
     }
 
     public void addChild(Child childToAdd) {
         children.add(childToAdd);
+    }
+
+    public Parent(String parentFirstName, String parentLastName, String email, Ingredient ...ingredients) {
+        this.parentFirstName = parentFirstName;
+        this.parentLastName = parentLastName;
+        this.email = email;
+        this.children = new HashSet<>();
+        this.ingredients = new ArrayList<>(Arrays.asList(ingredients));
+    }
+
+    public Parent() {}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Parent parent = (Parent) o;
+        return Objects.equals(id, parent.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

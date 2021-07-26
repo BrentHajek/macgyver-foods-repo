@@ -2,6 +2,7 @@ package com.macgyverfoods.pickyeater.models;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
 public class Preference {
@@ -10,8 +11,8 @@ public class Preference {
     @GeneratedValue
     private Long id;
 
-    @OneToOne(mappedBy = "preferences")
-    private Collection<Ingredient> preferredIngredients;
+    @OneToOne
+    private Ingredient preferredIngredients;
 
     @ManyToMany(mappedBy = "preferences")
     private Collection<Child> children;
@@ -20,7 +21,7 @@ public class Preference {
         return id;
     }
 
-    public Collection<Ingredient> getIngredients() {
+    public Ingredient getIngredients() {
         return preferredIngredients;
     }
 
@@ -28,10 +29,24 @@ public class Preference {
         return children;
     }
 
-    public Preference() {}
+    public Preference() {
 
-    public Preference(Collection<Ingredient> ingredients, Collection<Child> children) {
+    }
+
+    public Preference(Ingredient ingredients) {
         this.preferredIngredients = ingredients;
-        this.children = children;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Preference that = (Preference) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
