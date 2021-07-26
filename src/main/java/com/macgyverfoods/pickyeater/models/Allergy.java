@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
 public class Allergy {
@@ -16,5 +17,38 @@ public class Allergy {
     private String allergyType;
 
     @ManyToMany(mappedBy = "allergies")
-    private Collection<Child> children;
+    private Collection<SubChild> subChildren;
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getAllergyType() {
+        return allergyType;
+    }
+
+    public Collection<SubChild> getSubChildren(){
+        return subChildren;
+    }
+
+    public Allergy(String allergyType) {
+        this.allergyType = allergyType;
+    }
+
+    public Allergy() {
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Allergy allergy = (Allergy) o;
+        return Objects.equals(id, allergy.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
