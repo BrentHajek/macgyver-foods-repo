@@ -14,6 +14,8 @@ function getInfo(){
     for(i = 0; i < LogIns.length; i++) {
         if(username == LogIns[i].username && password == LogIns[i].password) {
             console.log(username + ' is logged in!')
+            return
         }
     }
+    console.log('incorrect username or password')
 }
