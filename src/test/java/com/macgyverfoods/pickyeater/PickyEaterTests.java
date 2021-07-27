@@ -33,12 +33,21 @@ public class PickyEaterTests {
     @Autowired
     private ParentRepository parentRepo;
 
+    @Autowired
+    private FoodCategoryRepository foodCategoryRepo;
+
     @Test
     public void shouldSaveAndLoadPreferencesChild(){
-        Ingredient testIngredient = new Ingredient("milk1");
-        Ingredient testIngredient2 = new Ingredient("Milk2");
-        Ingredient testIngredient3 = new Ingredient("Milk3");
-        Ingredient testIngredient4 = new Ingredient("Milk3");
+
+        FoodCategory testFoodCategory = new FoodCategory("Dairy","dairy.jpg");
+        FoodCategory testFoodCategory2 = new FoodCategory("Meat","meat.jpg");
+        foodCategoryRepo.save(testFoodCategory);
+        foodCategoryRepo.save(testFoodCategory2);
+
+        Ingredient testIngredient = new Ingredient("milk1",testFoodCategory);
+        Ingredient testIngredient2 = new Ingredient("Milk2",testFoodCategory);
+        Ingredient testIngredient3 = new Ingredient("fish",testFoodCategory2);
+        Ingredient testIngredient4 = new Ingredient("chicken",testFoodCategory2);
         ingredientRepo.save(testIngredient);
         ingredientRepo.save(testIngredient2);
         ingredientRepo.save(testIngredient3);
@@ -89,10 +98,16 @@ public class PickyEaterTests {
 
     @Test
     public void shouldSaveAndLoadChildrenToAParents(){
-        Ingredient testIngredient = new Ingredient("milk1");
-        Ingredient testIngredient2 = new Ingredient("Milk2");
-        Ingredient testIngredient3 = new Ingredient("Milk3");
-        Ingredient testIngredient4 = new Ingredient("Milk3");
+
+        FoodCategory testFoodCategory = new FoodCategory("Dairy","dairy.jpg");
+        FoodCategory testFoodCategory2 = new FoodCategory("Meat","meat.jpg");
+        foodCategoryRepo.save(testFoodCategory);
+        foodCategoryRepo.save(testFoodCategory2);
+
+        Ingredient testIngredient = new Ingredient("milk1",testFoodCategory);
+        Ingredient testIngredient2 = new Ingredient("Milk2",testFoodCategory);
+        Ingredient testIngredient3 = new Ingredient("fish",testFoodCategory2);
+        Ingredient testIngredient4 = new Ingredient("chicken",testFoodCategory2);
         ingredientRepo.save(testIngredient);
         ingredientRepo.save(testIngredient2);
         ingredientRepo.save(testIngredient3);
@@ -153,10 +168,16 @@ public class PickyEaterTests {
 
     @Test
     public void shouldBeAbleToAddChildrenToAParent(){
-        Ingredient testIngredient = new Ingredient("milk1");
-        Ingredient testIngredient2 = new Ingredient("Milk2");
-        Ingredient testIngredient3 = new Ingredient("Milk3");
-        Ingredient testIngredient4 = new Ingredient("Milk3");
+
+        FoodCategory testFoodCategory = new FoodCategory("Dairy","dairy.jpg");
+        FoodCategory testFoodCategory2 = new FoodCategory("Meat","meat.jpg");
+        foodCategoryRepo.save(testFoodCategory);
+        foodCategoryRepo.save(testFoodCategory2);
+
+        Ingredient testIngredient = new Ingredient("milk1",testFoodCategory);
+        Ingredient testIngredient2 = new Ingredient("Milk2",testFoodCategory);
+        Ingredient testIngredient3 = new Ingredient("fish",testFoodCategory2);
+        Ingredient testIngredient4 = new Ingredient("chicken",testFoodCategory2);
         ingredientRepo.save(testIngredient);
         ingredientRepo.save(testIngredient2);
         ingredientRepo.save(testIngredient3);
