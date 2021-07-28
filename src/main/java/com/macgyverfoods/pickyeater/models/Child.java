@@ -3,10 +3,7 @@ package com.macgyverfoods.pickyeater.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class Child {
@@ -15,11 +12,15 @@ public class Child {
     @GeneratedValue
     private Long id;
 
-    @OneToOne
-    private SubChild subChild;
+    private String firstName;
+    private String lastName;
+    private String age;
 
     @ManyToMany
-    private Collection<Preference> preferences;
+    private Set<Preference> preferences;
+
+    @ManyToMany
+    private Collection<Allergy> allergies;
 
     @ManyToOne
     private Parent parent;
@@ -28,21 +29,44 @@ public class Child {
         return id;
     }
 
-    public Collection<Preference> getPreferences() {
-        return preferences;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public SubChild getSubChild() {
-        return subChild;
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getAge() {
+        return age;
     }
 
     public Parent getParent() {
         return parent;
     }
 
-    public Child(SubChild subChild, Preference...preferences) {
-        this.subChild = subChild;
-        this.preferences = new ArrayList<>(Arrays.asList(preferences));
+    public Collection<Allergy> getAllergies() {
+        return allergies;
+    }
+
+    public Collection<Preference> getPreferences() {
+        return preferences;
+    }
+
+    public void addPreference(Preference preferenceToAdd) {
+        preferences.add(preferenceToAdd);
+    }
+
+    public void removePreference(Preference preferenceToRemove) {
+        preferences.remove(preferenceToRemove);
+    }
+
+    public Child(String firstName, String lastName, String age, Allergy...allergies) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.allergies = new ArrayList<>(Arrays.asList(allergies));
+        this.preferences = new HashSet<>();
     }
 
     public Child() {}

@@ -18,6 +18,9 @@ public class Ingredient {
     @OneToOne
     private Preference preferences;
 
+    @OneToOne
+    private FoodCategory foodCategory;
+
     @ManyToOne
     private Parent parent;
 
@@ -37,8 +40,13 @@ public class Ingredient {
         return parent;
     }
 
-    public Ingredient(String ingredientName) {
+    public FoodCategory getFoodCategory() {
+        return foodCategory;
+    }
+
+    public Ingredient(String ingredientName, FoodCategory foodCategory) {
         this.ingredientName = ingredientName;
+        this.foodCategory = foodCategory;
     }
 
     public Ingredient(){}

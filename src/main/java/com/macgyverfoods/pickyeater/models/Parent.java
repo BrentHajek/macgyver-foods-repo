@@ -20,7 +20,7 @@ public class Parent {
     private Set<Child> children;
 
     @OneToMany
-    private Collection<Ingredient> ingredients;
+    private Set<Ingredient> ingredients;
 
     public Long getId() {
         return id;
@@ -50,12 +50,24 @@ public class Parent {
         children.add(childToAdd);
     }
 
-    public Parent(String parentFirstName, String parentLastName, String email, Ingredient ...ingredients) {
+    public void removeChild(Child childToRemove) {
+        children.remove(childToRemove);
+    }
+
+    public void addIngredient(Ingredient ingredientToAdd) {
+        ingredients.add(ingredientToAdd);
+    }
+
+    public void removeIngredient(Ingredient ingredientToRemove) {
+        ingredients.remove(ingredientToRemove);
+    }
+
+    public Parent(String parentFirstName, String parentLastName, String email) {
         this.parentFirstName = parentFirstName;
         this.parentLastName = parentLastName;
         this.email = email;
         this.children = new HashSet<>();
-        this.ingredients = new ArrayList<>(Arrays.asList(ingredients));
+        this.ingredients = new HashSet<>();
     }
 
     public Parent() {}

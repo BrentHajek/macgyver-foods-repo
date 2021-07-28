@@ -16,8 +16,8 @@ public class Allergy {
 
     private String allergyType;
 
-    @ManyToMany(mappedBy = "allergies")
-    private Collection<SubChild> subChildren;
+    @ManyToMany (mappedBy = "allergies")
+    private Collection<Child> children;
 
     public Long getId() {
         return id;
@@ -27,8 +27,8 @@ public class Allergy {
         return allergyType;
     }
 
-    public Collection<SubChild> getSubChildren(){
-        return subChildren;
+    public Collection<Child> getChildren() {
+        return children;
     }
 
     public Allergy(String allergyType) {
