@@ -1,6 +1,7 @@
 package com.macgyverfoods.pickyeater.models;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -13,8 +14,8 @@ public class FoodCategory {
     private String foodCategoryName;
     private String foodCategoryImg;
 
-    @OneToOne
-    private Ingredient ingredient;
+    @OneToMany (mappedBy = "foodCategory")
+    private Collection<Ingredient> ingredient;
 
     public Long getId() {
         return id;
@@ -28,7 +29,7 @@ public class FoodCategory {
         return foodCategoryImg;
     }
 
-    public Ingredient getIngredient() {
+    public Collection<Ingredient> getIngredient() {
         return ingredient;
     }
 
