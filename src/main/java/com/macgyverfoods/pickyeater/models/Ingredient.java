@@ -18,7 +18,7 @@ public class Ingredient {
     @OneToOne
     private Preference preferences;
 
-    @OneToOne
+    @ManyToOne
     private FoodCategory foodCategory;
 
     @ManyToOne
