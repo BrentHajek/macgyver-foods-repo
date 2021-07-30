@@ -20,9 +20,10 @@ public class Child {
     private Set<Preference> preferences;
 
     @ManyToMany
-    private Collection<Allergy> allergies;
+    private Set<Allergy> allergies;
 
     @ManyToOne
+    @JsonIgnore
     private Parent parent;
 
     public Long getId() {
@@ -61,11 +62,19 @@ public class Child {
         preferences.remove(preferenceToRemove);
     }
 
-    public Child(String firstName, String lastName, String age, Allergy...allergies) {
+    public void addAllergy(Allergy allergyToAdd) {
+        allergies.add(allergyToAdd);
+    }
+
+    public void removeAllergy(Allergy allergyToRemove) {
+        allergies.remove(allergyToRemove);
+    }
+
+    public Child(String firstName, String lastName, String age) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-        this.allergies = new ArrayList<>(Arrays.asList(allergies));
+        this.allergies = new HashSet<>();
         this.preferences = new HashSet<>();
     }
 

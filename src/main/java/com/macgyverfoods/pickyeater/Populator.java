@@ -55,6 +55,19 @@ public class Populator implements CommandLineRunner {
         ingredientRepo.save(milk);
         ingredientRepo.save(yogurt);
 
+        Preference butter2 = new Preference("Butter",dairy);
+        Preference cheese2 = new Preference("Cheese",dairy);
+        Preference cream2 = new Preference("Cream",dairy);
+        Preference iceCream2 = new Preference("Ice Cream",dairy);
+        Preference milk2 = new Preference("Milk",dairy);
+        Preference yogurt2 = new Preference("Yogurt",dairy);
+        preferenceRepo.save(butter2);
+        preferenceRepo.save(cheese2);
+        preferenceRepo.save(cream2);
+        preferenceRepo.save(iceCream2);
+        preferenceRepo.save(milk2);
+        preferenceRepo.save(yogurt2);
+
         Ingredient apple = new Ingredient("Apple",fruits);
         Ingredient avocado = new Ingredient("Avocado",fruits);
         Ingredient banana = new Ingredient("Banana",fruits);
@@ -76,6 +89,27 @@ public class Populator implements CommandLineRunner {
         ingredientRepo.save(tomato);
         ingredientRepo.save(watermelon);
 
+        Preference apple2 = new Preference("Apple",fruits);
+        Preference avocado2 = new Preference("Avocado",fruits);
+        Preference banana2 = new Preference("Banana",fruits);
+        Preference mango2 = new Preference("Mango",fruits);
+        Preference pear2 = new Preference("Pear",fruits);
+        Preference pineapple2 = new Preference("Pineapple",fruits);
+        Preference orange2 = new Preference("Orange",fruits);
+        Preference strawberry2 = new Preference("Strawberry",fruits);
+        Preference tomato2 = new Preference("Tomato",fruits);
+        Preference watermelon2 = new Preference("Watermelon",fruits);
+        preferenceRepo.save(apple2);
+        preferenceRepo.save(avocado2);
+        preferenceRepo.save(banana2);
+        preferenceRepo.save(mango2);
+        preferenceRepo.save(pear2);
+        preferenceRepo.save(pineapple2);
+        preferenceRepo.save(orange2);
+        preferenceRepo.save(strawberry2);
+        preferenceRepo.save(tomato2);
+        preferenceRepo.save(watermelon2);
+
         Ingredient bread = new Ingredient("Bread",grains);
         Ingredient cereal = new Ingredient("Cereal",grains);
         Ingredient corn = new Ingredient("Corn",grains);
@@ -88,6 +122,19 @@ public class Populator implements CommandLineRunner {
         ingredientRepo.save(pasta);
         ingredientRepo.save(oats);
         ingredientRepo.save(rice);
+
+        Preference bread2 = new Preference("Bread",grains);
+        Preference cereal2 = new Preference("Cereal",grains);
+        Preference corn2 = new Preference("Corn",grains);
+        Preference pasta2 = new Preference("Pasta",grains);
+        Preference oats2 = new Preference("Oats",grains);
+        Preference rice2 = new Preference("Rice",grains);
+        preferenceRepo.save(bread2);
+        preferenceRepo.save(cereal2);
+        preferenceRepo.save(corn2);
+        preferenceRepo.save(pasta2);
+        preferenceRepo.save(oats2);
+        preferenceRepo.save(rice2);
 
         Ingredient beef = new Ingredient("Beef",protein);
         Ingredient chicken = new Ingredient("Chicken",protein);
@@ -103,6 +150,21 @@ public class Populator implements CommandLineRunner {
         ingredientRepo.save(lamb);
         ingredientRepo.save(shrimp);
         ingredientRepo.save(turkey);
+
+        Preference beef2 = new Preference("Beef",protein);
+        Preference chicken2 = new Preference("Chicken",protein);
+        Preference eggs2 = new Preference("Eggs",protein);
+        Preference fish2 = new Preference("Fish",protein);
+        Preference lamb2 = new Preference("Lamb",protein);
+        Preference shrimp2 = new Preference("Shrimp",protein);
+        Preference turkey2 = new Preference("Turkey",protein);
+        preferenceRepo.save(beef2);
+        preferenceRepo.save(chicken2);
+        preferenceRepo.save(eggs2);
+        preferenceRepo.save(fish2);
+        preferenceRepo.save(lamb2);
+        preferenceRepo.save(shrimp2);
+        preferenceRepo.save(turkey2);
 
         Ingredient broccoli = new Ingredient("Broccoli",vegetables);
         Ingredient capsicum = new Ingredient("Capsicum",vegetables);
@@ -121,76 +183,14 @@ public class Populator implements CommandLineRunner {
         ingredientRepo.save(onion);
         ingredientRepo.save(zucchini);
 
-        Preference butter2 = new Preference(butter);
-        Preference cheese2 = new Preference(cheese);
-        Preference cream2 = new Preference(cream);
-        Preference iceCream2 = new Preference(iceCream);
-        Preference milk2 = new Preference(milk);
-        Preference yogurt2 = new Preference(yogurt);
-        preferenceRepo.save(butter2);
-        preferenceRepo.save(cheese2);
-        preferenceRepo.save(cream2);
-        preferenceRepo.save(iceCream2);
-        preferenceRepo.save(milk2);
-        preferenceRepo.save(yogurt2);
-
-        Preference apple2 = new Preference(apple);
-        Preference avocado2 = new Preference(avocado);
-        Preference banana2 = new Preference(banana);
-        Preference mango2 = new Preference(mango);
-        Preference pear2 = new Preference(pear);
-        Preference pineapple2 = new Preference(pineapple);
-        Preference orange2 = new Preference(orange);
-        Preference strawberry2 = new Preference(strawberry);
-        Preference tomato2 = new Preference(tomato);
-        Preference watermelon2 = new Preference(watermelon);
-        preferenceRepo.save(apple2);
-        preferenceRepo.save(avocado2);
-        preferenceRepo.save(banana2);
-        preferenceRepo.save(mango2);
-        preferenceRepo.save(pear2);
-        preferenceRepo.save(pineapple2);
-        preferenceRepo.save(orange2);
-        preferenceRepo.save(strawberry2);
-        preferenceRepo.save(tomato2);
-        preferenceRepo.save(watermelon2);
-
-        Preference bread2 = new Preference(bread);
-        Preference cereal2 = new Preference(cereal);
-        Preference corn2 = new Preference(corn);
-        Preference pasta2 = new Preference(pasta);
-        Preference oats2 = new Preference(oats);
-        Preference rice2 = new Preference(rice);
-        preferenceRepo.save(bread2);
-        preferenceRepo.save(cereal2);
-        preferenceRepo.save(corn2);
-        preferenceRepo.save(pasta2);
-        preferenceRepo.save(oats2);
-        preferenceRepo.save(rice2);
-
-        Preference beef2 = new Preference(beef);
-        Preference chicken2 = new Preference(chicken);
-        Preference eggs2 = new Preference(eggs);
-        Preference fish2 = new Preference(fish);
-        Preference lamb2 = new Preference(lamb);
-        Preference shrimp2 = new Preference(shrimp);
-        Preference turkey2 = new Preference(turkey);
-        preferenceRepo.save(beef2);
-        preferenceRepo.save(chicken2);
-        preferenceRepo.save(eggs2);
-        preferenceRepo.save(fish2);
-        preferenceRepo.save(lamb2);
-        preferenceRepo.save(shrimp2);
-        preferenceRepo.save(turkey2);
-
-        Preference broccoli2 = new Preference(broccoli);
-        Preference capsicum2 = new Preference(capsicum);
-        Preference carrot2 = new Preference(carrot);
-        Preference lettuce2 = new Preference(lettuce);
-        Preference mushroom2 = new Preference(mushroom);
-        Preference potato2 = new Preference(potato);
-        Preference onion2 = new Preference(onion);
-        Preference zucchini2 = new Preference(zucchini);
+        Preference broccoli2 = new Preference("Broccoli",vegetables);
+        Preference capsicum2 = new Preference("Capsicum",vegetables);
+        Preference carrot2 = new Preference("Carrot",vegetables);
+        Preference lettuce2 = new Preference("Lettuce",vegetables);
+        Preference mushroom2 = new Preference("Mushroom",vegetables);
+        Preference potato2 = new Preference("Potato",vegetables);
+        Preference onion2 = new Preference("Onion",vegetables);
+        Preference zucchini2 = new Preference("Zucchini",vegetables);
         preferenceRepo.save(broccoli2);
         preferenceRepo.save(carrot2);
         preferenceRepo.save(capsicum2);
@@ -211,5 +211,8 @@ public class Populator implements CommandLineRunner {
 
         Parent johnDoe = new Parent("John", "Doe", "johnDoe@gmail.com");
         parentRepo.save(johnDoe);
+
+        Child testChild = new Child("test","test","2");
+        childRepo.save(testChild);
     }
 }

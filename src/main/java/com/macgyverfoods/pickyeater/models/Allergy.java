@@ -1,5 +1,7 @@
 package com.macgyverfoods.pickyeater.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,25 +16,26 @@ public class Allergy {
     @GeneratedValue
     private Long id;
 
-    private String allergyType;
+    private String allergy;
 
     @ManyToMany (mappedBy = "allergies")
+    @JsonIgnore
     private Collection<Child> children;
 
     public Long getId() {
         return id;
     }
 
-    public String getAllergyType() {
-        return allergyType;
+    public String getAllergy() {
+        return allergy;
     }
 
     public Collection<Child> getChildren() {
         return children;
     }
 
-    public Allergy(String allergyType) {
-        this.allergyType = allergyType;
+    public Allergy(String allergy) {
+        this.allergy = allergy;
     }
 
     public Allergy() {

@@ -13,39 +13,40 @@ public class Ingredient {
     @GeneratedValue
     private Long id;
 
-    private String ingredientName;
+    private String ingredient;
 
     @OneToOne
+    @JsonIgnore
     private Preference preferences;
 
     @ManyToOne
     private FoodCategory foodCategory;
 
-    @ManyToOne
-    private Parent parent;
+    @ManyToMany
+    private Collection<Parent> parents;
 
     public Long getId() {
         return id;
     }
 
-    public String getIngredientName() {
-        return ingredientName;
+    public String getIngredient() {
+        return ingredient;
     }
 
     public Preference getPreferences() {
         return preferences;
     }
 
-    public Parent getParent() {
-        return parent;
+    public Collection<Parent> getParent() {
+        return parents;
     }
 
     public FoodCategory getFoodCategory() {
         return foodCategory;
     }
 
-    public Ingredient(String ingredientName, FoodCategory foodCategory) {
-        this.ingredientName = ingredientName;
+    public Ingredient(String ingredient, FoodCategory foodCategory) {
+        this.ingredient = ingredient;
         this.foodCategory = foodCategory;
     }
 

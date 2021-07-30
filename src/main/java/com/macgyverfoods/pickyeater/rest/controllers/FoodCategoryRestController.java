@@ -1,4 +1,4 @@
-package com.macgyverfoods.pickyeater;
+package com.macgyverfoods.pickyeater.rest.controllers;
 
 import com.macgyverfoods.pickyeater.models.FoodCategory;
 import com.macgyverfoods.pickyeater.repositories.FoodCategoryRepository;
@@ -15,12 +15,12 @@ public class FoodCategoryRestController {
     @Resource
     FoodCategoryRepository foodCategoryRepo;
 
-    @GetMapping("/api/foodCategories")
+    @GetMapping("/foodCategories")
     public Collection<FoodCategory> getFoodCategories() {
         return (Collection<FoodCategory>) foodCategoryRepo.findAll();
     }
 
-    @GetMapping("/api/foodCategories/{foodCategoryId}")
+    @GetMapping("/foodCategories/{Id}")
         public FoodCategory getFoodCategory(@PathVariable Long foodCategoryId) {
             return foodCategoryRepo.findById(foodCategoryId).get();
         }
