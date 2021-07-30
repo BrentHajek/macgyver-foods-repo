@@ -1,3 +1,7 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
 body {
   margin: 0;
   height: 100vh;
@@ -118,4 +122,53 @@ body {
 
 .form__link:hover {
   text-decoration: underline;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    z-index: 10;
+    background-color: #ffffff;
+    width: 500px;
+    max-width: 80%;
+}
+
+.modal.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.modal__header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+}
+
+.modal__header .close__button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+#overlay {
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    transition: 200ms ease-in-out;
+}
+
+#overlay.active {
+    opacity: 1;
+    pointer-events: all;
 }
