@@ -7,12 +7,12 @@
   <link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
-  <section class="modal">
+  <section class="modal active">
     <div class="container">
       <form class="form" id="login">
         <div class="modal__header">
           <h1 class="form__title">Login</h1>
-          <button class="close__button">&times;</button>
+          <button class="close__button" id="close__button">&times;</button>
         </div>
         <div class="form__message form__message--error"></div>
         <div class="form__input-group">
@@ -92,6 +92,6 @@
       </form>
     </div>
   </section>
-  <div id="overlay"></div>
+  <div class="active" id="overlay"></div>
   <script src="./js/index.js"></script>
 </body>
