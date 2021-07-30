@@ -16,10 +16,10 @@ public class Parent {
     private String parentLastName;
     private String email;
 
-    @OneToMany
+    @OneToMany (mappedBy = "parent")
     private Set<Child> children;
 
-    @OneToMany
+    @ManyToMany
     private Set<Ingredient> ingredients;
 
     public Long getId() {

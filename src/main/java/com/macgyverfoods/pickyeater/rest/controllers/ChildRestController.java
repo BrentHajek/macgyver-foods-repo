@@ -1,9 +1,7 @@
 package com.macgyverfoods.pickyeater.rest.controllers;
 
-import com.macgyverfoods.pickyeater.models.Child;
-import com.macgyverfoods.pickyeater.models.Ingredient;
-import com.macgyverfoods.pickyeater.models.Parent;
-import com.macgyverfoods.pickyeater.models.Preference;
+import com.macgyverfoods.pickyeater.models.*;
+import com.macgyverfoods.pickyeater.repositories.AllergyRepository;
 import com.macgyverfoods.pickyeater.repositories.ChildRepository;
 import com.macgyverfoods.pickyeater.repositories.PreferenceRepository;
 import org.json.JSONException;
@@ -22,6 +20,9 @@ public class ChildRestController {
 
     @Resource
     private PreferenceRepository preferenceRepo;
+
+    @Resource
+    private AllergyRepository allergyRepo;
 
     @GetMapping("/children")
     public Collection<Child> getChildren() {
@@ -50,7 +51,22 @@ public class ChildRestController {
         return childRepo.findById(id);
     }
 
-    @PostMapping("/children/{id}/delete-preferences/{preferenceId}")
+    @PostMapping("/children/{id}/add-allergies")
+    public Optional<Child> addAllergies(@RequestBody String body, @PathVariable Long id) throws JSONException {
+        JSONObject newAllergy = new JSONObject(body);
+        String allergy = newAllergy.getString("allergy");
+        Optional<Allergy> allergyToAddOpt = allergyRepo.findByAllergy(allergy);
+        if (allergyToAddOpt.isPresent()) {
+            Optional<Child> childToAddAllergyToOpt = childRepo.findById(id);
+            Child childToAddAllergyTo = childToAddAllergyToOpt.get();
+            childToAddAllergyTo.addAllergy(allergyToAddOpt.get());
+            childRepo.save(childToAddAllergyTo);
+        }
+
+        return childRepo.findById(id);
+    }
+
+    @DeleteMapping ("/children/{id}/delete-preferences/{preferenceId}")
     public String removePreference(@PathVariable Long id, @PathVariable Long preferenceId) {
         Optional<Preference> preferenceToRemoveOpt = preferenceRepo.findById(preferenceId);
         Preference preferenceToRemove = preferenceToRemoveOpt.get();

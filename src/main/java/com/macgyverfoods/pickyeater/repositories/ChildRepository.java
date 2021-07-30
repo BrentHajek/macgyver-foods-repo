@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface ChildRepository extends CrudRepository<Child,Long> {
 
-    Optional<Child> findByName(String childName);
+    Optional<Child> findByFirstName(String firstName);
 }

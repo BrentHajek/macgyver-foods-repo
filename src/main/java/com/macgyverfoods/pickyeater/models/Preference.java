@@ -1,5 +1,7 @@
 package com.macgyverfoods.pickyeater.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -11,18 +13,25 @@ public class Preference {
     @GeneratedValue
     private Long id;
 
-    @OneToOne
-    private Ingredient preferredIngredients;
+    private String preference;
+
+    @ManyToOne
+    private FoodCategory foodCategory;
 
     @ManyToMany(mappedBy = "preferences")
+    @JsonIgnore
     private Collection<Child> children;
 
     public Long getId() {
         return id;
     }
 
-    public Ingredient getIngredients() {
-        return preferredIngredients;
+    public String getPreference() {
+        return preference;
+    }
+
+    public FoodCategory getFoodCategory() {
+        return foodCategory;
     }
 
     public Collection<Child> getChildren() {
@@ -33,8 +42,9 @@ public class Preference {
 
     }
 
-    public Preference(Ingredient ingredients) {
-        this.preferredIngredients = ingredients;
+    public Preference(String preference, FoodCategory foodCategory) {
+        this.preference = preference;
+        this.foodCategory = foodCategory;
     }
 
     @Override
