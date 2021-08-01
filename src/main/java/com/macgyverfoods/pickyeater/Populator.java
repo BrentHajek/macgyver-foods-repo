@@ -214,5 +214,7 @@ public class Populator implements CommandLineRunner {
 
         Child testChild = new Child("test","test","2");
         childRepo.save(testChild);
+
+        johnDoe.addChild(testChild);
     }
 }
