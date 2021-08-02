@@ -200,14 +200,24 @@ public class Populator implements CommandLineRunner {
         preferenceRepo.save(onion2);
         preferenceRepo.save(zucchini2);
 
-        Allergy cerealAllergy = new Allergy("Cereal");
+        Allergy wheatAllergy = new Allergy("Wheat");
         Allergy eggsAllergy = new Allergy("Eggs");
         Allergy fishAllergy = new Allergy("Fish");
+        Allergy sesameAllergy = new Allergy("Sesame");
         Allergy milkAllergy = new Allergy("Milk");
-        allergyRepo.save(cerealAllergy);
+        Allergy peanutAllergy = new Allergy("Peanut");
+        Allergy shellfishAllergy = new Allergy("Shellfish");
+        Allergy soyAllergy = new Allergy("Soy");
+        Allergy treeNutAllergy = new Allergy("Tree Nut");
+        allergyRepo.save(wheatAllergy);
         allergyRepo.save(eggsAllergy);
         allergyRepo.save(fishAllergy);
+        allergyRepo.save(sesameAllergy);
         allergyRepo.save(milkAllergy);
+        allergyRepo.save(peanutAllergy);
+        allergyRepo.save(shellfishAllergy);
+        allergyRepo.save(soyAllergy);
+        allergyRepo.save(treeNutAllergy);
 
         Parent johnDoe = new Parent("John", "Doe", "johnDoe@gmail.com");
         parentRepo.save(johnDoe);
