@@ -79,11 +79,10 @@ public class ParentRestController {
         String age = newChild.getString("age");
         Optional<Child> childToAddOpt = childRepo.findByFirstName(firstName);
         if (childToAddOpt.isEmpty()) {
-                Child childToAdd = new Child(firstName,lastName,age);
-                childRepo.save(childToAdd);
                 Optional<Parent> parentToAddChild2Opt = parentRepo.findById(id);
                 Parent parentToAddChild2 = parentToAddChild2Opt.get();
-                parentToAddChild2.addChild(childToAdd);
+                Child childToAdd = new Child(firstName,lastName,age,parentToAddChild2);
+                childRepo.save(childToAdd);
                 parentRepo.save(parentToAddChild2);
         }
         return parentRepo.findById(id);
@@ -99,7 +98,8 @@ public class ParentRestController {
         if (childToAddOpt.isPresent()) {
             Optional<Parent> parentToRemoveChild2Opt = parentRepo.findById(id);
             Parent parentToRemoveChild2 = parentToRemoveChild2Opt.get();
-            parentToRemoveChild2.removeChild(childToAddOpt.get());
+            childRepo.delete(childToAddOpt.get());
+//            parentToRemoveChild2.removeChild(childToAddOpt.get());
             parentRepo.save(parentToRemoveChild2);
         }
         return parentRepo.findById(id);

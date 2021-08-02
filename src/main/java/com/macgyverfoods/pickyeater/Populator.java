@@ -212,9 +212,8 @@ public class Populator implements CommandLineRunner {
         Parent johnDoe = new Parent("John", "Doe", "johnDoe@gmail.com");
         parentRepo.save(johnDoe);
 
-        Child testChild = new Child("test","test","2");
+        Child testChild = new Child("test","test","2",johnDoe);
         childRepo.save(testChild);
 
-        johnDoe.addChild(testChild);
     }
 }

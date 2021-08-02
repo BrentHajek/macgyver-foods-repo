@@ -70,12 +70,13 @@ public class Child {
         allergies.remove(allergyToRemove);
     }
 
-    public Child(String firstName, String lastName, String age) {
+    public Child(String firstName, String lastName, String age, Parent parent) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.allergies = new HashSet<>();
         this.preferences = new HashSet<>();
+        this.parent = parent;
     }
 
     public Child() {}
