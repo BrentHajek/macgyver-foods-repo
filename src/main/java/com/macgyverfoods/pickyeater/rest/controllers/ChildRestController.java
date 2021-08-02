@@ -36,7 +36,7 @@ public class ChildRestController {
         return childRepo.findById(id).get();
     }
 
-    @PostMapping("/children/{id}/add-preferences")
+    @PostMapping("/children/{id}/add-preference")
     public Optional<Child> addPreferences(@RequestBody String body, @PathVariable Long id) throws JSONException {
         JSONObject newPreference = new JSONObject(body);
         String preference = newPreference.getString("preference");
@@ -51,7 +51,21 @@ public class ChildRestController {
         return childRepo.findById(id);
     }
 
-    @PostMapping("/children/{id}/add-allergies")
+    @DeleteMapping ("/children/{id}/delete-preference")
+    public Optional<Child> removePreference(@RequestBody String body, @PathVariable Long id) {
+        JSONObject removedPreference = new JSONObject(body);
+        String preference = removedPreference.getString("preference");
+        Optional<Preference> preferenceToRemoveOpt = preferenceRepo.findByPreference(preference);
+        if (preferenceToRemoveOpt.isPresent()){
+            Optional<Child> childToRemovePreferenceFromOpt = childRepo.findById(id);
+            Child childToRemovePreferenceFrom = childToRemovePreferenceFromOpt.get();
+            childToRemovePreferenceFrom.removePreference(preferenceToRemoveOpt.get());
+            childRepo.save(childToRemovePreferenceFrom);
+        }
+        return childRepo.findById(id);
+    }
+
+    @PostMapping("/children/{id}/add-allergy")
     public Optional<Child> addAllergies(@RequestBody String body, @PathVariable Long id) throws JSONException {
         JSONObject newAllergy = new JSONObject(body);
         String allergy = newAllergy.getString("allergy");
@@ -66,16 +80,19 @@ public class ChildRestController {
         return childRepo.findById(id);
     }
 
-    @DeleteMapping ("/children/{id}/delete-preferences/{preferenceId}")
-    public String removePreference(@PathVariable Long id, @PathVariable Long preferenceId) {
-        Optional<Preference> preferenceToRemoveOpt = preferenceRepo.findById(preferenceId);
-        Preference preferenceToRemove = preferenceToRemoveOpt.get();
+    @DeleteMapping("/children/{id}/delete-allergy")
+    public Optional<Child> removeAllergies(@RequestBody String body, @PathVariable Long id) throws JSONException {
+        JSONObject removeAllergy = new JSONObject(body);
+        String allergy = removeAllergy.getString("allergy");
+        Optional<Allergy> allergyToAddOpt = allergyRepo.findByAllergy(allergy);
+        if (allergyToAddOpt.isPresent()) {
+            Optional<Child> childToAddAllergyToOpt = childRepo.findById(id);
+            Child childToAddAllergyTo = childToAddAllergyToOpt.get();
+            childToAddAllergyTo.removeAllergy(allergyToAddOpt.get());
+            childRepo.save(childToAddAllergyTo);
+        }
 
-        Optional<Child> childToRemovePreferenceFromOpt = childRepo.findById(id);
-        Child childToRemovePreferenceFrom = childToRemovePreferenceFromOpt.get();
-        childToRemovePreferenceFrom.removePreference(preferenceToRemove);
-
-        return "redirect:/children/" + id;
+        return childRepo.findById(id);
     }
 
 }
