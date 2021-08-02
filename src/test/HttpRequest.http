@@ -1,34 +1,40 @@
-# GET http://localhost:8080/preferences
-# ###
-# GET http://localhost:8080/parents
-# ###
-
-# POST http://localhost:8080/parents/84/add-child
-# content-type: application/json
-
-# {
-#     "firstName": "d",
-#     "lastName": "br",
-#     "age": "12"
-# }
+GET http://localhost:8080/preferences
+###
+GET http://localhost:8080/foodCategories
+###
+GET http://localhost:8080/allergies
+###
+GET http://localhost:8080/ingredients
+###
+GET http://localhost:8080/children
+###
+GET http://localhost:8080/parents
+###
 
 
 # DELETE http://localhost:8080/parents/84/delete-child
 # content-type: application/json
 
 # {
-#     "firstName": "d",
+#     "firstName": "d23",
 #     "lastName": "br",
 #     "age": "12"
 # }
 
-# GET http://localhost:8080/ingredients
-# ###
+# POST http://localhost:8080/parents/84/add-child
+# content-type: application/json
+
+# {
+#     "firstName": "d23",
+#     "lastName": "br",
+#     "age": "12"
+# }
+
 # DELETE  http://localhost:8080/children/85/delete-allergy
 # content-type: application/json
 
 # {
-#     "allergy": "Eggs"
+#     "allergy": "Fish"
 # }
 
 # POST http://localhost:8080/children/85/add-allergy
@@ -38,20 +44,6 @@
 #     "allergy": "Fish"
 # }
 
-# GET http://localhost:8080/allergies
-# ###
-# GET http://localhost:8080/children
-# ###
-# GET http://localhost:8080/foodCategories
-# ###
-# DELETE http://localhost:8080/children/85/delete-preference
-# content-type: application/json
-
-# {
-#     "preference": "Lamb" 
-# }
-
-
 # POST http://localhost:8080/children/85/add-preference
 # content-type: application/json
 
@@ -59,7 +51,19 @@
 #     "preference": "Lamb"
 # }
 
+# DELETE http://localhost:8080/children/85/delete-preference
+# content-type: application/json
 
+# {
+#     "preference": "Lamb" 
+# }
+
+# POST http://localhost:8080/parents/84/add-ingredient
+# content-type: application/json
+
+# {
+#     "ingredient": "Eggs"  
+# }
 
 # DELETE http://localhost:8080/parents/84/delete-ingredient
 # content-type: application/json
@@ -67,14 +71,3 @@
 # {
 #     "ingredient": "Beef"  
 # }
-
-# POST http://localhost:8080/parents/84/add-ingredient
-# content-type: application/json
-
-# {
-#     "ingredient": "Beef"  
-# }
-
-
-
-
