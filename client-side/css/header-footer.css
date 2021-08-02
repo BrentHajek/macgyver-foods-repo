@@ -1,0 +1,74 @@
+.header {
+    background-color: rgb(238, 129, 56);
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__menu_btn {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+    padding-left: 1.5rem;
+}
+
+.header__menu_burger {
+    width: 30px;
+    height: 4px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(255, 101, 47, .2);
+    transition: all .5s ease-in-out;
+}
+
+.header__menu_burger::before,
+.header__menu_burger::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 4px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(255, 101, 47, .2);
+    transition: all .5s ease-in-out;
+}
+
+.header__menu_burger::before {
+    transform: translateY(-9px);
+}
+
+.header__menu_burger::after {
+    transform: translateY(9px);
+}
+
+.header__list {
+    display: flex;
+    padding-right: 1.5rem;
+}
+
+.header__listItems {
+    color: white;
+    font-size: 20px;
+    list-style: none;
+    padding-left: 1.5rem;
+    padding-top: .25rem;
+}
+
+/*MENU BUTTON ANIMATION*/
+.header__menu_btn.open .header__menu_burger {
+    transform: translateX(-50px);
+    background: transparent;
+    box-shadow: none;
+}
+
+.header__menu_btn.open .header__menu_burger::before {
+    transform: rotate(45deg) translate(35px, -35px);
+}
+
+.header__menu_btn.open .header__menu_burger::after {
+    transform: rotate(-45deg) translate(35px, 35px);
+}
