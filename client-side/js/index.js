@@ -9,10 +9,15 @@ import AllergyComponent from './components/AllergyComponent.js';
 buildPage();
 
 function buildPage() {
-    allergyChecklist();
+    navAllergies();
 }
 
-function allergyChecklist() {
-    const app = document.querySelector('#app');
-    app.innerHTML = AllergyComponent();
+function navAllergies() {
+    const allergyElem = document.querySelector('.allergy-list-btn');
+    allergyElem.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        apiActions.getRequest('http://localhost:8080/allergies', allergies => {
+            app.innerHTML = AllergyComponent(allergies);
+        });
+    });
 }
