@@ -1,4 +1,4 @@
-import Child from "./Child";
+import Child from "./Child.js";
 
 export default function Parent(parent) {
     return `
@@ -9,21 +9,18 @@ export default function Parent(parent) {
         <p>Last name: ${parent.parentLastName}</p>
         <p>Email: ${parent.email}</p>
         <h3>Your Ingredients:</h3>
-        ${parent.ingredients.map((ingredients) => {
+        ${parent.ingredients.map((ingredient) => {
             return `
-                <p>${ingredients}</p>
+                <p>${ingredient.ingredient}</p>
             `;
         }).join('')}
     </div>
-    <div class="children_list">${parent.children.map((child) => {
+    <div class='child__info_containter'>
+    ${parent.child.map((child) => {
         return `
-            ${Child(child)}
+            <p>${Child(child)}</p>
         `;
     }).join('')}
     </div>
     `;
 }
-
- 
-
-

@@ -1,10 +1,11 @@
 import apiActions from './api-actions/api-actions.js';
 import ParentPage from './pages/ParentPage.js';
-// import Child from './components/Child.js';
+import Child from './components/Child.js';
 
 buildPage();
 
 function buildPage() {
+
     renderProfileInfo();
 }
 
@@ -19,3 +20,4 @@ function renderProfileInfo() {
         });
     });
 }
+
