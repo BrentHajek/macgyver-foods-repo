@@ -72,36 +72,34 @@ public class ParentRestController {
     }
 
     @PostMapping("/parents/{id}/add-child")
-    public Optional<Parent> addChild(@RequestBody String body, @PathVariable Long id) throws JSONException {
+    public Parent addChild(@RequestBody String body, @PathVariable Long id) throws JSONException {
         JSONObject newChild = new JSONObject(body);
         String firstName = newChild.getString("firstName");
         String lastName = newChild.getString("lastName");
         String age = newChild.getString("age");
         Optional<Child> childToAddOpt = childRepo.findByFirstName(firstName);
         if (childToAddOpt.isEmpty()) {
-                Optional<Parent> parentToAddChild2Opt = parentRepo.findById(id);
-                Parent parentToAddChild2 = parentToAddChild2Opt.get();
+                Parent parentToAddChild2 = parentRepo.findById(id).get();
                 Child childToAdd = new Child(firstName,lastName,age,parentToAddChild2);
                 childRepo.save(childToAdd);
                 parentRepo.save(parentToAddChild2);
         }
-        return parentRepo.findById(id);
+        return parentRepo.findById(id).get();
     }
 
     @DeleteMapping("/parents/{id}/delete-child")
-    public Optional<Parent> removeChild(@RequestBody String body, @PathVariable Long id) throws JSONException {
+    public Parent removeChild(@RequestBody String body, @PathVariable Long id) throws JSONException {
         JSONObject removedChild = new JSONObject(body);
         String firstName = removedChild.getString("firstName");
         String lastName = removedChild.getString("lastName");
         String age = removedChild.getString("age");
         Optional<Child> childToAddOpt = childRepo.findByFirstName(firstName);
         if (childToAddOpt.isPresent()) {
-            Optional<Parent> parentToRemoveChild2Opt = parentRepo.findById(id);
-            Parent parentToRemoveChild2 = parentToRemoveChild2Opt.get();
+            Parent parentToRemoveChild2 = parentRepo.findById(id).get();
             childRepo.delete(childToAddOpt.get());
 //            parentToRemoveChild2.removeChild(childToAddOpt.get());
             parentRepo.save(parentToRemoveChild2);
         }
-        return parentRepo.findById(id);
+        return parentRepo.findById(id).get();
     }
 }
