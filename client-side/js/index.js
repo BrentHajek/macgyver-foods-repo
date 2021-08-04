@@ -19,6 +19,8 @@ function renderProfileInfo() {
         apiActions.getRequest('http://localhost:8080/parents/89', (parents) => {
             app.innerHTML = ParentPage(parents);
             navToAddChildPage();
+            createChild();
+            // deleteChild();
         });
     });
 }
@@ -28,13 +30,6 @@ function navToAddChildPage() {
         navToAdd.addEventListener('click', ()=>{
             app.innerHTML = AddChildPage();
         })   
-}
-
-window.onload = function() {
-    const profileButton = document.querySelector('#profile_button');
-    profileButton.addEventListener('click', () => {
-        createChild();
-    });
 }
 
 function createChild() {
@@ -49,7 +44,8 @@ function createChild() {
                 "age": age
             }, (parents) => {
                 console.log(parents);
-                app.innerHTML = ParentPage(parents)
+                app.innerHTML = ParentPage(parents);
+                navToAddChildPage();
             });
         }
     })

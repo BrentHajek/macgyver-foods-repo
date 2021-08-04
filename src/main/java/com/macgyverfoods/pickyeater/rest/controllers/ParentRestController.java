@@ -91,8 +91,6 @@ public class ParentRestController {
     public Parent removeChild(@RequestBody String body, @PathVariable Long id) throws JSONException {
         JSONObject removedChild = new JSONObject(body);
         String firstName = removedChild.getString("firstName");
-        String lastName = removedChild.getString("lastName");
-        String age = removedChild.getString("age");
         Optional<Child> childToAddOpt = childRepo.findByFirstName(firstName);
         if (childToAddOpt.isPresent()) {
             Parent parentToRemoveChild2 = parentRepo.findById(id).get();
