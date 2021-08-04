@@ -16,7 +16,7 @@ const app = document.querySelector('#app');
 function renderProfileInfo() {
     const profileButton = document.querySelector('#profile_button');
     profileButton.addEventListener('click', () => {
-        apiActions.getRequest('http://localhost:8080/parents/84', (parents) => {
+        apiActions.getRequest('http://localhost:8080/parents/89', (parents) => {
             app.innerHTML = ParentPage(parents);
         });
     });
