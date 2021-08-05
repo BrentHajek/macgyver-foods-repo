@@ -5,5 +5,5 @@
 
 .child__info_containter {
     display: grid;
-    grid-area: auto;
+    grid-template-columns: 1fr 1fr;
 }

@@ -5,7 +5,6 @@ export default function ParentPage(parent) {
     <h2>The Profile Page</h2>
         <div class="user_info">
             ${Parent(parent)}
-            <button class="add_child_plus" type="button">+</button>
             <button class="delete_child_minus" type="button">-</button>
         </div>
     `;
