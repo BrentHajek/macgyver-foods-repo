@@ -12,13 +12,11 @@ GET http://localhost:8080/parents
 ###
 
 
-# DELETE http://localhost:8080/parents/84/delete-child
+# DELETE http://localhost:8080/parents/89/delete-child
 # content-type: application/json
 
 # {
-#     "firstName": "d23",
-#     "lastName": "br",
-#     "age": "12"
+#     "firstName": "tdssfsdfsd"
 # }
 
 # POST http://localhost:8080/parents/84/add-child

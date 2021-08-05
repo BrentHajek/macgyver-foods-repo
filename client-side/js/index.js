@@ -2,6 +2,7 @@ import apiActions from './api-actions/api-actions.js';
 import ParentPage from './pages/ParentPage.js';
 import AllergyComponent from './components/AllergyComponent.js';
 import AddChildPage from "./pages/AddChildPage.js"
+import DeleteChildPage from "./pages/DeleteChildPage.js"
 
 
 buildPage();
@@ -19,8 +20,9 @@ function renderProfileInfo() {
         apiActions.getRequest('http://localhost:8080/parents/89', (parents) => {
             app.innerHTML = ParentPage(parents);
             navToAddChildPage();
+            navToDeleteChildPage();
             createChild();
-            // deleteChild();
+            deleteChild();
         });
     });
 }
@@ -30,6 +32,13 @@ function navToAddChildPage() {
         navToAdd.addEventListener('click', ()=>{
             app.innerHTML = AddChildPage();
         })   
+}
+
+function navToDeleteChildPage() {
+    const deleteChildButton = document.querySelector('.delete_child_minus');
+    deleteChildButton.addEventListener('click', () => {
+        app.innerHTML = DeleteChildPage();
+    })
 }
 
 function createChild() {
@@ -46,9 +55,25 @@ function createChild() {
                 console.log(parents);
                 app.innerHTML = ParentPage(parents);
                 navToAddChildPage();
+                navToDeleteChildPage();
             });
         }
     })
+}
+
+function deleteChild() {
+        app.addEventListener('click', (event) => {
+            if(event.target.classList.contains('delete_child_submit')){
+                const firstName = event.target.parentElement.querySelector('#delete_child_firstName').value;
+                apiActions.deleteRequest('http://localhost:8080/parents/89/delete-child', {
+                    "firstName": firstName
+                }, (parents) => {
+                    app.innerHTML = ParentPage(parents)
+                    navToDeleteChildPage();
+                    navToAddChildPage();
+                });
+            }
+        })
 }
 
 function navAllergies() {
