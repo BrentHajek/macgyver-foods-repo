@@ -136,6 +136,11 @@
     padding: 0;
 }
 
+.footer__social_icons a {
+    color: inherit;
+    text-decoration: none;
+}
+
 .footer__social_icons li {
     cursor: pointer;
     margin: 1rem;
@@ -154,6 +159,7 @@
     font-weight: bolder;
     justify-content: space-around;
     list-style: none;
+    margin-bottom: 0;
 }
 
 .footer__links_list a {
@@ -164,4 +170,12 @@
 .footer__links_listItem {
     cursor: pointer;
     margin: 1rem;
+}
+
+.footer__copy {
+    color: rgb(238, 129, 56);
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+    justify-content: center;
+    padding-top: 1rem;
 }
