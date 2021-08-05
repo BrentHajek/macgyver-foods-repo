@@ -1,3 +1,4 @@
+/*HEADER*/
 .header {
     background-color: rgb(238, 129, 56);
     display: flex;
@@ -110,4 +111,22 @@
     list-style: none;
     margin-left: 1.5rem;
     margin-top: .25rem;
+}
+
+/*FOOTER*/
+.footer {
+    margin: auto;
+    width: 100%;
+}
+
+.footer__social_bar {
+    text-align: center;
+    align-items: center;
+}
+
+.footer__social_icons {
+    color: rgb(238, 129, 56);
+    display: flex;
+    font-size: 20px;
+    list-style: none;
 }
