@@ -120,13 +120,48 @@
 }
 
 .footer__social_bar {
-    text-align: center;
     align-items: center;
+    border-top: 1px solid rgb(238, 129, 56);
+    margin-top: 2rem;
+    text-align: center;
 }
 
 .footer__social_icons {
     color: rgb(238, 129, 56);
     display: flex;
     font-size: 20px;
+    justify-content: center;
     list-style: none;
+    margin: 1rem;
+    padding: 0;
+}
+
+.footer__social_icons li {
+    cursor: pointer;
+    margin: 1rem;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.footer__links {
+    background-color: rgb(238, 129, 56);
+}
+
+.footer__links_list {
+    color: white;
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bolder;
+    justify-content: space-around;
+    list-style: none;
+}
+
+.footer__links_list a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.footer__links_listItem {
+    cursor: pointer;
+    margin: 1rem;
 }
