@@ -3,15 +3,17 @@ import ParentPage from './pages/ParentPage.js';
 import AllergyComponent from './components/AllergyComponent.js';
 import AddChildPage from "./pages/AddChildPage.js"
 import DeleteChildPage from "./pages/DeleteChildPage.js"
+import FoodCategories from './components/FoodCategories.js';
+import FoodCategory from './components/FoodCategory.js';
 import RecipeInstructions from './components/RecipeInstructions.js';
 import RecipeIngredients from './components/RecipeIngredients.js';
-
 
 buildPage();
 
 function buildPage() {
     renderProfileInfo();
     navAllergies();
+    navFoodCategories();
 }
 
 const app = document.querySelector('#app');
@@ -38,17 +40,17 @@ function renderProfileInfo() {
 }
 
 function navToAddChildPage() {
-        const navToAdd = document.querySelector('.add_child_plus');
-        navToAdd.addEventListener('click', ()=>{
-            app.innerHTML = AddChildPage();
-        })   
+    const navToAdd = document.querySelector('.add_child_plus');
+    navToAdd.addEventListener('click', ()=>{
+        app.innerHTML = AddChildPage();
+    });
 }
 
 function navToDeleteChildPage() {
     const deleteChildButton = document.querySelector('.delete_child_minus');
     deleteChildButton.addEventListener('click', () => {
         app.innerHTML = DeleteChildPage();
-    })
+    });
 }
 
 function createChild() {
@@ -68,22 +70,22 @@ function createChild() {
                 navToDeleteChildPage();
             });
         }
-    })
+    });
 }
 
 function deleteChild() {
-        app.addEventListener('click', (event) => {
-            if(event.target.classList.contains('delete_child_submit')){
-                const firstName = event.target.parentElement.querySelector('#delete_child_firstName').value;
-                apiActions.deleteRequest('http://localhost:8080/parents/89/delete-child', {
-                    "firstName": firstName
-                }, (parents) => {
-                    app.innerHTML = ParentPage(parents)
-                    navToDeleteChildPage();
-                    navToAddChildPage();
-                });
-            }
-        })
+    app.addEventListener('click', (event) => {
+        if(event.target.classList.contains('delete_child_submit')){
+            const firstName = event.target.parentElement.querySelector('#delete_child_firstName').value;
+            apiActions.deleteRequest('http://localhost:8080/parents/89/delete-child', {
+                "firstName": firstName
+            }, (parents) => {
+                app.innerHTML = ParentPage(parents)
+                navToDeleteChildPage();
+                navToAddChildPage();
+            });
+        }
+    });
 }
 
 function navAllergies() {
@@ -95,6 +97,28 @@ function navAllergies() {
     });
 }
 
+function navFoodCategories() {
+    const foodCategoryElem = document.querySelector('.preference-list-btn');
+    foodCategoryElem.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
+            app.innerHTML =FoodCategories(foodCategories);
+        });
+    });
+    renderFoodCategoryIngredients();
+}
+
+function renderFoodCategoryIngredients() {
+    const app = document.querySelector('#app');
+    app.addEventListener('click', () => {
+        if (event.target.classList.contains('food-category-name')) {
+            const foodCategoryId = event.target.querySelector('#foodCategoryId').value;
+            apiActions.getRequest(`http://localhost:8080/foodCategories/${foodCategoryId}`, foodCategory => {
+                app.innerHTML = FoodCategory(foodCategory);
+            });
+        }
+    });
+}
 function renderRecipeInstructions() {
     const recipeInstructionsButton = document.querySelector('#recipe_button');
     recipeInstructionsButton.addEventListener('click', () => {
