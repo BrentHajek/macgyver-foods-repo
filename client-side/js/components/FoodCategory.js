@@ -4,14 +4,18 @@ export default function FoodCategory(foodCategory) {
         <div class="ingredient-list">
         ${foodCategory.ingredient.map(ingredient => {
         return `
-            <ul>
-                <li>
-                    <span>${ingredient.ingredient}</span>
-                </li>
-                    </ul>
+            <label class="preference-container">
+                <div class="ingredient-name">${ingredient.ingredient}
+                    <input type='checkbox' id='ingredientId' value='${ingredient.id}'>
+                </div>
+            </label>
             `;
     })
         .join('')}
         </div>
+
+        <section class='add-preferences'>
+            <button class='submit-btn'>Submit</button>
+        </section>
     `;
 }
