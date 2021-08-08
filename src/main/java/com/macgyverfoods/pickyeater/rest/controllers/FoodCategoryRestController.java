@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.Collection;
+import java.util.Optional;
 
 @RestController
 public class FoodCategoryRestController {
@@ -20,8 +21,8 @@ public class FoodCategoryRestController {
         return (Collection<FoodCategory>) foodCategoryRepo.findAll();
     }
 
-    @GetMapping("/foodCategories/{Id}")
-        public FoodCategory getFoodCategory(@PathVariable Long foodCategoryId) {
-            return foodCategoryRepo.findById(foodCategoryId).get();
+    @GetMapping("/foodCategories/{id}")
+        public Optional<FoodCategory> getFoodCategory(@PathVariable Long id) {
+            return foodCategoryRepo.findById(id);
         }
 }

@@ -3,6 +3,8 @@ package com.macgyverfoods.pickyeater.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -19,8 +21,9 @@ public class Ingredient {
     @JsonIgnore
     private Preference preferences;
 
-    @ManyToOne
-    private FoodCategory foodCategory;
+    @ManyToMany
+    @JsonIgnore
+    private Collection<FoodCategory> foodCategory;
 
     @ManyToMany
     private Collection<Parent> parents;
@@ -41,13 +44,13 @@ public class Ingredient {
         return parents;
     }
 
-    public FoodCategory getFoodCategory() {
+    public Collection<FoodCategory> getFoodCategory() {
         return foodCategory;
     }
 
-    public Ingredient(String ingredient, FoodCategory foodCategory) {
+    public Ingredient(String ingredient, FoodCategory...foodCategory) {
         this.ingredient = ingredient;
-        this.foodCategory = foodCategory;
+        this.foodCategory = new ArrayList<>(Arrays.asList(foodCategory));
     }
 
     public Ingredient(){}

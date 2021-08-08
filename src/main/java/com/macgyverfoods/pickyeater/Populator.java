@@ -31,29 +31,100 @@ public class Populator implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        FoodCategory dairy = new FoodCategory("Dairy","/dairy.jpg");
-        FoodCategory fruits = new FoodCategory("Fruits","/fruit_.jpg");
-        FoodCategory grains = new FoodCategory("Grains","/grains.jpg");
-        FoodCategory protein = new FoodCategory("Proteins","/protein.png");
-        FoodCategory vegetables = new FoodCategory("Vegetables","/vegetables.jpg");
-        foodCategoryRepo.save(dairy);
-        foodCategoryRepo.save(fruits);
-        foodCategoryRepo.save(grains);
-        foodCategoryRepo.save(protein);
-        foodCategoryRepo.save(vegetables);
-
-        Ingredient butter = new Ingredient("Butter",dairy);
-        Ingredient cheese = new Ingredient("Cheese",dairy);
-        Ingredient cream = new Ingredient("Cream",dairy);
-        Ingredient iceCream = new Ingredient("Ice Cream",dairy);
-        Ingredient milk = new Ingredient("Milk",dairy);
-        Ingredient yogurt = new Ingredient("Yogurt",dairy);
+        Ingredient butter = new Ingredient("Butter");
+        Ingredient cheese = new Ingredient("Cheese");
+        Ingredient cream = new Ingredient("Cream");
+        Ingredient iceCream = new Ingredient("Ice Cream");
+        Ingredient milk = new Ingredient("Milk");
+        Ingredient yogurt = new Ingredient("Yogurt");
         ingredientRepo.save(butter);
         ingredientRepo.save(cheese);
         ingredientRepo.save(cream);
         ingredientRepo.save(iceCream);
         ingredientRepo.save(milk);
         ingredientRepo.save(yogurt);
+
+        Ingredient apple = new Ingredient("Apple");
+        Ingredient avocado = new Ingredient("Avocado");
+        Ingredient banana = new Ingredient("Banana");
+        Ingredient mango = new Ingredient("Mango");
+        Ingredient pear = new Ingredient("Pear");
+        Ingredient pineapple = new Ingredient("Pineapple");
+        Ingredient orange = new Ingredient("Orange");
+        Ingredient strawberry = new Ingredient("Strawberry");
+        Ingredient tomato = new Ingredient("Tomato");
+        Ingredient watermelon = new Ingredient("Watermelon");
+        ingredientRepo.save(apple);
+        ingredientRepo.save(avocado);
+        ingredientRepo.save(banana);
+        ingredientRepo.save(mango);
+        ingredientRepo.save(pear);
+        ingredientRepo.save(pineapple);
+        ingredientRepo.save(orange);
+        ingredientRepo.save(strawberry);
+        ingredientRepo.save(tomato);
+        ingredientRepo.save(watermelon);
+
+        Ingredient bread = new Ingredient("Bread");
+        Ingredient cereal = new Ingredient("Cereal");
+        Ingredient corn = new Ingredient("Corn");
+        Ingredient pasta = new Ingredient("Pasta");
+        Ingredient oats = new Ingredient("Oats");
+        Ingredient rice = new Ingredient("Rice");
+        ingredientRepo.save(bread);
+        ingredientRepo.save(cereal);
+        ingredientRepo.save(corn);
+        ingredientRepo.save(pasta);
+        ingredientRepo.save(oats);
+        ingredientRepo.save(rice);
+
+        Ingredient beef = new Ingredient("Beef");
+        Ingredient chicken = new Ingredient("Chicken");
+        Ingredient eggs = new Ingredient("Eggs");
+        Ingredient fish = new Ingredient("Fish");
+        Ingredient lamb = new Ingredient("Lamb");
+        Ingredient shrimp = new Ingredient("Shrimp");
+        Ingredient turkey = new Ingredient("Turkey");
+        ingredientRepo.save(beef);
+        ingredientRepo.save(chicken);
+        ingredientRepo.save(eggs);
+        ingredientRepo.save(fish);
+        ingredientRepo.save(lamb);
+        ingredientRepo.save(shrimp);
+        ingredientRepo.save(turkey);
+
+        Ingredient broccoli = new Ingredient("Broccoli");
+        Ingredient capsicum = new Ingredient("Capsicum");
+        Ingredient carrot = new Ingredient("Carrot");
+        Ingredient lettuce = new Ingredient("Lettuce");
+        Ingredient mushroom = new Ingredient("Mushroom");
+        Ingredient potato = new Ingredient("Potato");
+        Ingredient onion = new Ingredient("Onion");
+        Ingredient zucchini = new Ingredient("Zucchini");
+        ingredientRepo.save(broccoli);
+        ingredientRepo.save(carrot);
+        ingredientRepo.save(capsicum);
+        ingredientRepo.save(lettuce);
+        ingredientRepo.save(mushroom);
+        ingredientRepo.save(potato);
+        ingredientRepo.save(onion);
+        ingredientRepo.save(zucchini);
+
+        FoodCategory dairy = new FoodCategory("Dairy","/dairy.jpg",
+                butter, cheese, cream, iceCream, milk, yogurt);
+        FoodCategory fruits = new FoodCategory("Fruits","/fruit_.jpg",
+                apple, avocado, banana, mango, pear, pineapple, orange, strawberry, tomato, watermelon);
+        FoodCategory grains = new FoodCategory("Grains","/grains.jpg",
+                bread, cereal, corn, pasta, oats, rice);
+        FoodCategory protein = new FoodCategory("Proteins","/protein.png",
+                beef, chicken, eggs, fish, lamb, shrimp, turkey);
+        FoodCategory vegetables = new FoodCategory("Vegetables","/vegetables.jpg",
+                broccoli, carrot, capsicum, lettuce, mushroom, potato, onion, zucchini);
+        foodCategoryRepo.save(dairy);
+        foodCategoryRepo.save(fruits);
+        foodCategoryRepo.save(grains);
+        foodCategoryRepo.save(protein);
+        foodCategoryRepo.save(vegetables);
 
         Preference butter2 = new Preference("Butter",dairy);
         Preference cheese2 = new Preference("Cheese",dairy);
@@ -67,27 +138,6 @@ public class Populator implements CommandLineRunner {
         preferenceRepo.save(iceCream2);
         preferenceRepo.save(milk2);
         preferenceRepo.save(yogurt2);
-
-        Ingredient apple = new Ingredient("Apple",fruits);
-        Ingredient avocado = new Ingredient("Avocado",fruits);
-        Ingredient banana = new Ingredient("Banana",fruits);
-        Ingredient mango = new Ingredient("Mango",fruits);
-        Ingredient pear = new Ingredient("Pear",fruits);
-        Ingredient pineapple = new Ingredient("Pineapple",fruits);
-        Ingredient orange = new Ingredient("Orange",fruits);
-        Ingredient strawberry = new Ingredient("Strawberry",fruits);
-        Ingredient tomato = new Ingredient("Tomato",fruits);
-        Ingredient watermelon = new Ingredient("Watermelon",fruits);
-        ingredientRepo.save(apple);
-        ingredientRepo.save(avocado);
-        ingredientRepo.save(banana);
-        ingredientRepo.save(mango);
-        ingredientRepo.save(pear);
-        ingredientRepo.save(pineapple);
-        ingredientRepo.save(orange);
-        ingredientRepo.save(strawberry);
-        ingredientRepo.save(tomato);
-        ingredientRepo.save(watermelon);
 
         Preference apple2 = new Preference("Apple",fruits);
         Preference avocado2 = new Preference("Avocado",fruits);
@@ -110,19 +160,6 @@ public class Populator implements CommandLineRunner {
         preferenceRepo.save(tomato2);
         preferenceRepo.save(watermelon2);
 
-        Ingredient bread = new Ingredient("Bread",grains);
-        Ingredient cereal = new Ingredient("Cereal",grains);
-        Ingredient corn = new Ingredient("Corn",grains);
-        Ingredient pasta = new Ingredient("Pasta",grains);
-        Ingredient oats = new Ingredient("Oats",grains);
-        Ingredient rice = new Ingredient("Rice",grains);
-        ingredientRepo.save(bread);
-        ingredientRepo.save(cereal);
-        ingredientRepo.save(corn);
-        ingredientRepo.save(pasta);
-        ingredientRepo.save(oats);
-        ingredientRepo.save(rice);
-
         Preference bread2 = new Preference("Bread",grains);
         Preference cereal2 = new Preference("Cereal",grains);
         Preference corn2 = new Preference("Corn",grains);
@@ -135,21 +172,6 @@ public class Populator implements CommandLineRunner {
         preferenceRepo.save(pasta2);
         preferenceRepo.save(oats2);
         preferenceRepo.save(rice2);
-
-        Ingredient beef = new Ingredient("Beef",protein);
-        Ingredient chicken = new Ingredient("Chicken",protein);
-        Ingredient eggs = new Ingredient("Eggs",protein);
-        Ingredient fish = new Ingredient("Fish",protein);
-        Ingredient lamb = new Ingredient("Lamb",protein);
-        Ingredient shrimp = new Ingredient("Shrimp",protein);
-        Ingredient turkey = new Ingredient("Turkey",protein);
-        ingredientRepo.save(beef);
-        ingredientRepo.save(chicken);
-        ingredientRepo.save(eggs);
-        ingredientRepo.save(fish);
-        ingredientRepo.save(lamb);
-        ingredientRepo.save(shrimp);
-        ingredientRepo.save(turkey);
 
         Preference beef2 = new Preference("Beef",protein);
         Preference chicken2 = new Preference("Chicken",protein);
@@ -165,23 +187,6 @@ public class Populator implements CommandLineRunner {
         preferenceRepo.save(lamb2);
         preferenceRepo.save(shrimp2);
         preferenceRepo.save(turkey2);
-
-        Ingredient broccoli = new Ingredient("Broccoli",vegetables);
-        Ingredient capsicum = new Ingredient("Capsicum",vegetables);
-        Ingredient carrot = new Ingredient("Carrot",vegetables);
-        Ingredient lettuce = new Ingredient("Lettuce",vegetables);
-        Ingredient mushroom = new Ingredient("Mushroom",vegetables);
-        Ingredient potato = new Ingredient("Potato",vegetables);
-        Ingredient onion = new Ingredient("Onion",vegetables);
-        Ingredient zucchini = new Ingredient("Zucchini",vegetables);
-        ingredientRepo.save(broccoli);
-        ingredientRepo.save(carrot);
-        ingredientRepo.save(capsicum);
-        ingredientRepo.save(lettuce);
-        ingredientRepo.save(mushroom);
-        ingredientRepo.save(potato);
-        ingredientRepo.save(onion);
-        ingredientRepo.save(zucchini);
 
         Preference broccoli2 = new Preference("Broccoli",vegetables);
         Preference capsicum2 = new Preference("Capsicum",vegetables);
@@ -224,17 +229,11 @@ public class Populator implements CommandLineRunner {
         parentRepo.save(johnDoe);
 
         Child testChild = new Child("test","test","2",johnDoe);
-        Child testChild2 = new Child("tdssfsdfs","testfsdfdsf","22",johnDoe);
-        Child testChild3 = new Child("tdssfsdfsd","testfsdfdsf","22",johnDoe);
-        Child testChild4 = new Child("tdssfsdfd","testfsdfdsf","22",johnDoe);
+        Child testChild2 = new Child("tdssfsdfsd","testfsdfdsf","22",johnDoe);
         testChild.addAllergy(wheatAllergy);
         testChild2.addAllergy(wheatAllergy);
-        testChild3.addAllergy(wheatAllergy);
-        testChild4.addAllergy(wheatAllergy);
         childRepo.save(testChild);
         childRepo.save(testChild2);
-        childRepo.save(testChild3);
-        childRepo.save(testChild4);
 
     }
 }
