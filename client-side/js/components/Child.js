@@ -11,6 +11,7 @@ export default function Child(child) {
                     <li>
                         <span>${allergy.allergy}</span>
                     </li>
+                    
                 `;
             }).join('')}
             </ul>
