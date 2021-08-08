@@ -3,17 +3,21 @@ import ParentPage from './pages/ParentPage.js';
 import AllergyComponent from './components/AllergyComponent.js';
 import AddChildPage from "./pages/AddChildPage.js"
 import DeleteChildPage from "./pages/DeleteChildPage.js"
+import FoodCategories from './components/FoodCategories.js';
+import FoodCategory from './components/FoodCategory.js';
 import RecipeInstructions from './components/RecipeInstructions.js';
 import RecipeIngredients from './components/RecipeIngredients.js';
 import AddIngredientPage from './pages/AddIngredientPage.js';
 import DeleteIngredientPage from './pages/DeleteIngredientPage.js';
-
+import Ingredients from './components/Ingredients.js';
 
 buildPage();
 
 function buildPage() {
     renderProfileInfo();
     navAllergies();
+    navFoodCategories();
+    test();
 }
 
 const app = document.querySelector('#app');
@@ -44,17 +48,17 @@ function renderProfileInfo() {
 }
 
 function navToAddChildPage() {
-        const navToAdd = document.querySelector('.add_child_plus');
-        navToAdd.addEventListener('click', ()=>{
-            app.innerHTML = AddChildPage();
-        })   
+    const navToAdd = document.querySelector('.add_child_plus');
+    navToAdd.addEventListener('click', ()=>{
+        app.innerHTML = AddChildPage();
+    });
 }
 
 function navToDeleteChildPage() {
     const deleteChildButton = document.querySelector('.delete_child_minus');
     deleteChildButton.addEventListener('click', () => {
         app.innerHTML = DeleteChildPage();
-    })
+    });
 }
 
 function createChild() {
@@ -76,7 +80,7 @@ function createChild() {
                 navToDeleteIngredientPage();
             });
         }
-    })
+    });
 }
 
 function deleteChild() {
@@ -105,10 +109,33 @@ function navAllergies() {
     });
 }
 
+function navFoodCategories() {
+    const foodCategoryElem = document.querySelector('.preference-list-btn');
+    foodCategoryElem.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
+            app.innerHTML =FoodCategories(foodCategories);
+        });
+    });
+    renderFoodCategoryIngredients();
+}
+
+function renderFoodCategoryIngredients() {
+    const app = document.querySelector('#app');
+    app.addEventListener('click', () => {
+        if (event.target.classList.contains('food-category-name')) {
+            const foodCategoryId = event.target.querySelector('#foodCategoryId').value;
+            apiActions.getRequest(`http://localhost:8080/foodCategories/${foodCategoryId}`, foodCategory => {
+                app.innerHTML = FoodCategory(foodCategory);
+            });
+        }
+    });
+}
+
 function renderRecipeInstructions() {
     const recipeInstructionsButton = document.querySelector('#recipe_button');
     recipeInstructionsButton.addEventListener('click', () => {
-        apiActions.getRequest(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKeyNum}&ingredients=apples,+peaches,+milk&number=1`, (recipes) => {
+            apiActions.getRequest(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKeyNum}&ingredients=apples,+peaches,+milk&number=1`, (recipes) => {
             console.log(recipes);
             const recipeId = recipes[0].id;
             app.innerHTML = RecipeIngredients(recipes);
@@ -149,7 +176,13 @@ function AddIngredientToParent() {
     app.addEventListener('click', (event) => {
         if(event.target.classList.contains('add_ingredient_submit')) {
             const ingredient = event.target.parentElement.querySelector('#add_ingredient_name').value;
-            apiActions.postRequest('http://localhost:8080/parents/89/add-ingredient', {
+            makePostToAddIngredient(ingredient);
+        }
+    })
+}
+
+function makePostToAddIngredient(ingredient) {
+    apiActions.postRequest('http://localhost:8080/parents/89/add-ingredient', {
                 "ingredient": ingredient
             }, (parents) => {
                 app.innerHTML = ParentPage(parents);
@@ -158,7 +191,28 @@ function AddIngredientToParent() {
                 navToAddIngredientPage();
                 navToDeleteIngredientPage();
             })
-        }
+}
+
+function test() {
+    const testButton = document.querySelector('#test');
+    testButton.addEventListener('click', () => {
+        apiActions.getRequest('http://localhost:8080/ingredients', (ingredients) => {
+    
+            let stringName = "";
+            for (let i = 0; i < ingredients.length; i++) {
+                stringName += ingredients[i].ingredient.toLowerCase() + ",+";
+                console.log(ingredients[i])
+                // if(stringName.indexOf(ingredients[i].ingredient)=== -1) {
+                //     console.log(ingredients[i].ingredient)
+                //     stringName = ingredients[i].ingredient + ",+";
+                // } else{
+                //     stringName = ingredients[i].ingredient + "&number=1";
+                // }
+              }
+              const parsedString = stringName.substring(0,stringName.length -2) + "&number=1";
+              
+              app.innerHTML = parsedString;
+        })
     })
 }
 

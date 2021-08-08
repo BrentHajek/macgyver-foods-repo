@@ -6,7 +6,7 @@ export default function Allergy(allergy) {
         return `
             <label class="allergy-container">
                 <p class="allergen-name">${allergy.allergy}
-                    <input type='checkbox' id='allergyId' value='${allergy.id}'>
+                    <input type='checkbox' class="allergies" id='allergyId${allergy.id}' value='${allergy.id}'>
                     <span class="radio-btn"></span>
                 </p>
             </label>

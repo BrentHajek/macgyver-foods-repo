@@ -1,0 +1,23 @@
+.preference-list-title {
+    color: rgb(117, 117, 22);
+    font-weight: bolder;
+}
+
+.preference-list-btn {
+    background-color: rgb(117, 117, 22);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bolder;
+    margin-top: 40px;
+    padding: 12px 24px;
+}
+
+.preference-list-btn:hover {
+    background-color: lightgrey;
+    color: rgb(117, 117, 22);
+    font-weight: bolder;
+}
