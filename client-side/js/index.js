@@ -3,6 +3,8 @@ import ParentPage from './pages/ParentPage.js';
 import AllergyComponent from './components/AllergyComponent.js';
 import AddChildPage from "./pages/AddChildPage.js"
 import DeleteChildPage from "./pages/DeleteChildPage.js"
+import RecipeInstructions from './components/RecipeInstructions.js';
+import RecipeIngredients from './components/RecipeIngredients.js';
 
 
 buildPage();
@@ -14,6 +16,13 @@ function buildPage() {
 
 const app = document.querySelector('#app');
 
+const apiKeyNum = "78bc7509124db458df764b454c2dc1e57807eff5";
+// const apiKeyNum = "d16a986f5295496bb236ca7062f1841a";
+// const apiKeyNum = "4d2f51bba03b42a59ba6d0843ac5b5f9";
+// const apiKeyNum = "733246d3691c4203855fd5063ee214b6";
+// const apiKeyNum = "00f757b09028492da86c30d8109241c0";
+// const apiKeyNum = "985a2080f8094fdea57cb96fa855b0dd";
+
 function renderProfileInfo() {
     const profileButton = document.querySelector('#profile_button');
     profileButton.addEventListener('click', () => {
@@ -23,6 +32,7 @@ function renderProfileInfo() {
             navToDeleteChildPage();
             createChild();
             deleteChild();
+            renderRecipeInstructions();
         });
     });
 }
@@ -84,3 +94,36 @@ function navAllergies() {
         });
     });
 }
+
+function renderRecipeInstructions() {
+    const recipeInstructionsButton = document.querySelector('#recipe_button');
+    recipeInstructionsButton.addEventListener('click', () => {
+        apiActions.getRequest(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKeyNum}&ingredients=apples,+peaches,+milk&number=1`, (recipes) => {
+            console.log(recipes);
+            const recipeId = recipes[0].id;
+            app.innerHTML = RecipeIngredients(recipes);
+            apiActions.getRequest(`https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=${apiKeyNum}`, (recipeInstructions) => {
+                console.log(recipeInstructions);
+                app.innerHTML += RecipeInstructions(recipeInstructions);
+            })
+        })
+    })
+}
+
+// function renderRecipeIngredients() {
+//     const testButton =document.querySelector('#recipe_test');
+//     testButton.addEventListener('click', () => {
+//         apiActions.getRequest('https://api.spoonacular.com/recipes/findByIngredients?apiKey=733246d3691c4203855fd5063ee214b6&ingredients=apples,+peaches,+milk&number=1', (recipeIngredients) => {
+//             app.innerHTML = RecipeIngredients(recipeIngredients);
+//         })
+//     })
+// }
+
+// function renderRecipeInstructions() {
+//     const recipeInstructionsButton = document.querySelector('#recipe_button');
+//     recipeInstructionsButton.addEventListener('click', () => {
+//         apiActions.getRequest('https://api.spoonacular.com/recipes/324694/analyzedInstructions?apiKey=733246d3691c4203855fd5063ee214b6', (recipeInstructions) => {
+//             app.innerHTML = RecipeInstructions(recipeInstructions);
+//         })
+//     })
+// }
