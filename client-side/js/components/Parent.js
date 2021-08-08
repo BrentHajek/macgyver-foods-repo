@@ -15,6 +15,7 @@ export default function Parent(parent) {
             `;
         }).join('')}
         <button class="add_ingredient_plus" type="button">+</button>
+        <button class="delete_ingredient_minus" type="button">-</button>
     </div>
     <div class='child__info_containter'>
     ${parent.child.map((child) => {

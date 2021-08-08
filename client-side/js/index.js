@@ -6,6 +6,8 @@ import DeleteChildPage from "./pages/DeleteChildPage.js"
 import RecipeInstructions from './components/RecipeInstructions.js';
 import RecipeIngredients from './components/RecipeIngredients.js';
 import AddIngredientPage from './pages/AddIngredientPage.js';
+import DeleteIngredientPage from './pages/DeleteIngredientPage.js';
+import AddAllergyPage from './pages/AddAllergyPage.js';
 
 
 buildPage();
@@ -36,6 +38,8 @@ function renderProfileInfo() {
             AddIngredientToParent();
             renderRecipeInstructions();
             navToAddIngredientPage();
+            navToDeleteIngredientPage();
+            deleteIngredientFromParent();
         });
     });
 }
@@ -70,6 +74,7 @@ function createChild() {
                 navToDeleteChildPage();
                 navToAddChildPage();
                 navToAddIngredientPage();
+                navToDeleteIngredientPage();
             });
         }
     })
@@ -84,8 +89,9 @@ function deleteChild() {
                 }, (parents) => {
                     app.innerHTML = ParentPage(parents)
                     navToDeleteChildPage();
-                    navToAddChildPage();
-                    navToAddIngredientPage();
+                navToAddChildPage();
+                navToAddIngredientPage();
+                navToDeleteIngredientPage();
                 });
             }
         })
@@ -151,7 +157,33 @@ function AddIngredientToParent() {
                 navToDeleteChildPage();
                 navToAddChildPage();
                 navToAddIngredientPage();
+                navToDeleteIngredientPage();
             })
         }
     })
 }
+
+function navToDeleteIngredientPage() {
+    const navToDeleteIngredientPageButton = document.querySelector('.delete_ingredient_minus');
+    navToDeleteIngredientPageButton.addEventListener('click', () => {
+        app.innerHTML = DeleteIngredientPage();
+    })
+}
+
+function deleteIngredientFromParent() {
+    app.addEventListener('click', (event) => {
+        if(event.target.classList.contains('delete_ingredient_submit')) {
+            const ingredient = event.target.parentElement.querySelector('#delete_ingredient_name').value;
+            apiActions.deleteRequest('http://localhost:8080/parents/89/delete-ingredient', {
+                "ingredient": ingredient
+            }, (parents) => {
+                app.innerHTML = ParentPage(parents);
+                navToDeleteChildPage();
+                navToAddChildPage();
+                navToAddIngredientPage();
+                navToDeleteIngredientPage();
+            })
+        }
+    })
+}
+
