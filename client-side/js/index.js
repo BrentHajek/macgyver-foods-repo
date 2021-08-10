@@ -10,6 +10,7 @@ import RecipeIngredients from './components/RecipeIngredients.js';
 import AddIngredientPage from './pages/AddIngredientPage.js';
 import DeleteIngredientPage from './pages/DeleteIngredientPage.js';
 import Ingredients from './components/Ingredients.js';
+import SignInPage from './pages/SignInPage.js';
 
 buildPage();
 
@@ -18,6 +19,7 @@ function buildPage() {
     navAllergies();
     navFoodCategories();
     test();
+    navToSignInPage();
 }
 
 const app = document.querySelector('#app');
@@ -43,13 +45,14 @@ function renderProfileInfo() {
             navToAddIngredientPage();
             navToDeleteIngredientPage();
             deleteIngredientFromParent();
+            navToSignInPage();
         });
     });
 }
 
 function navToAddChildPage() {
     const navToAdd = document.querySelector('.add_child_plus');
-    navToAdd.addEventListener('click', ()=>{
+    navToAdd.addEventListener('click', () => {
         app.innerHTML = AddChildPage();
     });
 }
@@ -63,7 +66,7 @@ function navToDeleteChildPage() {
 
 function createChild() {
     app.addEventListener('click', (event) => {
-        if(event.target.classList.contains('add_child_submit')){
+        if (event.target.classList.contains('add_child_submit')) {
             const firstName = event.target.parentElement.querySelector('#add_child_firstName').value;
             const lastName = event.target.parentElement.querySelector('#add_child_lastName').value;
             const age = event.target.parentElement.querySelector('#add_child_age').value;
@@ -84,20 +87,20 @@ function createChild() {
 }
 
 function deleteChild() {
-        app.addEventListener('click', (event) => {
-            if(event.target.classList.contains('delete_child_submit')){
-                const firstName = event.target.parentElement.querySelector('#delete_child_firstName').value;
-                apiActions.deleteRequest('http://localhost:8080/parents/89/delete-child', {
-                    "firstName": firstName
-                }, (parents) => {
-                    app.innerHTML = ParentPage(parents)
-                    navToDeleteChildPage();
+    app.addEventListener('click', (event) => {
+        if (event.target.classList.contains('delete_child_submit')) {
+            const firstName = event.target.parentElement.querySelector('#delete_child_firstName').value;
+            apiActions.deleteRequest('http://localhost:8080/parents/89/delete-child', {
+                "firstName": firstName
+            }, (parents) => {
+                app.innerHTML = ParentPage(parents)
+                navToDeleteChildPage();
                 navToAddChildPage();
                 navToAddIngredientPage();
                 navToDeleteIngredientPage();
-                });
-            }
-        })
+            });
+        }
+    })
 }
 
 function navAllergies() {
@@ -114,7 +117,7 @@ function navFoodCategories() {
     foodCategoryElem.addEventListener('click', () => {
         const app = document.querySelector('#app');
         apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
-            app.innerHTML =FoodCategories(foodCategories);
+            app.innerHTML = FoodCategories(foodCategories);
         });
     });
     renderFoodCategoryIngredients();
@@ -135,7 +138,7 @@ function renderFoodCategoryIngredients() {
 function renderRecipeInstructions() {
     const recipeInstructionsButton = document.querySelector('#recipe_button');
     recipeInstructionsButton.addEventListener('click', () => {
-            apiActions.getRequest(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKeyNum}&ingredients=apples,+peaches,+milk&number=1`, (recipes) => {
+        apiActions.getRequest(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKeyNum}&ingredients=apples,+peaches,+milk&number=1`, (recipes) => {
             console.log(recipes);
             const recipeId = recipes[0].id;
             app.innerHTML = RecipeIngredients(recipes);
@@ -174,7 +177,7 @@ function navToAddIngredientPage() {
 
 function AddIngredientToParent() {
     app.addEventListener('click', (event) => {
-        if(event.target.classList.contains('add_ingredient_submit')) {
+        if (event.target.classList.contains('add_ingredient_submit')) {
             const ingredient = event.target.parentElement.querySelector('#add_ingredient_name').value;
             makePostToAddIngredient(ingredient);
         }
@@ -183,21 +186,21 @@ function AddIngredientToParent() {
 
 function makePostToAddIngredient(ingredient) {
     apiActions.postRequest('http://localhost:8080/parents/89/add-ingredient', {
-                "ingredient": ingredient
-            }, (parents) => {
-                app.innerHTML = ParentPage(parents);
-                navToDeleteChildPage();
-                navToAddChildPage();
-                navToAddIngredientPage();
-                navToDeleteIngredientPage();
-            })
+        "ingredient": ingredient
+    }, (parents) => {
+        app.innerHTML = ParentPage(parents);
+        navToDeleteChildPage();
+        navToAddChildPage();
+        navToAddIngredientPage();
+        navToDeleteIngredientPage();
+    })
 }
 
 function test() {
     const testButton = document.querySelector('#test');
     testButton.addEventListener('click', () => {
         apiActions.getRequest('http://localhost:8080/ingredients', (ingredients) => {
-    
+
             let stringName = "";
             for (let i = 0; i < ingredients.length; i++) {
                 stringName += ingredients[i].ingredient.toLowerCase() + ",+";
@@ -208,10 +211,10 @@ function test() {
                 // } else{
                 //     stringName = ingredients[i].ingredient + "&number=1";
                 // }
-              }
-              const parsedString = stringName.substring(0,stringName.length -2) + "&number=1";
-              
-              app.innerHTML = parsedString;
+            }
+            const parsedString = stringName.substring(0, stringName.length - 2) + "&number=1";
+
+            app.innerHTML = parsedString;
         })
     })
 }
@@ -225,7 +228,7 @@ function navToDeleteIngredientPage() {
 
 function deleteIngredientFromParent() {
     app.addEventListener('click', (event) => {
-        if(event.target.classList.contains('delete_ingredient_submit')) {
+        if (event.target.classList.contains('delete_ingredient_submit')) {
             const ingredient = event.target.parentElement.querySelector('#delete_ingredient_name').value;
             apiActions.deleteRequest('http://localhost:8080/parents/89/delete-ingredient', {
                 "ingredient": ingredient
@@ -240,3 +243,9 @@ function deleteIngredientFromParent() {
     })
 }
 
+function navToSignInPage() {
+    const navToSignInButton = document.querySelector('#sign_in');
+    navToSignInButton.addEventListener('click', () => {
+        app.innerHTML = SignInPage();
+    })
+}
