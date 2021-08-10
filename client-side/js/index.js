@@ -9,7 +9,6 @@ import RecipeInstructions from './components/RecipeInstructions.js';
 import RecipeIngredients from './components/RecipeIngredients.js';
 import AddIngredientPage from './pages/AddIngredientPage.js';
 import DeleteIngredientPage from './pages/DeleteIngredientPage.js';
-import Ingredients from './components/Ingredients.js';
 
 buildPage();
 
@@ -135,8 +134,7 @@ function renderFoodCategoryIngredients() {
 function renderRecipeInstructions() {
     const recipeInstructionsButton = document.querySelector('#recipe_button');
     recipeInstructionsButton.addEventListener('click', () => {
-            apiActions.getRequest(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKeyNum}&ingredients=apples,+peaches,+milk&number=1`, (recipes) => {
-            console.log(recipes);
+            apiActions.getRequest(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKeyNum}&ingredients=apples,+peaches,+icecream,+milk&number=1`, (recipes) => {
             const recipeId = recipes[0].id;
             app.innerHTML = RecipeIngredients(recipes);
             apiActions.getRequest(`https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=${apiKeyNum}`, (recipeInstructions) => {
@@ -193,25 +191,31 @@ function makePostToAddIngredient(ingredient) {
             })
 }
 
+// function test() {
+//     const testButton = document.querySelector('#test');
+//     testButton.addEventListener('click', () => {
+//         apiActions.getRequest('http://localhost:8080/ingredients', (ingredients) => {
+    
+//             let stringName = "";
+//             for (let i = 0; i < ingredients.length; i++) {
+//                 stringName += ingredients[i].ingredient.toLowerCase() + ",+";
+//               }
+//               const parsedString = stringName.substring(0,stringName.length -2) + "&number=1";
+//               app.innerHTML = parsedString;
+//         })
+//     })
+// }
+
 function test() {
     const testButton = document.querySelector('#test');
     testButton.addEventListener('click', () => {
-        apiActions.getRequest('http://localhost:8080/ingredients', (ingredients) => {
-    
+        apiActions.getRequest('http://localhost:8080/parents/89', (parents) => {
             let stringName = "";
-            for (let i = 0; i < ingredients.length; i++) {
-                stringName += ingredients[i].ingredient.toLowerCase() + ",+";
-                console.log(ingredients[i])
-                // if(stringName.indexOf(ingredients[i].ingredient)=== -1) {
-                //     console.log(ingredients[i].ingredient)
-                //     stringName = ingredients[i].ingredient + ",+";
-                // } else{
-                //     stringName = ingredients[i].ingredient + "&number=1";
-                // }
+            for (let i = 0; i < parents.ingredients.length; i++) {
+                stringName += parents.ingredients[i].ingredient.toLowerCase() + ",+";
               }
               const parsedString = stringName.substring(0,stringName.length -2) + "&number=1";
-              
-              app.innerHTML = parsedString;
+              app.innerHTML = parsedString; 
         })
     })
 }
