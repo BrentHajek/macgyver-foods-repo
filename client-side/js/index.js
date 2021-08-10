@@ -43,6 +43,27 @@ function renderProfileInfo() {
             navToAddIngredientPage();
             navToDeleteIngredientPage();
             deleteIngredientFromParent();
+            toggleChildren();
+        });
+    });
+}
+
+function toggleChildren() {
+    const childNames = document.querySelectorAll('.child__name');
+    console.log(childNames);
+    childNames.forEach((childName) => {
+        console.log(childName);
+        childName.addEventListener('click', (event) => {
+            console.log(event);
+            if(event.target.classList.contains('child__name')) {
+                if(event.target.parentElement.style.visibility !== 'visible'){
+                    event.target.parentElement.style.visibility = 'visible';
+                    event.target.parentElement.style.height = '300px'; 
+                } else {
+                    event.target.parentElement.style.visibility = 'hidden';
+                    event.target.parentElement.style.height = '20px';
+                }
+            }
         });
     });
 }
@@ -78,6 +99,7 @@ function createChild() {
                 navToAddChildPage();
                 navToAddIngredientPage();
                 navToDeleteIngredientPage();
+                toggleChildren();
             });
         }
     });
@@ -95,6 +117,7 @@ function deleteChild() {
                 navToAddChildPage();
                 navToAddIngredientPage();
                 navToDeleteIngredientPage();
+                toggleChildren();
                 });
             }
         })
@@ -190,6 +213,7 @@ function makePostToAddIngredient(ingredient) {
                 navToAddChildPage();
                 navToAddIngredientPage();
                 navToDeleteIngredientPage();
+                toggleChildren();
             })
 }
 
@@ -235,6 +259,7 @@ function deleteIngredientFromParent() {
                 navToAddChildPage();
                 navToAddIngredientPage();
                 navToDeleteIngredientPage();
+                toggleChildren();
             })
         }
     })
