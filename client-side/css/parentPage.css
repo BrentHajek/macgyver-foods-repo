@@ -56,6 +56,12 @@ html {
     display: flex;
     flex-direction: column;
     padding: 10px;
+    visibility: hidden;
+    height: 20px;
+}
+
+.child__name {
+    visibility: visible;
 }
 
 /* coming from the Child.js component */
