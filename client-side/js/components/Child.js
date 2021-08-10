@@ -1,7 +1,7 @@
 export default function Child(child) {
     return `
         <div class="test_child_grid">
-            <input type='hidden' class='childId' value=${child.id} />
+            <input type='hidden' id='childId${child.id}' value=${child.id} />
             <h2 class='child__name'>${child.firstName}</h2>
             <p>Age: ${child.age}</p>
             <div class="child__allergies_div">
@@ -32,6 +32,7 @@ export default function Child(child) {
                 <button class="add__preference_plus" type="button">+ Add a Preference</button>
                 <button class="delete__preference_minus" type="button">- Remove a Preference</button>
             </div>
+
         </div>
         `;
 }

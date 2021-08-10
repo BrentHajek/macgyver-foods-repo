@@ -230,8 +230,10 @@ public class Populator implements CommandLineRunner {
 
         Child testChild = new Child("test","test","2",johnDoe);
         Child testChild2 = new Child("tdssfsdfsd","testfsdfdsf","22",johnDoe);
-        testChild.addAllergy(wheatAllergy);
-        testChild2.addAllergy(wheatAllergy);
+//        testChild.addAllergy(wheatAllergy);
+//        testChild.addPreference(carrot2);
+//        testChild.addPreference(lettuce2);
+//        testChild2.addAllergy(wheatAllergy);
         childRepo.save(testChild);
         childRepo.save(testChild2);
 
