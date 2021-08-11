@@ -1,8 +1,8 @@
 import apiActions from './api-actions/api-actions.js';
 import ParentPage from './pages/ParentPage.js';
 import AllergyComponent from './components/AllergyComponent.js';
-import AddChildPage from "./pages/AddChildPage.js"
-import DeleteChildPage from "./pages/DeleteChildPage.js"
+import AddChildPage from './pages/AddChildPage.js';
+import DeleteChildPage from './pages/DeleteChildPage.js';
 import FoodCategories from './components/FoodCategories.js';
 import FoodCategory from './components/FoodCategory.js';
 import RecipeInstructions from './components/RecipeInstructions.js';
@@ -10,7 +10,7 @@ import RecipeIngredients from './components/RecipeIngredients.js';
 import AddIngredientPage from './pages/AddIngredientPage.js';
 import DeleteIngredientPage from './pages/DeleteIngredientPage.js';
 import AddPreferencePage from './pages/AddPreferencePage.js';
-import Child from './components/Child.js'
+import Child from './components/Child.js';
 import DeletePreferencePage from './pages/DeletePreferencePage.js';
 
 buildPage();
@@ -25,29 +25,37 @@ function buildPage() {
 const app = document.querySelector('#app');
 
 
-const apiKeyNum = "4d2f51bba03b42a59ba6d0843ac5b5f9";
-// const apiKeyNum = "733246d3691c4203855fd5063ee214b6";
-// const apiKeyNum = "00f757b09028492da86c30d8109241c0";
-// const apiKeyNum = "985a2080f8094fdea57cb96fa855b0dd";
-// const apiKeyNum = "78bc7509124db458df764b454c2dc1e57807eff5";
-// const apiKeyNum = "d16a986f5295496bb236ca7062f1841a";
+const apiKeyNum = '4d2f51bba03b42a59ba6d0843ac5b5f9';
+// const apiKeyNum = '733246d3691c4203855fd5063ee214b6';
+// const apiKeyNum = '00f757b09028492da86c30d8109241c0';
+// const apiKeyNum = '985a2080f8094fdea57cb96fa855b0dd';
+// const apiKeyNum = '78bc7509124db458df764b454c2dc1e57807eff5';
+// const apiKeyNum = 'd16a986f5295496bb236ca7062f1841a';
 
 function renderProfileInfo() {
     const profileButton = document.querySelector('#profile_button');
     profileButton.addEventListener('click', () => {
         apiActions.getRequest('http://localhost:8080/parents/89', (parents) => {
-            app.innerHTML = ParentPage(parents);
-            navToAddChildPage();
-            navToDeleteChildPage();
-            createChild();
-            deleteChild();
-            AddIngredientToParent();
-            navToAddIngredientPage();
-            navToDeleteIngredientPage();
-            deleteIngredientFromParent();
-            toggleChildren();
+            wireUpParent(parents);
         });
     });
+}
+
+function wireUpParent(parents) {
+    app.innerHTML = ParentPage(parents);
+    navToAddChildPage();
+    navToDeleteChildPage();
+    createChild();
+    deleteChild();
+    AddIngredientToParent();
+    navToAddIngredientPage();
+    navToDeleteIngredientPage();
+    deleteIngredientFromParent();
+    navToAddPreferencePage();
+    addPreferenceToChild();
+    navToDeletePreferencePage();
+    deletePreferenceFromChild();
+    toggleChildren();
 }
 
 function toggleChildren() {
@@ -62,9 +70,7 @@ function toggleChildren() {
             if(event.target.classList.contains('child__name')) {
                 if(event.target.parentElement.style.visibility !== 'visible'){
                     event.target.parentElement.style.visibility = 'visible';
-                    event.target.parentElement.style.height = '300px'; console.log(childId);
-                    childId = event.target.parentElement.querySelector("input").value;
-                    console.log(childId);
+                    event.target.parentElement.style.height = '20%';
                 } else {
                     event.target.parentElement.style.visibility = 'hidden';
                     event.target.parentElement.style.height = '20px';
@@ -99,9 +105,9 @@ function createChild() {
             const lastName = event.target.parentElement.querySelector('#add_child_lastName').value;
             const age = event.target.parentElement.querySelector('#add_child_age').value;
             apiActions.postRequest('http://localhost:8080/parents/89/add-child', {
-                "firstName": firstName,
-                "lastName": lastName,
-                "age": age
+                'firstName': firstName,
+                'lastName': lastName,
+                'age': age
             }, (parents) => {
                 console.log(parents);
                 app.innerHTML = ParentPage(parents);
@@ -118,31 +124,71 @@ function createChild() {
 }
 
 function deleteChild() {
-        app.addEventListener('click', (event) => {
-            if(event.target.classList.contains('delete_child_submit')){
-                const firstName = event.target.parentElement.querySelector('#delete_child_firstName').value;
-                apiActions.deleteRequest('http://localhost:8080/parents/89/delete-child', {
-                    "firstName": firstName
-                }, (parents) => {
-                    app.innerHTML = ParentPage(parents)
-                    navToDeleteChildPage();
+    app.addEventListener('click', (event) => {
+        if(event.target.classList.contains('delete_child_submit')){
+            const firstName = event.target.parentElement.querySelector('#delete_child_firstName').value;
+            apiActions.deleteRequest('http://localhost:8080/parents/89/delete-child', {
+                'firstName': firstName
+            }, (parents) => {
+                app.innerHTML = ParentPage(parents)
+                navToDeleteChildPage();
                 navToAddChildPage();
                 navToAddIngredientPage();
                 navToDeleteIngredientPage();
                 toggleChildren();
                 navToAddPreferencePage();
                 navToDeletePreferencePage();
-                });
-            }
-        })
+            });
+        }
+    });
 }
 
 function navAllergies() {
-    const allergyElem = document.querySelector('.allergy-list-btn');
-    allergyElem.addEventListener('click', () => {
-        apiActions.getRequest('http://localhost:8080/allergies', allergies => {
-            app.innerHTML = AllergyComponent(allergies);
-        });
+    const app = document.querySelector('#app');
+    app.addEventListener('click', (event) => {
+        if (event.target.classList.contains('allergy-list-btn')) {
+            childId = event.target.parentElement.parentElement.querySelector('input').value;
+            apiActions.getRequest('http://localhost:8080/allergies', allergies => {
+                app.innerHTML = AllergyComponent(allergies);
+            });
+        }
+    });
+    submitAllergySelections();
+}
+
+let allergyCount = 0;
+function submitAllergySelections() {
+    const app = document.querySelector('#app');
+    app.addEventListener('click', (event) => {
+        if (event.target.classList.contains('submit-allergies-btn')) {
+            var allergiesToAdd = [];
+            allergyCount = 0;
+            currentAllergyCount = 0;
+            var allAllergies = app.querySelectorAll('.allergies');
+            allAllergies.forEach((currentAllergy) => {
+                if (currentAllergy.checked) {
+                    var checkedAllergy = currentAllergy.value;
+                    allergiesToAdd.push(checkedAllergy);
+                    allergyCount++;
+                }
+                else {
+
+                }
+            });
+            allergiesToAdd.forEach(addAllergiesToChildProfile);
+        }
+    });
+}
+
+let currentAllergyCount = 0;
+function addAllergiesToChildProfile(allergy) {
+    apiActions.postRequest(`http://localhost:8080/children/${childId}/add-allergy`, {'allergy': allergy}, allergies => {
+        currentAllergyCount++;
+        if (currentAllergyCount == allergyCount) {
+            apiActions.getRequest('http://localhost:8080/parents/89', (parents) => {
+                wireUpParent(parents);
+            });
+        }
     });
 }
 
@@ -173,7 +219,7 @@ function navToAddIngredientPage() {
     const navToAddIngredientButton = document.querySelector('.add_ingredient_plus');
     navToAddIngredientButton.addEventListener('click', () => {
         app.innerHTML = AddIngredientPage();
-    })
+    });
 }
 
 function AddIngredientToParent() {
@@ -182,22 +228,22 @@ function AddIngredientToParent() {
             const ingredient = event.target.parentElement.querySelector('#add_ingredient_name').value;
             makePostToAddIngredient(ingredient);
         }
-    })
+    });
 }
 
 function makePostToAddIngredient(ingredient) {
     apiActions.postRequest('http://localhost:8080/parents/89/add-ingredient', {
-                "ingredient": ingredient
-            }, (parents) => {
-                app.innerHTML = ParentPage(parents);
-                navToDeleteChildPage();
-                navToAddChildPage();
-                navToAddIngredientPage();
-                navToDeleteIngredientPage();
-                toggleChildren();
-                navToAddPreferencePage();
-                navToDeletePreferencePage();
-            })
+        'ingredient': ingredient
+    }, (parents) => {
+        app.innerHTML = ParentPage(parents);
+        navToDeleteChildPage();
+        navToAddChildPage();
+        navToAddIngredientPage();
+        navToDeleteIngredientPage();
+        toggleChildren();
+        navToAddPreferencePage();
+        navToDeletePreferencePage();
+    });
 }
 
 
@@ -205,19 +251,19 @@ function test() {
     const testButton = document.querySelector('#test');
     testButton.addEventListener('click', () => {
         apiActions.getRequest('http://localhost:8080/parents/89', (parents) => {
-            let stringName = "";
+            let stringName = '';
             for (let i = 0; i < parents.ingredients.length; i++) {
-                stringName += parents.ingredients[i].ingredient.toLowerCase() + ",";
-              }
+                stringName += parents.ingredients[i].ingredient.toLowerCase() + ',';
+            }
             apiActions.getRequest(`http://localhost:8080/children/${childId}`, (child) => {
-                let stringName2 = "";
+                let stringName2 = '';
                 for (let i = 0; i < child.allergies.length; i++) {
-                        stringName2 += child.allergies[i].allergy.toLowerCase() + ",";
+                    stringName2 += child.allergies[i].allergy.toLowerCase() + ',';
                 }
                 apiActions.getRequest(`http://localhost:8080/children/${childId}`, (child) => {
-                    let stringName3 = "";
+                    let stringName3 = '';
                     for(let i = 0; i < child.preferences.length; i++) {
-                        stringName3 += child.preferences[i].preference.toLowerCase() + ",";
+                        stringName3 += child.preferences[i].preference.toLowerCase() + ',';
                     }
                     let stringInclude = stringName + stringName3;
                     let stringExclude = stringName2;
@@ -228,7 +274,7 @@ function test() {
 
 
                     apiActions.getRequest(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKeyNum}&includeIngredients=${parsedString}&intolerances=${stringExclude}&fillIngredients=true&number=1`, (recipes) => {
-                        // console.log(recipes);
+                        console.log(recipes);
             const recipeId = recipes.results[0].id;
             app.innerHTML = RecipeIngredients(recipes);
             apiActions.getRequest(`https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=${apiKeyNum}`, (recipeInstructions) => {
@@ -246,7 +292,7 @@ function navToDeleteIngredientPage() {
     const navToDeleteIngredientPageButton = document.querySelector('.delete_ingredient_minus');
     navToDeleteIngredientPageButton.addEventListener('click', () => {
         app.innerHTML = DeleteIngredientPage();
-    })
+    });
 }
 
 function deleteIngredientFromParent() {
@@ -254,7 +300,7 @@ function deleteIngredientFromParent() {
         if(event.target.classList.contains('delete_ingredient_submit')) {
             const ingredient = event.target.parentElement.querySelector('#delete_ingredient_name').value;
             apiActions.deleteRequest('http://localhost:8080/parents/89/delete-ingredient', {
-                "ingredient": ingredient
+                'ingredient': ingredient
             }, (parents) => {
                 app.innerHTML = ParentPage(parents);
                 navToDeleteChildPage();
@@ -264,9 +310,9 @@ function deleteIngredientFromParent() {
                 toggleChildren();
                 navToAddPreferencePage();
                 navToDeletePreferencePage();
-            })
+            });
         }
-    })
+    });
 }
 let childId = 0;
 
@@ -277,7 +323,7 @@ function navToAddPreferencePage() {
              childId = event.target.parentElement.parentElement.querySelector("input").value;
              console.log(childId);
             app.innerHTML = AddPreferencePage();
-        })
+        });
     }
 }
 
@@ -287,7 +333,7 @@ function addPreferenceToChild() {
             const preference = event.target.parentElement.querySelector('#add_preference_name').value;
             console.log(childId);
             apiActions.postRequest(`http://localhost:8080/children/${childId}/add-preference`, {
-                "preference": preference
+                'preference': preference
             }, (child) => {
                 Child(child);
                 apiActions.getRequest('http://localhost:8080/parents/89', (parents) => {
@@ -309,7 +355,7 @@ function addPreferenceToChild() {
         });
             })
         }
-    })
+    });
 }
 
 function navToDeletePreferencePage() {
@@ -319,7 +365,7 @@ function navToDeletePreferencePage() {
             childId = event.target.parentElement.parentElement.querySelector('input').value;
             console.log(childId);
             app.innerHTML = DeletePreferencePage();
-        })
+        });
     }
 }
 
@@ -329,7 +375,7 @@ function deletePreferenceFromChild() {
             const preference = event.target.parentElement.querySelector('#delete_preference_name').value;
             console.log(childId);
             apiActions.deleteRequest(`http://localhost:8080/children/${childId}/delete-preference`, {
-                "preference": preference
+                'preference': preference
             }, (child) => {
                 Child(child);
                 apiActions.getRequest('http://localhost:8080/parents/89', (parents) => {
@@ -351,5 +397,5 @@ function deletePreferenceFromChild() {
         });
             })
         }
-    })
+    });
 }

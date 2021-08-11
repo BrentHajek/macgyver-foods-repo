@@ -2,7 +2,7 @@ export default function RecipeIngredients(recipeIngredients) {
     return `
         <h2>Recipe Ingredients</h2>
         ${recipeIngredients.results.map((recipeIngredient) => {
-            return `
+        return `
             <input type="hidden" id="recipeIngredientId" value=${recipeIngredient.id}>
             `;
         }).join('')}
