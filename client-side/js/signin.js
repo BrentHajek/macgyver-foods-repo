@@ -10,7 +10,8 @@ export default function SignInJs() {
 
         if (username === "user" && password === "teammacgyver") {
             alert("You have successfully logged in.");
-            window.location.assign('https://www.espn.com');
+            // window.location.assign('https://www.espn.com')
+            location.reload();
         } else {
             loginErrorMsg.style.opacity = 1;
         }
