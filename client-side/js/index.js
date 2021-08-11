@@ -131,11 +131,13 @@ function deleteChild() {
 }
 
 function navAllergies() {
-    const allergyElem = document.querySelector('.allergy-list-btn');
-    allergyElem.addEventListener('click', () => {
-        apiActions.getRequest('http://localhost:8080/allergies', allergies => {
-            app.innerHTML = AllergyComponent(allergies);
-        });
+    const app = document.querySelector('#app');
+    app.addEventListener('click', (event) => {
+        if (event.target.classList.contains('allergy-list-btn')) {
+            apiActions.getRequest('http://localhost:8080/allergies', allergies => {
+                app.innerHTML = AllergyComponent(allergies);
+            });
+        }
     });
 }
 

@@ -15,7 +15,7 @@ export default function Child(child) {
                 `;
     }).join('')}
             </ul>
-                <button class="add__allergy_plus" type="button">+ Add an Allergy</button>
+                <button class="allergy-list-btn" type="button">+ Add an Allergy</button>
                 <button class="delete__allergy_minus" type="button">- Remove an Allergy</button>
             </div>
             <div class="child__preferences_div">
