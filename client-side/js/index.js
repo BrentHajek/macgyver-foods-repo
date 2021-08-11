@@ -11,6 +11,8 @@ import AddIngredientPage from './pages/AddIngredientPage.js';
 import DeleteIngredientPage from './pages/DeleteIngredientPage.js';
 import Ingredients from './components/Ingredients.js';
 import SignInPage from './pages/SignInPage.js';
+import SignInUser from './signin';
+import SignInJs from './signin';
 
 buildPage();
 
@@ -247,5 +249,6 @@ function navToSignInPage() {
     const navToSignInButton = document.querySelector('#sign_in');
     navToSignInButton.addEventListener('click', () => {
         app.innerHTML = SignInPage();
+        SignInJs();
     })
 }
