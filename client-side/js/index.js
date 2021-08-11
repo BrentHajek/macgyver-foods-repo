@@ -42,7 +42,6 @@ function renderProfileInfo() {
             createChild();
             deleteChild();
             AddIngredientToParent();
-            renderRecipeInstructions();
             navToAddIngredientPage();
             navToDeleteIngredientPage();
             deleteIngredientFromParent();
@@ -57,16 +56,24 @@ function toggleChildren() {
     childNames.forEach((childName) => {
         console.log(childName);
         childName.addEventListener('click', (event) => {
+            
+            
             console.log(event);
             if(event.target.classList.contains('child__name')) {
                 if(event.target.parentElement.style.visibility !== 'visible'){
                     event.target.parentElement.style.visibility = 'visible';
-                    event.target.parentElement.style.height = '300px'; 
+                    event.target.parentElement.style.height = '300px'; console.log(childId);
+                    childId = event.target.parentElement.querySelector("input").value;
+                    console.log(childId);
                 } else {
                     event.target.parentElement.style.visibility = 'hidden';
                     event.target.parentElement.style.height = '20px';
                 }
             }
+            navToDeletePreferencePage();
+            navToAddPreferencePage();
+            addPreferenceToChild();
+            deletePreferenceFromChild();
         });
     });
 }
@@ -162,38 +169,6 @@ function renderFoodCategoryIngredients() {
     });
 }
 
-function renderRecipeInstructions() {
-    const recipeInstructionsButton = document.querySelector('#recipe_button');
-    recipeInstructionsButton.addEventListener('click', () => {
-            apiActions.getRequest(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKeyNum}&ingredients=apples,+peaches,+icecream,+milk&number=1`, (recipes) => {
-            const recipeId = recipes[0].id;
-            app.innerHTML = RecipeIngredients(recipes);
-            apiActions.getRequest(`https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=${apiKeyNum}`, (recipeInstructions) => {
-                console.log(recipeInstructions);
-                app.innerHTML += RecipeInstructions(recipeInstructions);
-            })
-        })
-    })
-}
-
-// function renderRecipeIngredients() {
-//     const testButton =document.querySelector('#recipe_test');
-//     testButton.addEventListener('click', () => {
-//         apiActions.getRequest('https://api.spoonacular.com/recipes/findByIngredients?apiKey=733246d3691c4203855fd5063ee214b6&ingredients=apples,+peaches,+milk&number=1', (recipeIngredients) => {
-//             app.innerHTML = RecipeIngredients(recipeIngredients);
-//         })
-//     })
-// }
-
-// function renderRecipeInstructions() {
-//     const recipeInstructionsButton = document.querySelector('#recipe_button');
-//     recipeInstructionsButton.addEventListener('click', () => {
-//         apiActions.getRequest('https://api.spoonacular.com/recipes/324694/analyzedInstructions?apiKey=733246d3691c4203855fd5063ee214b6', (recipeInstructions) => {
-//             app.innerHTML = RecipeInstructions(recipeInstructions);
-//         })
-//     })
-// }
-
 function navToAddIngredientPage() {
     const navToAddIngredientButton = document.querySelector('.add_ingredient_plus');
     navToAddIngredientButton.addEventListener('click', () => {
@@ -252,15 +227,15 @@ function test() {
                     console.log(stringExclude);
 
 
-        //             apiActions.getRequest(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKeyNum}&includeIngredients=${parsedString}&intolerances=${stringExclude}&number=1`, (recipes) => {
-        //                 console.log(recipes);
-        //     const recipeId = recipes.results[0].id;
-        //     app.innerHTML = RecipeIngredients(recipes);
-        //     apiActions.getRequest(`https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=${apiKeyNum}`, (recipeInstructions) => {
-        //         console.log(recipeInstructions);
-        //         app.innerHTML += RecipeInstructions(recipeInstructions);
-        //     })
-        // })
+                    apiActions.getRequest(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKeyNum}&includeIngredients=${parsedString}&intolerances=${stringExclude}&fillIngredients=true&number=1`, (recipes) => {
+                        // console.log(recipes);
+            const recipeId = recipes.results[0].id;
+            app.innerHTML = RecipeIngredients(recipes);
+            apiActions.getRequest(`https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=${apiKeyNum}`, (recipeInstructions) => {
+                // console.log(recipeInstructions);
+                app.innerHTML += RecipeInstructions(recipeInstructions);
+            })
+        })
                 })
             })
         })
@@ -299,7 +274,7 @@ function navToAddPreferencePage() {
     const navToAddPreferencePageButton = document.querySelectorAll('.add_preference_plus');
     for( const navToAddPreferencePageButton of navToAddPreferencePageButton) {
         navToAddPreferencePageButton.addEventListener('click', (event) => {
-             childId = event.target.parentElement.querySelector("input").value;
+             childId = event.target.parentElement.parentElement.querySelector("input").value;
              console.log(childId);
             app.innerHTML = AddPreferencePage();
         })
@@ -322,7 +297,7 @@ function addPreferenceToChild() {
                     createChild();
                     deleteChild();
                     AddIngredientToParent();
-                    renderRecipeInstructions();
+                    // renderRecipeInstructions();
                     navToAddIngredientPage();
                     navToDeleteIngredientPage();
                     deleteIngredientFromParent();
@@ -330,6 +305,7 @@ function addPreferenceToChild() {
                     addPreferenceToChild();
                     navToDeletePreferencePage();
                     deletePreferenceFromChild();
+                    toggleChildren();
         });
             })
         }
@@ -340,7 +316,7 @@ function navToDeletePreferencePage() {
     const navToDeletePreferencePageButton = document.querySelectorAll('.delete_preference_minus');
     for(const navToDeletePreferencePageButton of navToDeletePreferencePageButton) {
         navToDeletePreferencePageButton.addEventListener('click', (event) => {
-            childId = event.target.parentElement.querySelector('input').value;
+            childId = event.target.parentElement.parentElement.querySelector('input').value;
             console.log(childId);
             app.innerHTML = DeletePreferencePage();
         })
@@ -371,6 +347,7 @@ function deletePreferenceFromChild() {
                     addPreferenceToChild();
                     navToDeletePreferencePage();
                     deletePreferenceFromChild();
+                    toggleChildren();
         });
             })
         }

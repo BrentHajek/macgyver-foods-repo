@@ -29,8 +29,8 @@ export default function Child(child) {
                 `;
     }).join('')}
             </ul>
-                <button class="add__preference_plus" type="button">+ Add a Preference</button>
-                <button class="delete__preference_minus" type="button">- Remove a Preference</button>
+                <button class="add_preference_plus" type="button">+ Add a Preference</button>
+                <button class="delete_preference_minus" type="button">- Remove a Preference</button>
             </div>
 
         </div>

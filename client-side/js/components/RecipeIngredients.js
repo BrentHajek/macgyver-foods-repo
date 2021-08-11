@@ -13,7 +13,7 @@ export default function RecipeIngredients(recipeIngredients) {
                     <ul>
                     ${usedIngredients.usedIngredients.map((usedIngredient) => {
                         return  `
-                            <li>${usedIngredient.original}</li>
+                            <li>${usedIngredient.originalString}</li>
                         `;
                     }).join('')}
                     </ul>
