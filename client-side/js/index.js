@@ -12,6 +12,7 @@ import DeleteIngredientPage from './pages/DeleteIngredientPage.js';
 import AddPreferencePage from './pages/AddPreferencePage.js';
 import Child from './components/Child.js';
 import DeletePreferencePage from './pages/DeletePreferencePage.js';
+import ContactPage from './pages/ContactPage.js';
 
 buildPage();
 
@@ -20,6 +21,7 @@ function buildPage() {
     navAllergies();
     navFoodCategories();
     test();
+    navigateToContactPage();
 }
 
 const app = document.querySelector('#app');
@@ -397,5 +399,13 @@ function deletePreferenceFromChild() {
         });
             })
         }
+    });
+}
+
+function navigateToContactPage() {
+    const contactButton = document.querySelector('#footer__contactBtn');
+    contactButton.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        app.innerHTML = ContactPage();
     });
 }
