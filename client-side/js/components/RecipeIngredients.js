@@ -3,6 +3,7 @@ export default function RecipeIngredients(recipeIngredients) {
         <h2>Recipe Ingredients</h2>
         ${recipeIngredients.results.map((recipeIngredient) => {
         return `
+            ${recipeIngredient.title}
             <input type="hidden" id="recipeIngredientId" value=${recipeIngredient.id}>
             `;
         }).join('')}

@@ -12,6 +12,7 @@ import DeleteIngredientPage from './pages/DeleteIngredientPage.js';
 import AddPreferencePage from './pages/AddPreferencePage.js';
 import Child from './components/Child.js';
 import DeletePreferencePage from './pages/DeletePreferencePage.js';
+import RecipeIngredientsListPage from './pages/RecipeIngredientsListPage.js';
 
 buildPage();
 
@@ -273,20 +274,27 @@ function test() {
                     console.log(stringExclude);
 
 
-                    apiActions.getRequest(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKeyNum}&includeIngredients=${parsedString}&intolerances=${stringExclude}&fillIngredients=true&number=1`, (recipes) => {
+                    apiActions.getRequest(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKeyNum}&includeIngredients=${parsedString}&intolerances=${stringExclude}&fillIngredients=true&number=10`, (recipes) => {
                         console.log(recipes);
-            const recipeId = recipes.results[0].id;
-            app.innerHTML = RecipeIngredients(recipes);
-            apiActions.getRequest(`https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=${apiKeyNum}`, (recipeInstructions) => {
-                // console.log(recipeInstructions);
-                app.innerHTML += RecipeInstructions(recipeInstructions);
-            })
-        })
+                        app.innerHTML = RecipeIngredientsListPage(recipes);
+                        // const recipeId = recipes.results[0].id;
+                        // apiActions.getRequest(`https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=${apiKeyNum}`, (recipeInstructions) => {
+                        //     // console.log(recipeInstructions);
+                        //     app.innerHTML += RecipeInstructions(recipeInstructions);
+                        // })
+                    })
                 })
             })
         })
     })
 }
+
+// function navToSingleRecipePage() {
+//     const navToSingleRecipePageButton = document.querySelector('.ingredient_title');
+//     navToSingleRecipePageButton.addEventListener('click', () => {
+//         app.innerHTML = 
+//     })
+// }
 
 function navToDeleteIngredientPage() {
     const navToDeleteIngredientPageButton = document.querySelector('.delete_ingredient_minus');
