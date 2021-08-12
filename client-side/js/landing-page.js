@@ -25,3 +25,7 @@ nextBtn.addEventListener('click', () => {
 });
 
 //when I click the nav indicators, move to that slide
+
+
+
+const catagoryBtn = document.querySelector('.body__ingredient_testing');

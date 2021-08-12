@@ -12,6 +12,11 @@ import DeleteIngredientPage from './pages/DeleteIngredientPage.js';
 import AddPreferencePage from './pages/AddPreferencePage.js';
 import Child from './components/Child.js'
 import DeletePreferencePage from './pages/DeletePreferencePage.js';
+import LandingCategories from './components/LandingCategories.js';
+import AboutUs from './pages/AboutUs.js';
+import FaqPage from './pages/Faq.js';
+import Terms from './pages/Terms.js';
+import Privacy from './pages/Privacy.js';
 
 buildPage();
 
@@ -20,6 +25,11 @@ function buildPage() {
     navAllergies();
     navFoodCategories();
     test();
+    navLandingCategories();
+    navAbout();
+    navFaq();
+    navTerms();
+    navPrivacy();
 }
 
 const app = document.querySelector('#app');
@@ -148,6 +158,14 @@ function navFoodCategories() {
         });
     });
     renderFoodCategoryIngredients();
+}
+
+function navLandingCategories() {
+    const categoryElem = document.querySelector('#ingredient__categories');
+    apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
+        console.log(foodCategories);
+        categoryElem.innerHTML = LandingCategories(foodCategories);
+    });
 }
 
 function renderFoodCategoryIngredients() {
@@ -375,4 +393,36 @@ function deletePreferenceFromChild() {
             })
         }
     })
+}
+
+function navAbout() {
+    const aboutElem = document.querySelector('.footer__about_listItem');
+    aboutElem.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        app.innerHTML = AboutUs();
+    });
+}
+
+function navFaq() {
+    const faqElem = document.querySelector('.footer__faq_listItem');
+    faqElem.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        app.innerHTML = FaqPage();
+    });
+}
+
+function navTerms() {
+    const termsElem = document.querySelector('.footer__terms_listItem');
+    termsElem.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        app.innerHTML = Terms();
+    });
+}
+
+function navPrivacy() {
+    const privacyElem = document.querySelector('.footer__privacy_listItem');
+    privacyElem.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        app.innerHTML = Privacy();
+    });
 }
