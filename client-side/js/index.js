@@ -343,7 +343,6 @@ function addPreferenceToChild() {
                     createChild();
                     deleteChild();
                     AddIngredientToParent();
-                    // renderRecipeInstructions();
                     navToAddIngredientPage();
                     navToDeleteIngredientPage();
                     deleteIngredientFromParent();
@@ -385,7 +384,6 @@ function deletePreferenceFromChild() {
                     createChild();
                     deleteChild();
                     AddIngredientToParent();
-                    renderRecipeInstructions();
                     navToAddIngredientPage();
                     navToDeleteIngredientPage();
                     deleteIngredientFromParent();
