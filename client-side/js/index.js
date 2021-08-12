@@ -12,6 +12,7 @@ import DeleteIngredientPage from './pages/DeleteIngredientPage.js';
 import AddPreferencePage from './pages/AddPreferencePage.js';
 import Child from './components/Child.js';
 import DeletePreferencePage from './pages/DeletePreferencePage.js';
+import ContactPage from './pages/ContactPage.js';
 import LandingCategories from './components/LandingCategories.js';
 import AboutUs from './pages/AboutUs.js';
 import FaqPage from './pages/Faq.js';
@@ -25,6 +26,7 @@ function buildPage() {
     navAllergies();
     navFoodCategories();
     test();
+    navigateToContactPage();
     navLandingCategories();
     navAbout();
     navFaq();
@@ -447,5 +449,13 @@ function navPrivacy() {
     privacyElem.addEventListener('click', () => {
         const app = document.querySelector('#app');
         app.innerHTML = Privacy();
+    });
+}
+
+function navigateToContactPage() {
+    const contactButton = document.querySelector('#footer__contactBtn');
+    contactButton.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        app.innerHTML = ContactPage();
     });
 }
