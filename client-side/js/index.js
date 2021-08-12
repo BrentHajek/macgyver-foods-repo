@@ -11,7 +11,6 @@ import AddIngredientPage from './pages/AddIngredientPage.js';
 import DeleteIngredientPage from './pages/DeleteIngredientPage.js';
 import Ingredients from './components/Ingredients.js';
 import SignInPage from './pages/SignInPage.js';
-import SignInUser from './signin';
 import SignInJs from './signin';
 
 buildPage();
