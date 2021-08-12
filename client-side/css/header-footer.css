@@ -142,7 +142,6 @@
 }
 
 .footer__social_icons li {
-    cursor: pointer;
     margin: 1rem;
     margin-bottom: 0;
     margin-top: 0;
@@ -167,13 +166,13 @@
     text-decoration: none;
 }
 
-.footer__links_listItem {
+.footer__links_list li {
     cursor: pointer;
     margin: 1rem;
 }
 
 .footer__copy {
-    color: rgb(238, 129, 56);
+    color: rgb(255, 56, 0);
     display: flex;
     font-family: 'Roboto', sans-serif;
     justify-content: center;
