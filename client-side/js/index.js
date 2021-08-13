@@ -9,10 +9,10 @@ import RecipeInstructions from './components/RecipeInstructions.js';
 import RecipeIngredients from './components/RecipeIngredients.js';
 import AddIngredientPage from './pages/AddIngredientPage.js';
 import DeleteIngredientPage from './pages/DeleteIngredientPage.js';
-import AddPreferencePage from './pages/AddPreferencePage.js';
-import Child from './components/Child.js';
-import DeletePreferencePage from './pages/DeletePreferencePage.js';
 import ContactPage from './pages/ContactPage.js';
+// import Ingredients from './components/Ingredients.js';
+import SignInPage from './pages/SignInPage.js';
+import SignInJs from './signin';
 import LandingCategories from './components/LandingCategories.js';
 import AboutUs from './pages/AboutUs.js';
 import FaqPage from './pages/Faq.js';
@@ -30,6 +30,7 @@ function buildPage() {
     test();
     navigateToContactPage();
     navLandingCategories();
+    navToSignInPage();
     navAbout();
     navFaq();
     navTerms();
@@ -71,6 +72,7 @@ function wireUpParent(parents) {
     navToDeletePreferencePage();
     deletePreferenceFromChild();
     toggleChildren();
+    navToSignInPage();
 }
 
 function toggleChildren() {
@@ -80,8 +82,8 @@ function toggleChildren() {
         console.log(childName);
         childName.addEventListener('click', (event) => {
             console.log(event);
-            if(event.target.classList.contains('child__name')) {
-                if(event.target.parentElement.style.visibility !== 'visible'){
+            if (event.target.classList.contains('child__name')) {
+                if (event.target.parentElement.style.visibility !== 'visible') {
                     event.target.parentElement.style.visibility = 'visible';
                     event.target.parentElement.style.height = 'auto';
                 } else {
@@ -99,7 +101,7 @@ function toggleChildren() {
 
 function navToAddChildPage() {
     const navToAdd = document.querySelector('.add_child_plus');
-    navToAdd.addEventListener('click', ()=>{
+    navToAdd.addEventListener('click', () => {
         app.innerHTML = AddChildPage();
     });
 }
@@ -113,7 +115,7 @@ function navToDeleteChildPage() {
 
 function createChild() {
     app.addEventListener('click', (event) => {
-        if(event.target.classList.contains('add_child_submit')){
+        if (event.target.classList.contains('add_child_submit')) {
             const firstName = event.target.parentElement.querySelector('#add_child_firstName').value;
             const lastName = event.target.parentElement.querySelector('#add_child_lastName').value;
             const age = event.target.parentElement.querySelector('#add_child_age').value;
@@ -138,7 +140,7 @@ function createChild() {
 
 function deleteChild() {
     app.addEventListener('click', (event) => {
-        if(event.target.classList.contains('delete_child_submit')){
+        if (event.target.classList.contains('delete_child_submit')) {
             const firstName = event.target.parentElement.querySelector('#delete_child_firstName').value;
             apiActions.deleteRequest('http://localhost:8080/parents/203/delete-child', {
                 'firstName': firstName
@@ -176,7 +178,9 @@ function navAllergies() {
 }
 
 let allergyCount = 0;
+
 let allergyToRemoveCount = 0;
+
 function submitAllergySelections() {
     const app = document.querySelector('#app');
     app.addEventListener('click', (event) => {
@@ -210,8 +214,11 @@ function submitAllergySelections() {
 }
 
 let currentAllergyCount = 0;
+
 function addAllergiesToChildProfile(allergy) {
-    apiActions.postRequest(`http://localhost:8080/children/${childId}/add-allergy`, {'allergy': allergy}, allergies => {
+    apiActions.postRequest(`http://localhost:8080/children/${childId}/add-allergy`, {
+        'allergy': allergy
+    }, allergies => {
         currentAllergyCount++;
         if (currentAllergyCount == allergyCount) {
             apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
@@ -240,7 +247,7 @@ function navFoodCategories() {
     foodCategoryElem.addEventListener('click', () => {
         const app = document.querySelector('#app');
         apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
-            app.innerHTML =FoodCategories(foodCategories);
+            app.innerHTML = FoodCategories(foodCategories);
         });
     });
     renderFoodCategoryIngredients();
@@ -275,7 +282,7 @@ function navToAddIngredientPage() {
 
 function AddIngredientToParent() {
     app.addEventListener('click', (event) => {
-        if(event.target.classList.contains('add_ingredient_submit')) {
+        if (event.target.classList.contains('add_ingredient_submit')) {
             const ingredient = event.target.parentElement.querySelector('#add_ingredient_name').value;
             makePostToAddIngredient(ingredient);
         }
@@ -313,12 +320,12 @@ function test() {
                 }
                 apiActions.getRequest(`http://localhost:8080/children/${childId}`, (child) => {
                     let stringName3 = '';
-                    for(let i = 0; i < child.preferences.length; i++) {
+                    for (let i = 0; i < child.preferences.length; i++) {
                         stringName3 += child.preferences[i].preference.toLowerCase() + ',';
                     }
                     let stringInclude = stringName + stringName3;
                     let stringExclude = stringName2;
-                    const parsedString = stringInclude.substring(0,stringInclude.length -1) ;
+                    const parsedString = stringInclude.substring(0, stringInclude.length - 1);
                     console.log(stringInclude);
                     console.log([parsedString]);
                     console.log(stringExclude);
@@ -348,7 +355,7 @@ function navToDeleteIngredientPage() {
 
 function deleteIngredientFromParent() {
     app.addEventListener('click', (event) => {
-        if(event.target.classList.contains('delete_ingredient_submit')) {
+        if (event.target.classList.contains('delete_ingredient_submit')) {
             const ingredient = event.target.parentElement.querySelector('#delete_ingredient_name').value;
             apiActions.deleteRequest('http://localhost:8080/parents/203/delete-ingredient', {
                 'ingredient': ingredient
@@ -369,7 +376,7 @@ let childId = 0;
 
 function navToAddPreferencePage() {
     const navToAddPreferencePageButton = document.querySelectorAll('.add_preference_plus');
-    for( const navToAddPreferencePageButton of navToAddPreferencePageButton) {
+    for (const navToAddPreferencePageButton of navToAddPreferencePageButton) {
         navToAddPreferencePageButton.addEventListener('click', (event) => {
             childId = event.target.parentElement.parentElement.querySelector('input').value;
             console.log(childId);
@@ -380,7 +387,7 @@ function navToAddPreferencePage() {
 
 function addPreferenceToChild() {
     app.addEventListener('click', (event) => {
-        if(event.target.classList.contains('add_preference_submit')) {
+        if (event.target.classList.contains('add_preference_submit')) {
             const preference = event.target.parentElement.querySelector('#add_preference_name').value;
             console.log(childId);
             apiActions.postRequest(`http://localhost:8080/children/${childId}/add-preference`, {
@@ -410,7 +417,7 @@ function addPreferenceToChild() {
 
 function navToDeletePreferencePage() {
     const navToDeletePreferencePageButton = document.querySelectorAll('.delete_preference_minus');
-    for(const navToDeletePreferencePageButton of navToDeletePreferencePageButton) {
+    for (const navToDeletePreferencePageButton of navToDeletePreferencePageButton) {
         navToDeletePreferencePageButton.addEventListener('click', (event) => {
             childId = event.target.parentElement.parentElement.querySelector('input').value;
             console.log(childId);
@@ -421,7 +428,7 @@ function navToDeletePreferencePage() {
 
 function deletePreferenceFromChild() {
     app.addEventListener('click', (event) => {
-        if(event.target.classList.contains('delete_preference_submit')) {
+        if (event.target.classList.contains('delete_preference_submit')) {
             const preference = event.target.parentElement.querySelector('#delete_preference_name').value;
             console.log(childId);
             apiActions.deleteRequest(`http://localhost:8080/children/${childId}/delete-preference`, {
@@ -452,7 +459,7 @@ function deletePreferenceFromChild() {
 function navAbout() {
     const aboutElem = document.querySelector('.footer__about_listItem');
     aboutElem.addEventListener('click', () => {
-        const app = document.querySelector('#app');
+        const app = document.querySelector('#');
         app.innerHTML = AboutUs();
     });
 }
@@ -460,7 +467,7 @@ function navAbout() {
 function navFaq() {
     const faqElem = document.querySelector('.footer__faq_listItem');
     faqElem.addEventListener('click', () => {
-        const app = document.querySelector('#app');
+        const app = document.querySelector('#');
         app.innerHTML = FaqPage();
     });
 }
@@ -468,7 +475,7 @@ function navFaq() {
 function navTerms() {
     const termsElem = document.querySelector('.footer__terms_listItem');
     termsElem.addEventListener('click', () => {
-        const app = document.querySelector('#app');
+        const app = document.querySelector('#');
         app.innerHTML = Terms();
     });
 }
@@ -476,7 +483,7 @@ function navTerms() {
 function navPrivacy() {
     const privacyElem = document.querySelector('.footer__privacy_listItem');
     privacyElem.addEventListener('click', () => {
-        const app = document.querySelector('#app');
+        const app = document.querySelector('#');
         app.innerHTML = Privacy();
     });
 }
@@ -487,6 +494,21 @@ function navigateToContactPage() {
         const app = document.querySelector('#app');
         app.innerHTML = ContactPage();
     });
+}
+
+function navToAboutPage() {
+    const navToAboutPageButton = document.querySelector('#about')
+    navToAboutPageButton.addEventListener('click', () => {
+        app.innerHTML = About()
+    })
+}
+
+function navToSignInPage() {
+    const navToSignInButton = document.querySelector('#sign_in');
+    navToSignInButton.addEventListener('click', () => {
+        app.innerHTML = SignInPage();
+        SignInJs();
+    })
 }
 
 function navHome() {
