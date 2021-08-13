@@ -1,11 +1,10 @@
-import Parent from "../components/Parent.js"
+import Parent from '../components/Parent.js';
 
 export default function ParentPage(parent) {
     return `
-    <h2>The Profile Page</h2>
+    <h2 class="your__profile_header">Your Profile</h2>
         <div class="user_info">
             ${Parent(parent)}
-            <button class="delete_child_minus" type="button">-</button>
         </div>
     `;
 }
