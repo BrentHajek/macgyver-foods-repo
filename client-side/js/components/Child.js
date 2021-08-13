@@ -32,7 +32,6 @@ export default function Child(child) {
                 <button class="add_preference_plus" type="button">+ Add a Preference</button>
                 <button class="delete_preference_minus" type="button">- Remove a Preference</button>
             </div>
-
         </div>
         `;
 }

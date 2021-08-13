@@ -6,7 +6,7 @@ export default function ContactPage() {
         <h2 class="contact__us_title">Contact Us</h2>
         <div class="ways__to__contact">
             <article class="contact__us__customer__service">
-            <h3 class="general__inquiries__header">For General Inquiries</h3>    
+            <h3 class="general__inquiries__header">For General Inquiries</h3>
                 <p>Call our service center at: 1-800-555-8383</p>
                 <p> or email <a href="customer__service__email">help@macgyverfoods.com</a></p>
             </article>
@@ -22,16 +22,16 @@ export default function ContactPage() {
                     <br><label for="phoneNumber">Last Name:</label>
                     <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Your phone number...">
                     <br><label for="country">Country:</label>
-                    <select id="country" name="country"> 
+                    <select id="country" name="country">
                         <option value="usa">United States of America</option>
                         <option value="australia">Australia</option>
                         <option value="canada">Canada</option>
-                        <option value="ireland">Ireland</option>   
-                        <option value="jamaica">Jamaica</option> 
-                        <option value="newZealand">New Zealand</option>                            
-                        <option value="uk">United Kingdom</option>               
-                        <option value="other">Other Country</option>                    
-                    </select>             
+                        <option value="ireland">Ireland</option>
+                        <option value="jamaica">Jamaica</option>
+                        <option value="newZealand">New Zealand</option>
+                        <option value="uk">United Kingdom</option>
+                        <option value="other">Other Country</option>
+                    </select>
                     <br><label for="subject">Subject:</label>
                     <input type="text" id="subject" name="subject" placeholder="Subject...">
                     <br><label for="comments__or__questions">Comments or Questions:</label></form>

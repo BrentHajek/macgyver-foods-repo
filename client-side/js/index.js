@@ -18,6 +18,7 @@ import AboutUs from './pages/AboutUs.js';
 import FaqPage from './pages/Faq.js';
 import Terms from './pages/Terms.js';
 import Privacy from './pages/Privacy.js';
+import RemoveAllergy from './components/RemoveAllergy.js';
 
 buildPage();
 
@@ -76,8 +77,6 @@ function toggleChildren() {
     childNames.forEach((childName) => {
         console.log(childName);
         childName.addEventListener('click', (event) => {
-            
-            
             console.log(event);
             if(event.target.classList.contains('child__name')) {
                 if(event.target.parentElement.style.visibility !== 'visible'){
@@ -164,18 +163,24 @@ function navAllergies() {
                 app.innerHTML = AllergyComponent(allergies);
             });
         }
+        else if (event.target.classList.contains('delete__allergy_minus')) {
+            childId = event.target.parentElement.parentElement.querySelector('input').value;
+            apiActions.getRequest(`http://localhost:8080/children/${childId}/allergies`, allergies => {
+                app.innerHTML = RemoveAllergy(allergies);
+            });
+        }
     });
     submitAllergySelections();
 }
 
 let allergyCount = 0;
+let allergyToRemoveCount = 0;
 function submitAllergySelections() {
     const app = document.querySelector('#app');
     app.addEventListener('click', (event) => {
         if (event.target.classList.contains('submit-allergies-btn')) {
             var allergiesToAdd = [];
             allergyCount = 0;
-            currentAllergyCount = 0;
             var allAllergies = app.querySelectorAll('.allergies');
             allAllergies.forEach((currentAllergy) => {
                 if (currentAllergy.checked) {
@@ -183,11 +188,21 @@ function submitAllergySelections() {
                     allergiesToAdd.push(checkedAllergy);
                     allergyCount++;
                 }
-                else {
-
-                }
             });
             allergiesToAdd.forEach(addAllergiesToChildProfile);
+        }
+        else if (event.target.classList.contains('submit-allergies-to-remove-btn')) {
+            var allergiesToRemove = [];
+            allergyToRemoveCount = 0;
+            var allAllergiesToRemove = app.querySelectorAll('.allergies');
+            allAllergiesToRemove.forEach((currentAllergy) => {
+                if (currentAllergy.checked) {
+                    var checkedAllergyToRemove = currentAllergy.value;
+                    allergiesToRemove.push(checkedAllergyToRemove);
+                    allergyToRemoveCount++;
+                }
+            });
+            allergiesToRemove.forEach(removeAllergiesFromChildProfile);
         }
     });
 }
@@ -198,6 +213,20 @@ function addAllergiesToChildProfile(allergy) {
         currentAllergyCount++;
         if (currentAllergyCount == allergyCount) {
             apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
+                currentAllergyCount = 0;
+                wireUpParent(parents);
+            });
+        }
+    });
+}
+
+let currentAllergiesToRemoveCount = 0;
+function removeAllergiesFromChildProfile(allergy) {
+    apiActions.deleteRequest(`http://localhost:8080/children/${childId}/delete-allergy`, {'allergy': allergy}, allergies => {
+        currentAllergiesToRemoveCount++;
+        if (currentAllergiesToRemoveCount == allergyToRemoveCount) {
+            apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
+                currentAllergiesToRemoveCount = 0;
                 wireUpParent(parents);
             });
         }
@@ -295,17 +324,17 @@ function test() {
 
                     apiActions.getRequest(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKeyNum}&includeIngredients=${parsedString}&intolerances=${stringExclude}&fillIngredients=true&number=1`, (recipes) => {
                         console.log(recipes);
-            const recipeId = recipes.results[0].id;
-            app.innerHTML = RecipeIngredients(recipes);
-            apiActions.getRequest(`https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=${apiKeyNum}`, (recipeInstructions) => {
-                // console.log(recipeInstructions);
-                app.innerHTML += RecipeInstructions(recipeInstructions);
-            })
-        })
-                })
-            })
-        })
-    })
+                        const recipeId = recipes.results[0].id;
+                        app.innerHTML = RecipeIngredients(recipes);
+                        apiActions.getRequest(`https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=${apiKeyNum}`, (recipeInstructions) => {
+                        // console.log(recipeInstructions);
+                            app.innerHTML += RecipeInstructions(recipeInstructions);
+                        });
+                    });
+                });
+            });
+        });
+    });
 }
 
 function navToDeleteIngredientPage() {
@@ -340,8 +369,8 @@ function navToAddPreferencePage() {
     const navToAddPreferencePageButton = document.querySelectorAll('.add_preference_plus');
     for( const navToAddPreferencePageButton of navToAddPreferencePageButton) {
         navToAddPreferencePageButton.addEventListener('click', (event) => {
-             childId = event.target.parentElement.parentElement.querySelector("input").value;
-             console.log(childId);
+            childId = event.target.parentElement.parentElement.querySelector('input').value;
+            console.log(childId);
             app.innerHTML = AddPreferencePage();
         });
     }
@@ -371,8 +400,8 @@ function addPreferenceToChild() {
                     navToDeletePreferencePage();
                     deletePreferenceFromChild();
                     toggleChildren();
-        });
-            })
+                });
+            });
         }
     });
 }
@@ -412,10 +441,10 @@ function deletePreferenceFromChild() {
                     navToDeletePreferencePage();
                     deletePreferenceFromChild();
                     toggleChildren();
-        });
-            })
+                });
+            });
         }
-    })
+    });
 }
 
 function navAbout() {
