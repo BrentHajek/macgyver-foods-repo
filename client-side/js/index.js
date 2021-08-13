@@ -12,7 +12,16 @@ import DeleteIngredientPage from './pages/DeleteIngredientPage.js';
 import AddPreferencePage from './pages/AddPreferencePage.js';
 import Child from './components/Child.js';
 import DeletePreferencePage from './pages/DeletePreferencePage.js';
+<<<<<<< HEAD
 import About from './pages/About.js';
+=======
+import ContactPage from './pages/ContactPage.js';
+import LandingCategories from './components/LandingCategories.js';
+import AboutUs from './pages/AboutUs.js';
+import FaqPage from './pages/Faq.js';
+import Terms from './pages/Terms.js';
+import Privacy from './pages/Privacy.js';
+>>>>>>> main
 
 buildPage();
 
@@ -21,7 +30,16 @@ function buildPage() {
     navAllergies();
     navFoodCategories();
     test();
+<<<<<<< HEAD
     navToAboutPage();
+=======
+    navigateToContactPage();
+    navLandingCategories();
+    navAbout();
+    navFaq();
+    navTerms();
+    navPrivacy();
+>>>>>>> main
 }
 
 const app = document.querySelector('#app');
@@ -37,7 +55,7 @@ const apiKeyNum = '4d2f51bba03b42a59ba6d0843ac5b5f9';
 function renderProfileInfo() {
     const profileButton = document.querySelector('#profile_button');
     profileButton.addEventListener('click', () => {
-        apiActions.getRequest('http://localhost:8080/parents/89', (parents) => {
+        apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
             wireUpParent(parents);
         });
     });
@@ -106,7 +124,7 @@ function createChild() {
             const firstName = event.target.parentElement.querySelector('#add_child_firstName').value;
             const lastName = event.target.parentElement.querySelector('#add_child_lastName').value;
             const age = event.target.parentElement.querySelector('#add_child_age').value;
-            apiActions.postRequest('http://localhost:8080/parents/89/add-child', {
+            apiActions.postRequest('http://localhost:8080/parents/203/add-child', {
                 'firstName': firstName,
                 'lastName': lastName,
                 'age': age
@@ -129,7 +147,7 @@ function deleteChild() {
     app.addEventListener('click', (event) => {
         if(event.target.classList.contains('delete_child_submit')){
             const firstName = event.target.parentElement.querySelector('#delete_child_firstName').value;
-            apiActions.deleteRequest('http://localhost:8080/parents/89/delete-child', {
+            apiActions.deleteRequest('http://localhost:8080/parents/203/delete-child', {
                 'firstName': firstName
             }, (parents) => {
                 app.innerHTML = ParentPage(parents)
@@ -187,7 +205,7 @@ function addAllergiesToChildProfile(allergy) {
     apiActions.postRequest(`http://localhost:8080/children/${childId}/add-allergy`, {'allergy': allergy}, allergies => {
         currentAllergyCount++;
         if (currentAllergyCount == allergyCount) {
-            apiActions.getRequest('http://localhost:8080/parents/89', (parents) => {
+            apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
                 wireUpParent(parents);
             });
         }
@@ -203,6 +221,14 @@ function navFoodCategories() {
         });
     });
     renderFoodCategoryIngredients();
+}
+
+function navLandingCategories() {
+    const categoryElem = document.querySelector('#ingredient__categories');
+    apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
+        console.log(foodCategories);
+        categoryElem.innerHTML = LandingCategories(foodCategories);
+    });
 }
 
 function renderFoodCategoryIngredients() {
@@ -234,7 +260,7 @@ function AddIngredientToParent() {
 }
 
 function makePostToAddIngredient(ingredient) {
-    apiActions.postRequest('http://localhost:8080/parents/89/add-ingredient', {
+    apiActions.postRequest('http://localhost:8080/parents/203/add-ingredient', {
         'ingredient': ingredient
     }, (parents) => {
         app.innerHTML = ParentPage(parents);
@@ -252,7 +278,7 @@ function makePostToAddIngredient(ingredient) {
 function test() {
     const testButton = document.querySelector('#test');
     testButton.addEventListener('click', () => {
-        apiActions.getRequest('http://localhost:8080/parents/89', (parents) => {
+        apiActions.getRequest('http://localhost:8080/parents/93', (parents) => {
             let stringName = '';
             for (let i = 0; i < parents.ingredients.length; i++) {
                 stringName += parents.ingredients[i].ingredient.toLowerCase() + ',';
@@ -301,7 +327,7 @@ function deleteIngredientFromParent() {
     app.addEventListener('click', (event) => {
         if(event.target.classList.contains('delete_ingredient_submit')) {
             const ingredient = event.target.parentElement.querySelector('#delete_ingredient_name').value;
-            apiActions.deleteRequest('http://localhost:8080/parents/89/delete-ingredient', {
+            apiActions.deleteRequest('http://localhost:8080/parents/203/delete-ingredient', {
                 'ingredient': ingredient
             }, (parents) => {
                 app.innerHTML = ParentPage(parents);
@@ -338,14 +364,13 @@ function addPreferenceToChild() {
                 'preference': preference
             }, (child) => {
                 Child(child);
-                apiActions.getRequest('http://localhost:8080/parents/89', (parents) => {
+                apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
                     app.innerHTML = ParentPage(parents);
                     navToAddChildPage();
                     navToDeleteChildPage();
                     createChild();
                     deleteChild();
                     AddIngredientToParent();
-                    // renderRecipeInstructions();
                     navToAddIngredientPage();
                     navToDeleteIngredientPage();
                     deleteIngredientFromParent();
@@ -380,14 +405,13 @@ function deletePreferenceFromChild() {
                 'preference': preference
             }, (child) => {
                 Child(child);
-                apiActions.getRequest('http://localhost:8080/parents/89', (parents) => {
+                apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
                     app.innerHTML = ParentPage(parents);
                     navToAddChildPage();
                     navToDeleteChildPage();
                     createChild();
                     deleteChild();
                     AddIngredientToParent();
-                    renderRecipeInstructions();
                     navToAddIngredientPage();
                     navToDeleteIngredientPage();
                     deleteIngredientFromParent();
@@ -399,6 +423,46 @@ function deletePreferenceFromChild() {
         });
             })
         }
+    })
+}
+
+function navAbout() {
+    const aboutElem = document.querySelector('.footer__about_listItem');
+    aboutElem.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        app.innerHTML = AboutUs();
+    });
+}
+
+function navFaq() {
+    const faqElem = document.querySelector('.footer__faq_listItem');
+    faqElem.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        app.innerHTML = FaqPage();
+    });
+}
+
+function navTerms() {
+    const termsElem = document.querySelector('.footer__terms_listItem');
+    termsElem.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        app.innerHTML = Terms();
+    });
+}
+
+function navPrivacy() {
+    const privacyElem = document.querySelector('.footer__privacy_listItem');
+    privacyElem.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        app.innerHTML = Privacy();
+    });
+}
+
+function navigateToContactPage() {
+    const contactButton = document.querySelector('#footer__contactBtn');
+    contactButton.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        app.innerHTML = ContactPage();
     });
 }
 
