@@ -1,9 +1,112 @@
-.user_info {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+html {
+    font-family: 'Roboto', sans-serif;
+    margin: auto;
+    max-width: 80rem;
 }
 
-.child__info_containter {
+/* coming from the ParentPage */
+.your__profile_header {
+    font-family: 'Roboto', sans-serif;
+    font-size:xx-large;
+    text-align: center;
+}
+
+/* coming from the ParentPage */
+.user_info {
+    border: solid rgb(79, 161, 37) 2px;
+    border-radius: 25px;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    padding: 20px
+}
+
+/* coming from the Parent.js component */
+.parent__name_header {
+    
+}
+
+/* coming from the Parent.js component */
+.child__info_containter {
+    border: solid rgb(255, 56, 0) 2px;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* coming from the Parent.js component */
+.children__name_header {
+    background-color: rgb(255, 56, 0);
+    border-radius: 25px;
+    color: white;
+    padding: 3px;
+    text-align: center;
+}
+
+/* coming from the Child.js component */
+.test_child_grid {
+    /* display: grid;
+    grid-row-gap: 5px;
+    grid-column-gap: 5px; */
+    /* grid-template-columns: repeat(2, 1fr); */
+    align-items: center;
+    background-color: rgb(132, 175, 119);
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    visibility: hidden;
+    height: 20px;
+}
+
+.child__name {
+    visibility: visible;
+}
+
+/* coming from the Child.js component */
+.test_child_grid:hover {
+    background-color: rgb(221, 219, 96);
+}
+
+/* coming from the ParentPage */
+.delete_child_minus_button_contaier {
+    justify-content: center;
+}
+
+/* coming from the Parent.js component */
+.add_child_plus_button_container {
+    justify-content: center;
+    padding-bottom: 10px
+}
+
+/* coming from the ParentPage */
+.delete_child_minus:hover {
+    background-color: rgb(184, 184, 189);
+}
+
+/* coming from the Parent.js component */
+.add_child_plus:hover {
+    background-color: rgb(184, 184, 189);
+}
+
+/* coming from the Parent.js component */
+.add_ingredient_plus:hover{
+    background-color: rgb(184, 184, 189);
+}
+
+.add_child_plus {
+    border-radius: 25px;
+}
+
+.add_ingredient_plus {
+    border-radius: 25px;
+}
+
+.delete_ingredient_minus {
+    border-radius: 25px;
+}
+
+.delete_child_minus {
+    border-radius: 25px;
 }

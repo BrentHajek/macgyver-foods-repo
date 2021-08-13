@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,11 +9,10 @@
     <link rel="stylesheet" href="./css/allergy-component.css" />
     <link rel="stylesheet" href="./css/parentPage.css">
     <link rel="stylesheet" href="./css/foodCategories-component.css">
-    <link rel="stylesheet" href="./css/signIn.css">
+    <link rel="stylesheet" href="./css/contactPage.css">
     <script src="https://kit.fontawesome.com/746e027e38.js" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
-
 <body>
     <header class="header">
         <div class="header__menu_backdrop"></div>
@@ -22,9 +20,9 @@
             <div class="header__menu_burger"></div>
             <div class="header__menu_list">
                 <ul class="header__menu_content">
-                    <li class="header__menu_item">About Us</li>
+                    <li class="header__menu_item" id="about">About Us</li>
                     <li class="header__menu_item">Contact Us</li>
-                    <li class="header__menu_item" id="sign_in">Sign In</li>
+                    <li class="header__menu_item" id="sign_in">Contact Us</li>
                 </ul>
             </div>
         </div>
@@ -34,49 +32,63 @@
                 <li class="header__listItems"><i class="fas fa-search"></i></li>
                 <li class="header__listItems"><i class="fas fa-shopping-cart"></i></li>
                 <li class="header__listItems" id="profile_button"><i class="far fa-user-circle"></i></li>
-                <li class="header__listItems" id="recipe_button"><i class="fas fa-plus"></i></li>
                 <li class="header__listItems" id="test">Test</li>
             </ul>
         </div>
     </header>
-    <div id="app">
-        <button class="allergy-list-btn">Allergen List</button>
-        <button class="preference-list-btn">Preference List</button>
-    </div>
+    <body>
+        <div id="app">
+            <div class="body__buttons">
+                <button class="allergy-list-btn">Allergen List</button>
+                <button class="preference-list-btn">Preference List</button>
+            </div>
+            <div class="body__carousel">
+                <button class="body__carousel_btnLeft">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="body__carousel_trackContainer">
+                    <ul class="body__carousel_track">
+                        <li class="body__carousel_slide current-slide">
+                            <img class="carousel__image" src="./images/food-image-3.jpg" alt="">
+                        </li>
+                        <li class="body__carousel_slide">
+                            <img class="carousel__image" src="./images/food-image-2.jpg" alt="">
+                        </li>
+                        <li class="body__carousel_slide">
+                            <img class="carousel__image" src="./images/food-image-1.jpg" alt="">
+                        </li>
+                    </ul>
+                </div>
+                <button class="body__carousel_btnRight">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <div class="body__carousel_nav">
+                    <button class="body__carousel_indicator current-slide"></button>
+                    <button class="body__carousel_indicator"></button>
+                    <button class="body__carousel_indicator"></button>
+                </div>
+            </div>
+            <div id="ingredient__categories" class="body__ingredient_groups"></div>
+        </div>
+    </body>
     <footer class="footer">
         <div class="footer__social_bar">
             <ul class="footer__social_icons">
-                <a href="#">
-                    <li class="footer__social_facebook"><i class="fab fa-facebook-f"></i></li>
-                </a>
-                <a href="#">
-                    <li class="footer__social_twitter"><i class="fab fa-twitter"></i></li>
-                </a>
-                <a href="#">
-                    <li class="footer__social_instagram"><i class="fab fa-instagram"></i></li>
-                </a>
-                <a href="#">
-                    <li class="footer__social_pinterest"><i class="fab fa-pinterest-p"></i></li>
-                </a>
+                <a href="https://www.facebook.com/" target="_blank"><li class="footer__social_facebook"><i class="fab fa-facebook-f"></i></li></a>
+                <a href="https://twitter.com/" target="_blank"><li class="footer__social_twitter"><i class="fab fa-twitter"></i></li></a>
+                <a href="https://www.instagram.com/" target="_blank"><li class="footer__social_instagram"><i class="fab fa-instagram"></i></li></a>
+                <a href="https://www.pinterest.com/" target="_blank"><li class="footer__social_pinterest"><i class="fab fa-pinterest-p"></i></li></a>
             </ul>
         </div>
         <div class="footer__links">
             <ul class="footer__links_list">
-                <a href="#">
-                    <li class="footer__links_listItem">ABOUT</li>
-                </a>
-                <a href="#">
-                    <li class="footer__links_listItem">CONTACT</li>
-                </a>
-                <a href="#">
-                    <li class="footer__links_listItem">FAQ</li>
-                </a>
-                <a href="#">
-                    <li class="footer__links_listItem">TERMS</li>
-                </a>
-                <a href="#">
-                    <li class="footer__links_listItem">PRIVACY POLICY</li>
-                </a>
+
+                <li class="footer__about_listItem">ABOUT</li>
+                <li id="footer__contactBtn" class="footer__contact_listItem">CONTACT</li>
+                <li class="footer__faq_listItem">FAQ</li>
+                <li class="footer__terms_listItem">TERMS</li>
+                <li class="footer__privacy_listItem">PRIVACY POLICY</li>
+
             </ul>
         </div>
         <div class="footer__copy">
@@ -85,7 +97,6 @@
     </footer>
     <script src="./js/index.js"></script>
     <script src="./js/header-footer.js"></script>
-    <script src="./js/signin.js"></script>
+    <script src="./js/landing-page.js"></script>
 </body>
-
 </html>

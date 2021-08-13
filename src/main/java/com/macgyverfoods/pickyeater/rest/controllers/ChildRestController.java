@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 public class ChildRestController {
 
     @Resource
@@ -52,7 +53,7 @@ public class ChildRestController {
     }
 
     @DeleteMapping ("/children/{id}/delete-preference")
-    public Optional<Child> removePreference(@RequestBody String body, @PathVariable Long id) {
+    public Optional<Child> removePreference(@RequestBody String body, @PathVariable Long id) throws JSONException {
         JSONObject removedPreference = new JSONObject(body);
         String preference = removedPreference.getString("preference");
         Optional<Preference> preferenceToRemoveOpt = preferenceRepo.findByPreference(preference);

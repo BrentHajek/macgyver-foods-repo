@@ -1,6 +1,6 @@
 /*HEADER*/
 .header {
-    background-color: rgb(238, 129, 56);
+    background-color: rgb(255, 56, 0);
     display: flex;
     justify-content: space-between;
 }
@@ -121,13 +121,13 @@
 
 .footer__social_bar {
     align-items: center;
-    border-top: 1px solid rgb(238, 129, 56);
+    border-top: 1px solid rgb(255, 56, 0);
     margin-top: 2rem;
     text-align: center;
 }
 
 .footer__social_icons {
-    color: rgb(238, 129, 56);
+    color: rgb(255, 56, 0);
     display: flex;
     font-size: 20px;
     justify-content: center;
@@ -142,14 +142,13 @@
 }
 
 .footer__social_icons li {
-    cursor: pointer;
     margin: 1rem;
     margin-bottom: 0;
     margin-top: 0;
 }
 
 .footer__links {
-    background-color: rgb(238, 129, 56);
+    background-color: rgb(255, 56, 0);
 }
 
 .footer__links_list {
@@ -167,13 +166,13 @@
     text-decoration: none;
 }
 
-.footer__links_listItem {
+.footer__links_list li {
     cursor: pointer;
     margin: 1rem;
 }
 
 .footer__copy {
-    color: rgb(238, 129, 56);
+    color: rgb(255, 56, 0);
     display: flex;
     font-family: 'Roboto', sans-serif;
     justify-content: center;
