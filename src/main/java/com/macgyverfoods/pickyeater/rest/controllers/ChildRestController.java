@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -35,6 +36,12 @@ public class ChildRestController {
     public Child getChild(@PathVariable Long id) {
 
         return childRepo.findById(id).get();
+    }
+
+    @GetMapping("/children/{id}/allergies")
+    public Collection<Allergy> getChildAllergies(@PathVariable Long id) {
+        Optional<Child> childToGetAllergiesFor = Optional.of(childRepo.findById(id).get());
+        return childToGetAllergiesFor.get().getAllergies();
     }
 
     @PostMapping("/children/{id}/add-preference")
@@ -85,12 +92,12 @@ public class ChildRestController {
     public Optional<Child> removeAllergies(@RequestBody String body, @PathVariable Long id) throws JSONException {
         JSONObject removeAllergy = new JSONObject(body);
         String allergy = removeAllergy.getString("allergy");
-        Optional<Allergy> allergyToAddOpt = allergyRepo.findByAllergy(allergy);
-        if (allergyToAddOpt.isPresent()) {
-            Optional<Child> childToAddAllergyToOpt = childRepo.findById(id);
-            Child childToAddAllergyTo = childToAddAllergyToOpt.get();
-            childToAddAllergyTo.removeAllergy(allergyToAddOpt.get());
-            childRepo.save(childToAddAllergyTo);
+        Optional<Allergy> allergyToRemoveOpt = allergyRepo.findByAllergy(allergy);
+        if (allergyToRemoveOpt.isPresent()) {
+            Optional<Child> childToRemoveAllergyFromOpt = childRepo.findById(id);
+            Child childToRemoveAllergyFrom = childToRemoveAllergyFromOpt.get();
+            childToRemoveAllergyFrom.removeAllergy(allergyToRemoveOpt.get());
+            childRepo.save(childToRemoveAllergyFrom);
         }
 
         return childRepo.findById(id);
