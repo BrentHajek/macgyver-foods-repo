@@ -18,6 +18,7 @@ import AboutUs from './pages/AboutUs.js';
 import FaqPage from './pages/Faq.js';
 import Terms from './pages/Terms.js';
 import Privacy from './pages/Privacy.js';
+import LandingPage from '/index.html';
 
 buildPage();
 
@@ -32,6 +33,7 @@ function buildPage() {
     navFaq();
     navTerms();
     navPrivacy();
+    navHome();
 }
 
 const app = document.querySelector('#app');
@@ -455,5 +457,12 @@ function navigateToContactPage() {
     contactButton.addEventListener('click', () => {
         const app = document.querySelector('#app');
         app.innerHTML = ContactPage();
+    });
+}
+
+function navHome() {
+    const homeElem = document.querySelector('#home-button');
+    homeElem.addEventListener('click', () => {
+        location.href='index.html';
     });
 }
