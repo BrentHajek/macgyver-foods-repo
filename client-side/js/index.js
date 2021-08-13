@@ -19,6 +19,7 @@ import FaqPage from './pages/Faq.js';
 import Terms from './pages/Terms.js';
 import Privacy from './pages/Privacy.js';
 import SignInPage from './pages/SignInPage.js'
+import SignInJs from './signin'
 
 buildPage();
 
