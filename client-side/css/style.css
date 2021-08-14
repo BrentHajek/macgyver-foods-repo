@@ -108,7 +108,7 @@
     width: 90%;
 }
 
-.body__ingredient_groups section {
+.body__category_list {
     background: rgb(255, 56, 0);
     color: white;
     display: flex;
@@ -128,4 +128,8 @@ section i {
     font-size: 1.75rem;
     padding: .6rem;
     padding-right: 1rem;
+}
+
+.body__ingredients_list {
+    border: 1px solid rgb(255, 56, 0);
 }
