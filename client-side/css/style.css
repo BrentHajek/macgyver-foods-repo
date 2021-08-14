@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
-.allergy-list-btn {
+.allergy-list-btn, .delete__allergy_minus {
     background-color: rgb(117, 117, 22);
     border: none;
     border-radius: 8px;
@@ -13,7 +13,7 @@
     padding: 12px 24px;
 }
 
-.allergy-list-btn:hover {
+.allergy-list-btn:hover, .delete__allergy_minus:hover {
     background-color: lightgrey;
     color: rgb(117, 117, 22);
     font-weight: bolder;
@@ -36,6 +36,7 @@
     background: lightgreen;
     height: 100%;
     position: relative;
+    overflow: hidden;
 }
 
 .body__carousel_track {
@@ -51,7 +52,7 @@
     top: 0;
     bottom: 0;
     width: 100%;
-
+    transition: transform 250ms ease-in;
 }
 
 .body__carousel_btnLeft,
@@ -87,6 +88,7 @@
 .body__carousel_indicator {
     border: 0;
     border-radius: 50%;
+    cursor: pointer;
     width: 15px;
     height: 15px;
     background: rgba(0, 0, 0, .3);
@@ -95,6 +97,10 @@
 
 .body__carousel_indicator.current-slide {
     background: rgba(0, 0, 0, .75);
+}
+
+.is-hidden {
+    display: none;
 }
 
 .body__ingredient_groups {

@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="./css/allergy-component.css" />
     <link rel="stylesheet" href="./css/parentPage.css">
     <link rel="stylesheet" href="./css/foodCategories-component.css">
+    <link rel="stylesheet" href="./css/signIn.css">
     <link rel="stylesheet" href="./css/contactPage.css">
+
     <script src="https://kit.fontawesome.com/746e027e38.js" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
@@ -20,14 +22,16 @@
             <div class="header__menu_burger"></div>
             <div class="header__menu_list">
                 <ul class="header__menu_content">
-                    <li class="header__menu_item">About Us</li>
-                    <li class="header__menu_item">Contact Us</li>
+                    <li class="header__menu_item" id="about">About Us</li>
+                    <li class="header__menu_item" id="footer__contactBtn">Contact Us</li>
+                    <li class="header__menu_item" id="sign_in">Sign In</li>
                 </ul>
             </div>
         </div>
         <div class="header__logo"></div>
         <div class="header__icons">
             <ul class="header__list">
+                <li class="header__listItems" id="home-button"><i class="fas fa-home"></i></li>
                 <li class="header__listItems"><i class="fas fa-search"></i></li>
                 <li class="header__listItems"><i class="fas fa-shopping-cart"></i></li>
                 <li class="header__listItems" id="profile_button"><i class="far fa-user-circle"></i></li>
@@ -42,7 +46,7 @@
                 <button class="preference-list-btn">Preference List</button>
             </div>
             <div class="body__carousel">
-                <button class="body__carousel_btnLeft">
+                <button class="body__carousel_btnLeft is-hidden">
                     <i class="fas fa-chevron-left"></i>
                 </button>
                 <div class="body__carousel_trackContainer">
@@ -73,21 +77,27 @@
     <footer class="footer">
         <div class="footer__social_bar">
             <ul class="footer__social_icons">
-                <a href="https://www.facebook.com/" target="_blank"><li class="footer__social_facebook"><i class="fab fa-facebook-f"></i></li></a>
-                <a href="https://twitter.com/" target="_blank"><li class="footer__social_twitter"><i class="fab fa-twitter"></i></li></a>
-                <a href="https://www.instagram.com/" target="_blank"><li class="footer__social_instagram"><i class="fab fa-instagram"></i></li></a>
-                <a href="https://www.pinterest.com/" target="_blank"><li class="footer__social_pinterest"><i class="fab fa-pinterest-p"></i></li></a>
+                <a href="https://www.facebook.com/" target="_blank">
+                    <li class="footer__social_facebook"><i class="fab fa-facebook-f"></i></li>
+                </a>
+                <a href="https://twitter.com/" target="_blank">
+                    <li class="footer__social_twitter"><i class="fab fa-twitter"></i></li>
+                </a>
+                <a href="https://www.instagram.com/" target="_blank">
+                    <li class="footer__social_instagram"><i class="fab fa-instagram"></i></li>
+                </a>
+                <a href="https://www.pinterest.com/" target="_blank">
+                    <li class="footer__social_pinterest"><i class="fab fa-pinterest-p"></i></li>
+                </a>
             </ul>
         </div>
         <div class="footer__links">
             <ul class="footer__links_list">
-
-                <li class="footer__about_listItem">ABOUT</li>
-                <li id="footer__contactBtn" class="footer__contact_listItem">CONTACT</li>
-                <li class="footer__faq_listItem">FAQ</li>
-                <li class="footer__terms_listItem">TERMS</li>
-                <li class="footer__privacy_listItem">PRIVACY POLICY</li>
-
+                    <li class="footer__about_listItem">ABOUT</li>
+                    <li class="footer__contact_listItem">CONTACT</li>
+                    <li class="footer__faq_listItem">FAQ</li>
+                    <li class="footer__terms_listItem">TERMS</li>
+                    <li class="footer__privacy_listItem">PRIVACY POLICY</li>
             </ul>
         </div>
         <div class="footer__copy">
@@ -97,5 +107,6 @@
     <script src="./js/index.js"></script>
     <script src="./js/header-footer.js"></script>
     <script src="./js/landing-page.js"></script>
+    <script src="./js/signin.js"></script>
 </body>
 </html>

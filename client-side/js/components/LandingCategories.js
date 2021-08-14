@@ -1,4 +1,4 @@
-import FoodCategory from "./FoodCategory";
+import FoodCategory from './FoodCategory';
 
 export default function navLandingCategories(foodCategories) {
     return `
