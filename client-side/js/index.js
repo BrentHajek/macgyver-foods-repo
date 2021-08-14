@@ -11,15 +11,18 @@ import AddIngredientPage from './pages/AddIngredientPage.js';
 import DeleteIngredientPage from './pages/DeleteIngredientPage.js';
 import ContactPage from './pages/ContactPage.js';
 // import Ingredients from './components/Ingredients.js';
-import SignInPage from './pages/SignInPage.js';
-import SignInJs from './signin';
+// import SignInPage from './pages/SignInPage.js';
+// import SignInJs from './signin';
 import LandingCategories from './components/LandingCategories.js';
 import AboutUs from './pages/AboutUs.js';
 import FaqPage from './pages/Faq.js';
 import Terms from './pages/Terms.js';
 import Privacy from './pages/Privacy.js';
 import RemoveAllergy from './components/RemoveAllergy.js';
-import LandingPage from '/index.html';
+// import LandingPage from './index.html';
+import DeletePreferencePage from './pages/DeletePreferencePage.js';
+import AddPreferencePage from './pages/AddPreferencePage.js';
+
 
 buildPage();
 
@@ -30,7 +33,7 @@ function buildPage() {
     test();
     navigateToContactPage();
     navLandingCategories();
-    navToSignInPage();
+    // navToSignInPage();
     navAbout();
     navFaq();
     navTerms();
@@ -72,7 +75,7 @@ function wireUpParent(parents) {
     navToDeletePreferencePage();
     deletePreferenceFromChild();
     toggleChildren();
-    navToSignInPage();
+    // navToSignInPage();
 }
 
 function toggleChildren() {
@@ -459,7 +462,7 @@ function deletePreferenceFromChild() {
 function navAbout() {
     const aboutElem = document.querySelector('.footer__about_listItem');
     aboutElem.addEventListener('click', () => {
-        const app = document.querySelector('#');
+        const app = document.querySelector('#app');
         app.innerHTML = AboutUs();
     });
 }
@@ -467,7 +470,7 @@ function navAbout() {
 function navFaq() {
     const faqElem = document.querySelector('.footer__faq_listItem');
     faqElem.addEventListener('click', () => {
-        const app = document.querySelector('#');
+        const app = document.querySelector('#app');
         app.innerHTML = FaqPage();
     });
 }
@@ -475,7 +478,7 @@ function navFaq() {
 function navTerms() {
     const termsElem = document.querySelector('.footer__terms_listItem');
     termsElem.addEventListener('click', () => {
-        const app = document.querySelector('#');
+        const app = document.querySelector('#app');
         app.innerHTML = Terms();
     });
 }
@@ -483,33 +486,33 @@ function navTerms() {
 function navPrivacy() {
     const privacyElem = document.querySelector('.footer__privacy_listItem');
     privacyElem.addEventListener('click', () => {
-        const app = document.querySelector('#');
+        const app = document.querySelector('#app');
         app.innerHTML = Privacy();
     });
 }
 
 function navigateToContactPage() {
-    const contactButton = document.querySelector('#footer__contactBtn');
+    const contactButton = document.querySelector('.footer__contact_listItem');
     contactButton.addEventListener('click', () => {
         const app = document.querySelector('#app');
         app.innerHTML = ContactPage();
     });
 }
 
-function navToAboutPage() {
-    const navToAboutPageButton = document.querySelector('#about')
-    navToAboutPageButton.addEventListener('click', () => {
-        app.innerHTML = About()
-    })
-}
+// function navToAboutPage() {
+//     const navToAboutPageButton = document.querySelector('#about')
+//     navToAboutPageButton.addEventListener('click', () => {
+//         app.innerHTML = About()
+//     })
+// }
 
-function navToSignInPage() {
-    const navToSignInButton = document.querySelector('#sign_in');
-    navToSignInButton.addEventListener('click', () => {
-        app.innerHTML = SignInPage();
-        SignInJs();
-    })
-}
+// function navToSignInPage() {
+//     const navToSignInButton = document.querySelector('#sign_in');
+//     navToSignInButton.addEventListener('click', () => {
+//         app.innerHTML = SignInPage();
+//         SignInJs();
+//     })
+// }
 
 function navHome() {
     const homeElem = document.querySelector('#home-button');
