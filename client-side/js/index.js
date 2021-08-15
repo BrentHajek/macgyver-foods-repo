@@ -23,8 +23,6 @@ import Terms from './pages/Terms.js';
 import Privacy from './pages/Privacy.js';
 import RemoveAllergy from './components/RemoveAllergy.js';
 // import LandingPage from './index.html';
-// import DeletePreferencePage from './pages/DeletePreferencePage.js';
-// import AddPreferencePage from './pages/AddPreferencePage.js';
 import RemovePreferences from './components/RemovePreferences.js';
 
 buildPage();
@@ -33,7 +31,6 @@ function buildPage() {
     renderProfileInfo();
     navAllergies();
     navFoodCategories();
-    test();
     navigateToContactPage();
     navLandingCategories();
     // navToSignInPage();
@@ -366,7 +363,7 @@ function navToRecipesPage() {
     for(const navToRecipesPageButton of navToRecipesPageButton) {
         navToRecipesPageButton.addEventListener('click', (event) => {
             const childId = event.target.parentElement.parentElement.querySelector('input').value;
-            apiActions.getRequest('http://localhost:8080/parents/93', (parents) => {
+            apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
                 let stringName = '';
                 for (let i = 0; i < parents.ingredients.length; i++) {
                     stringName += parents.ingredients[i].ingredient.toLowerCase() + ',';
@@ -444,21 +441,6 @@ function navAbout() {
     });
 }
 
-function addPreferenceToChild() {
-    app.addEventListener('click', (event) => {
-        if(event.target.classList.contains('add_preference_submit')) {
-            const preference = event.target.parentElement.querySelector('#add_preference_name').value;
-            console.log(childId);
-            apiActions.postRequest(`http://localhost:8080/children/${childId}/add-preference`, {
-                'preference': preference
-            }, (child) => {
-                Child(child);
-                apiActions.getRequest('http://localhost:8080/parents/93', (parents) => {
-                    wireUpParent(parents);
-        });
-            })
-    }
-      
 function navFaq() {
     const faqElem = document.querySelector('.footer__faq_listItem');
     faqElem.addEventListener('click', () => {
@@ -474,22 +456,6 @@ function navTerms() {
         app.innerHTML = Terms();
     });
 }
-
-
-function deletePreferenceFromChild() {
-    app.addEventListener('click', (event) => {
-        if(event.target.classList.contains('delete_preference_submit')) {
-            const preference = event.target.parentElement.querySelector('#delete_preference_name').value;
-            console.log(childId);
-            apiActions.deleteRequest(`http://localhost:8080/children/${childId}/delete-preference`, {
-                'preference': preference
-            }, (child) => {
-                Child(child);
-                apiActions.getRequest('http://localhost:8080/parents/93', (parents) => {
-                    wireUpParent(parents);
-        });
-            })
-        }
 
 function navPrivacy() {
     const privacyElem = document.querySelector('.footer__privacy_listItem');
