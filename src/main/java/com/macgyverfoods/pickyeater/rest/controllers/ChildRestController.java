@@ -4,6 +4,7 @@ import com.macgyverfoods.pickyeater.models.*;
 import com.macgyverfoods.pickyeater.repositories.AllergyRepository;
 import com.macgyverfoods.pickyeater.repositories.ChildRepository;
 import com.macgyverfoods.pickyeater.repositories.PreferenceRepository;
+import com.macgyverfoods.pickyeater.repositories.RecipeRepository;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,9 @@ public class ChildRestController {
 
     @Resource
     private AllergyRepository allergyRepo;
+
+    @Resource
+    private RecipeRepository recipeRepo;
 
     @GetMapping("/children")
     public Collection<Child> getChildren() {
@@ -95,4 +99,32 @@ public class ChildRestController {
         return childRepo.findById(id);
     }
 
+    @PostMapping("/children/{id}/add-recipe")
+    public Optional<Child> addRecipes(@RequestBody String body, @PathVariable Long id) throws JSONException {
+        JSONObject newRecipe = new JSONObject(body);
+        String recipe = newRecipe.getString("recipe");
+        Optional<Recipe> recipeToAddOpt = recipeRepo.findByRecipe(recipe);
+        if (recipeToAddOpt.isPresent()) {
+            Optional<Child> childToAddRecipeToOpt = childRepo.findById(id);
+            Child childToAddRecipeTo = childToAddRecipeToOpt.get();
+            childToAddRecipeTo.addRecipe(recipeToAddOpt.get());
+            childRepo.save(childToAddRecipeTo);
+        }
+
+        return childRepo.findById(id);
+    }
+
+    @DeleteMapping ("/children/{id}/delete-recipe")
+    public Optional<Child> removeRecipe(@RequestBody String body, @PathVariable Long id) {
+        JSONObject removedRecipe = new JSONObject(body);
+        String recipe = removedRecipe.getString("recipe");
+        Optional<Recipe> recipeToRemoveOpt = recipeRepo.findByRecipe(recipe);
+        if (recipeToRemoveOpt.isPresent()){
+            Optional<Child> childToRemoveRecipeFromOpt = childRepo.findById(id);
+            Child childToRemoveRecipeFrom = childToRemoveRecipeFromOpt.get();
+            childToRemoveRecipeFrom.removeRecipe(recipeToRemoveOpt.get());
+            childRepo.save(childToRemoveRecipeFrom);
+        }
+        return childRepo.findById(id);
+    }
 }
