@@ -7,6 +7,7 @@ export default function FoodCategory(foodCategory) {
         <label class="preference-container">
             <div class="ingredient-name">
                 <input type='checkbox' id='ingredientId${ingredient.id}' class="preferences" value='${ingredient.ingredient}'>${ingredient.ingredient}
+                <span class="radio-btn"></span>
             </div>
         </label>
         `;
