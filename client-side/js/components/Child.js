@@ -32,6 +32,8 @@ export default function Child(child) {
                 <button class="preference-list-btn" id="childId" value="${child.id}" type="button">+ Add a Preference</button>
                 <button class="delete_preference_minus" id="childId" value="${child.id}" type="button">- Remove a Preference</button>
             </div>
+            <button class="search_recipes_button">Search Recipes</button>
+
         </div>
         `;
 }

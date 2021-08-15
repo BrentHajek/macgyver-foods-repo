@@ -1,0 +1,107 @@
+.recipe_card_wrapper {
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 1px #ebebf0, 0 15px 30px 0 rgb(0 0 0 / 15%);
+}
+
+.recipe_card_img {
+    width: 100%;
+    border-radius:active;
+}
+
+.recipe_card_box {
+    padding: 3rem;
+}
+
+.recipe_card_title {
+    font-family: 'Roboto',sans-serif;
+    font-size: 1.2rem;
+    padding-bottom: 10px;
+    font-weight: 700;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    font-style: normal;
+    line-height: 1.2;
+    width: 100%;
+    color: #20202a;
+    word-break: break-word;
+    word-wrap: break-word;
+    display: block;
+    margin-block-start: 1.33em;
+    margin-block-end: 1.33em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.nav_full_recipe {
+    margin: 0 -0.9rem;
+    font-size: 0;
+    text-align: left;
+    box-sizing: border-box;
+    outline: none;
+    display: block;
+    border-radius: 100px;
+    box-shadow: 0 15px 35px -5px rgb(0 0 0 / 25%);
+    font-family: 'Roboto',sans-serif;
+    font-size: 1rem;
+    padding: 0.4rem 0.8rem;
+    position: relative;
+    font-weight: 700;
+    margin: 0.4rem 0.9rem;
+    border: 2px solid;
+    font-style: normal;
+    white-space: normal;
+    transition: all 0.3s cubic-bezier(0.25,0.1,0.25,1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    word-break: break-word;
+    line-height: 1.2rem;
+    letter-spacing: normal;
+    cursor: pointer;
+    text-align: left;
+}
+
+.nav_full_recipe:active {
+    background: none;
+    border-color: #000000;
+    color: #000000;
+}
+
+.recipe_container {
+    max-width: 1140px;
+    padding: 0 1rem;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+    word-wrap: break-word;
+}
+
+.recipeList_test {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-row-gap: 2rem;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    justify-content: center;
+}
+
+.card_recipe {
+    -ms-flex: 0 0 33.3333333333%;
+    -webkit-box-flex: 0;
+    flex: 0 0 33.3333333333%;
+    /* max-width: 33.3333333333%; */
+    padding-right: 1rem;
+    padding-left: 1rem;
+    position: relative;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    width: 100%;
+    padding: 0 1rem;
+}

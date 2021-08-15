@@ -9,6 +9,9 @@ import RecipeInstructions from './components/RecipeInstructions.js';
 import RecipeIngredients from './components/RecipeIngredients.js';
 import AddIngredientPage from './pages/AddIngredientPage.js';
 import DeleteIngredientPage from './pages/DeleteIngredientPage.js';
+import Child from './components/Child.js';
+import RecipeIngredientsListPage from './pages/RecipeIngredientsListPage.js';
+import RecipePage from './pages/RecipePage.js'
 import ContactPage from './pages/ContactPage.js';
 // import Ingredients from './components/Ingredients.js';
 // import SignInPage from './pages/SignInPage.js';
@@ -23,7 +26,6 @@ import RemoveAllergy from './components/RemoveAllergy.js';
 // import DeletePreferencePage from './pages/DeletePreferencePage.js';
 // import AddPreferencePage from './pages/AddPreferencePage.js';
 import RemovePreferences from './components/RemovePreferences.js';
-
 
 buildPage();
 
@@ -45,12 +47,14 @@ function buildPage() {
 const app = document.querySelector('#app');
 
 
-const apiKeyNum = '4d2f51bba03b42a59ba6d0843ac5b5f9';
-// const apiKeyNum = '733246d3691c4203855fd5063ee214b6';
-// const apiKeyNum = '00f757b09028492da86c30d8109241c0';
+
+
+const apiKeyNum = '00f757b09028492da86c30d8109241c0';
 // const apiKeyNum = '985a2080f8094fdea57cb96fa855b0dd';
 // const apiKeyNum = '78bc7509124db458df764b454c2dc1e57807eff5';
 // const apiKeyNum = 'd16a986f5295496bb236ca7062f1841a';
+// const apiKeyNum = '4d2f51bba03b42a59ba6d0843ac5b5f9';
+// const apiKeyNum = '733246d3691c4203855fd5063ee214b6';
 
 function renderProfileInfo() {
     const profileButton = document.querySelector('#profile_button');
@@ -71,12 +75,9 @@ function wireUpParent(parents) {
     navToAddIngredientPage();
     navToDeleteIngredientPage();
     deleteIngredientFromParent();
-    // navToAddPreferencePage();
-    // addPreferenceToChild();
-    // navToDeletePreferencePage();
-    // deletePreferenceFromChild();
     toggleChildren();
-    // navFoodCategories()
+    navToRecipesPage();
+    navToSpecificRecipePage();
     // navToSignInPage();
 }
 
@@ -96,10 +97,6 @@ function toggleChildren() {
                     event.target.parentElement.style.height = '20px';
                 }
             }
-            // navToDeletePreferencePage();
-            // navToAddPreferencePage();
-            // addPreferenceToChild();
-            // deletePreferenceFromChild();
         });
     });
 }
@@ -129,15 +126,7 @@ function createChild() {
                 'lastName': lastName,
                 'age': age
             }, (parents) => {
-                console.log(parents);
-                app.innerHTML = ParentPage(parents);
-                navToDeleteChildPage();
-                navToAddChildPage();
-                navToAddIngredientPage();
-                navToDeleteIngredientPage();
-                toggleChildren();
-                // navToAddPreferencePage();
-                // navToDeletePreferencePage();
+                wireUpParent(parents);
             });
         }
     });
@@ -150,14 +139,7 @@ function deleteChild() {
             apiActions.deleteRequest('http://localhost:8080/parents/203/delete-child', {
                 'firstName': firstName
             }, (parents) => {
-                app.innerHTML = ParentPage(parents)
-                navToDeleteChildPage();
-                navToAddChildPage();
-                navToAddIngredientPage();
-                navToDeleteIngredientPage();
-                toggleChildren();
-                // navToAddPreferencePage();
-                // navToDeletePreferencePage();
+                wireUpParent(parents);
             });
         }
     });
@@ -374,57 +356,63 @@ function makePostToAddIngredient(ingredient) {
     apiActions.postRequest('http://localhost:8080/parents/203/add-ingredient', {
         'ingredient': ingredient
     }, (parents) => {
-        app.innerHTML = ParentPage(parents);
-        navToDeleteChildPage();
-        navToAddChildPage();
-        navToAddIngredientPage();
-        navToDeleteIngredientPage();
-        toggleChildren();
-        // navToAddPreferencePage();
-        // navToDeletePreferencePage();
+        wireUpParent(parents);
     });
 }
 
+function navToRecipesPage() {
+    const navToRecipesPageButton = document.querySelectorAll('.search_recipes_button');
 
-function test() {
-    const testButton = document.querySelector('#test');
-    testButton.addEventListener('click', () => {
-        apiActions.getRequest('http://localhost:8080/parents/93', (parents) => {
-            let stringName = '';
-            for (let i = 0; i < parents.ingredients.length; i++) {
-                stringName += parents.ingredients[i].ingredient.toLowerCase() + ',';
-            }
-            apiActions.getRequest(`http://localhost:8080/children/${childId}`, (child) => {
-                let stringName2 = '';
-                for (let i = 0; i < child.allergies.length; i++) {
-                    stringName2 += child.allergies[i].allergy.toLowerCase() + ',';
+    for(const navToRecipesPageButton of navToRecipesPageButton) {
+        navToRecipesPageButton.addEventListener('click', (event) => {
+            const childId = event.target.parentElement.parentElement.querySelector('input').value;
+            apiActions.getRequest('http://localhost:8080/parents/93', (parents) => {
+                let stringName = '';
+                for (let i = 0; i < parents.ingredients.length; i++) {
+                    stringName += parents.ingredients[i].ingredient.toLowerCase() + ',';
                 }
                 apiActions.getRequest(`http://localhost:8080/children/${childId}`, (child) => {
-                    let stringName3 = '';
-                    for (let i = 0; i < child.preferences.length; i++) {
-                        stringName3 += child.preferences[i].preference.toLowerCase() + ',';
+                    let stringName2 = '';
+                    for (let i = 0; i < child.allergies.length; i++) {
+                        stringName2 += child.allergies[i].allergy.toLowerCase() + ',';
                     }
-                    let stringInclude = stringName + stringName3;
-                    let stringExclude = stringName2;
-                    const parsedString = stringInclude.substring(0, stringInclude.length - 1);
-                    console.log(stringInclude);
-                    console.log([parsedString]);
-                    console.log(stringExclude);
+                    apiActions.getRequest(`http://localhost:8080/children/${childId}`, (child) => {
+                        let stringName3 = '';
+                        for(let i = 0; i < child.preferences.length; i++) {
+                            stringName3 += child.preferences[i].preference.toLowerCase() + ',';
+                        }
+                        let stringInclude = stringName + stringName3;
+                        let stringExclude = stringName2;
+                        const parsedString = stringInclude.substring(0,stringInclude.length -1) ;
+    
+                        apiActions.getRequest(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKeyNum}&includeIngredients=${parsedString}&intolerances=${stringExclude}&fillIngredients=true&number=10`, (recipes) => {
+                            // console.log(recipes);   
+                        app.innerHTML = RecipeIngredientsListPage(recipes);
+                            // const recipeId = recipes.results[0].id;
+                            // apiActions.getRequest(`https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=${apiKeyNum}`, (recipeInstructions) => {
+                            //     // console.log(recipeInstructions);
+                            //     app.innerHTML += RecipeInstructions(recipeInstructions);
+                            // })
+                            navToSpecificRecipePage();
+                        })
+                    })
+                })
+            })
+        })
+    }
+}
 
-
-                    apiActions.getRequest(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKeyNum}&includeIngredients=${parsedString}&intolerances=${stringExclude}&fillIngredients=true&number=1`, (recipes) => {
-                        console.log(recipes);
-                        const recipeId = recipes.results[0].id;
-                        app.innerHTML = RecipeIngredients(recipes);
-                        apiActions.getRequest(`https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=${apiKeyNum}`, (recipeInstructions) => {
-                        // console.log(recipeInstructions);
-                            app.innerHTML += RecipeInstructions(recipeInstructions);
-                        });
-                    });
-                });
-            });
-        });
-    });
+function navToSpecificRecipePage() {
+    app.addEventListener('click', (event) => {
+        if (event.target.classList.contains('nav_full_recipe')) {
+           const singleRecipe = event.target.parentElement.parentElement.querySelector("input").value;
+                console.log(singleRecipe);
+            // apiActions.getRequest(`https://api.spoonacular.com/recipes/642582/card?apiKey=${apiKeyNum}&backgroundImage=background1`, (recipe) => {
+            //     console.log(recipe);
+            //     app.innerHTML = RecipePage(recipe);
+            // })
+        }
+    })
 }
 
 function navToDeleteIngredientPage() {
@@ -441,101 +429,12 @@ function deleteIngredientFromParent() {
             apiActions.deleteRequest('http://localhost:8080/parents/203/delete-ingredient', {
                 'ingredient': ingredient
             }, (parents) => {
-                app.innerHTML = ParentPage(parents);
-                navToDeleteChildPage();
-                navToAddChildPage();
-                navToAddIngredientPage();
-                navToDeleteIngredientPage();
-                toggleChildren();
-                // navToAddPreferencePage();
-                // navToDeletePreferencePage();
+                wireUpParent(parents);
             });
         }
     });
 }
 let childId = 0;
-
-// function navToAddPreferencePage() {
-//     const navToAddPreferencePageButton = document.querySelectorAll('.add_preference_plus');
-//     for (const navToAddPreferencePageButton of navToAddPreferencePageButton) {
-//         navToAddPreferencePageButton.addEventListener('click', (event) => {
-//             childId = event.target.parentElement.parentElement.querySelector('input').value;
-//             console.log(childId);
-//             app.innerHTML = AddPreferencePage();
-//         });
-//     }
-// }
-
-// function addPreferenceToChild() {
-//     app.addEventListener('click', (event) => {
-//         if (event.target.classList.contains('add_preference_submit')) {
-//             const preference = event.target.parentElement.querySelector('#add_preference_name').value;
-//             console.log(childId);
-//             apiActions.postRequest(`http://localhost:8080/children/${childId}/add-preference`, {
-//                 'preference': preference
-//             }, (child) => {
-//                 Child(child);
-//                 apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
-//                     app.innerHTML = ParentPage(parents);
-//                     navToAddChildPage();
-//                     navToDeleteChildPage();
-//                     createChild();
-//                     deleteChild();
-//                     AddIngredientToParent();
-//                     navToAddIngredientPage();
-//                     navToDeleteIngredientPage();
-//                     deleteIngredientFromParent();
-//                     navToAddPreferencePage();
-//                     addPreferenceToChild();
-//                     navToDeletePreferencePage();
-//                     deletePreferenceFromChild();
-//                     toggleChildren();
-//                 });
-//             });
-//         }
-//     });
-// }
-
-// function navToDeletePreferencePage() {
-//     const navToDeletePreferencePageButton = document.querySelectorAll('.delete_preference_minus');
-//     for (const navToDeletePreferencePageButton of navToDeletePreferencePageButton) {
-//         navToDeletePreferencePageButton.addEventListener('click', (event) => {
-//             childId = event.target.parentElement.parentElement.querySelector('input').value;
-//             console.log(childId);
-//             app.innerHTML = DeletePreferencePage();
-//         });
-//     }
-// }
-
-// function deletePreferenceFromChild() {
-//     app.addEventListener('click', (event) => {
-//         if (event.target.classList.contains('delete_preference_submit')) {
-//             const preference = event.target.parentElement.querySelector('#delete_preference_name').value;
-//             console.log(childId);
-//             apiActions.deleteRequest(`http://localhost:8080/children/${childId}/delete-preference`, {
-//                 'preference': preference
-//             }, (child) => {
-//                 Child(child);
-//                 apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
-//                     app.innerHTML = ParentPage(parents);
-//                     navToAddChildPage();
-//                     navToDeleteChildPage();
-//                     createChild();
-//                     deleteChild();
-//                     AddIngredientToParent();
-//                     navToAddIngredientPage();
-//                     navToDeleteIngredientPage();
-//                     deleteIngredientFromParent();
-//                     navToAddPreferencePage();
-//                     addPreferenceToChild();
-//                     navToDeletePreferencePage();
-//                     deletePreferenceFromChild();
-//                     toggleChildren();
-//                 });
-//             });
-//         }
-//     });
-// }
 
 function navAbout() {
     const aboutElem = document.querySelector('.footer__about_listItem');
@@ -545,6 +444,21 @@ function navAbout() {
     });
 }
 
+function addPreferenceToChild() {
+    app.addEventListener('click', (event) => {
+        if(event.target.classList.contains('add_preference_submit')) {
+            const preference = event.target.parentElement.querySelector('#add_preference_name').value;
+            console.log(childId);
+            apiActions.postRequest(`http://localhost:8080/children/${childId}/add-preference`, {
+                'preference': preference
+            }, (child) => {
+                Child(child);
+                apiActions.getRequest('http://localhost:8080/parents/93', (parents) => {
+                    wireUpParent(parents);
+        });
+            })
+    }
+      
 function navFaq() {
     const faqElem = document.querySelector('.footer__faq_listItem');
     faqElem.addEventListener('click', () => {
@@ -560,6 +474,22 @@ function navTerms() {
         app.innerHTML = Terms();
     });
 }
+
+
+function deletePreferenceFromChild() {
+    app.addEventListener('click', (event) => {
+        if(event.target.classList.contains('delete_preference_submit')) {
+            const preference = event.target.parentElement.querySelector('#delete_preference_name').value;
+            console.log(childId);
+            apiActions.deleteRequest(`http://localhost:8080/children/${childId}/delete-preference`, {
+                'preference': preference
+            }, (child) => {
+                Child(child);
+                apiActions.getRequest('http://localhost:8080/parents/93', (parents) => {
+                    wireUpParent(parents);
+        });
+            })
+        }
 
 function navPrivacy() {
     const privacyElem = document.querySelector('.footer__privacy_listItem');
