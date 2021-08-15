@@ -13,6 +13,7 @@ import AddPreferencePage from './pages/AddPreferencePage.js';
 import Child from './components/Child.js';
 import DeletePreferencePage from './pages/DeletePreferencePage.js';
 import RecipeIngredientsListPage from './pages/RecipeIngredientsListPage.js';
+import RecipePage from './pages/RecipePage.js'
 
 buildPage();
 
@@ -25,12 +26,14 @@ function buildPage() {
 const app = document.querySelector('#app');
 
 
-const apiKeyNum = '4d2f51bba03b42a59ba6d0843ac5b5f9';
-// const apiKeyNum = '733246d3691c4203855fd5063ee214b6';
-// const apiKeyNum = '00f757b09028492da86c30d8109241c0';
+
+
+const apiKeyNum = '00f757b09028492da86c30d8109241c0';
 // const apiKeyNum = '985a2080f8094fdea57cb96fa855b0dd';
 // const apiKeyNum = '78bc7509124db458df764b454c2dc1e57807eff5';
 // const apiKeyNum = 'd16a986f5295496bb236ca7062f1841a';
+// const apiKeyNum = '4d2f51bba03b42a59ba6d0843ac5b5f9';
+// const apiKeyNum = '733246d3691c4203855fd5063ee214b6';
 
 function renderProfileInfo() {
     const profileButton = document.querySelector('#profile_button');
@@ -57,6 +60,7 @@ function wireUpParent(parents) {
     deletePreferenceFromChild();
     toggleChildren();
     navToRecipesPage();
+    navToSpecificRecipePage();
 }
 
 function toggleChildren() {
@@ -252,18 +256,33 @@ function navToRecipesPage() {
                         const parsedString = stringInclude.substring(0,stringInclude.length -1) ;
     
                         apiActions.getRequest(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKeyNum}&includeIngredients=${parsedString}&intolerances=${stringExclude}&fillIngredients=true&number=10`, (recipes) => {
-                            app.innerHTML = RecipeIngredientsListPage(recipes);
+                            // console.log(recipes);   
+                        app.innerHTML = RecipeIngredientsListPage(recipes);
                             // const recipeId = recipes.results[0].id;
                             // apiActions.getRequest(`https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=${apiKeyNum}`, (recipeInstructions) => {
                             //     // console.log(recipeInstructions);
                             //     app.innerHTML += RecipeInstructions(recipeInstructions);
                             // })
+                            navToSpecificRecipePage();
                         })
                     })
                 })
             })
         })
     }
+}
+
+function navToSpecificRecipePage() {
+    app.addEventListener('click', (event) => {
+        if (event.target.classList.contains('nav_full_recipe')) {
+           const singleRecipe = event.target.parentElement.parentElement.querySelector("input").value;
+                console.log(singleRecipe);
+            // apiActions.getRequest(`https://api.spoonacular.com/recipes/642582/card?apiKey=${apiKeyNum}&backgroundImage=background1`, (recipe) => {
+            //     console.log(recipe);
+            //     app.innerHTML = RecipePage(recipe);
+            // })
+        }
+    })
 }
 
 function navToDeleteIngredientPage() {
