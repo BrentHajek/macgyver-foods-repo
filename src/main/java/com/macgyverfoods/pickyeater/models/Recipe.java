@@ -1,9 +1,8 @@
 package com.macgyverfoods.pickyeater.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -14,20 +13,25 @@ public class Recipe {
     @GeneratedValue
     private Long id;
 
+    private String recipe;
     private String ingredient;
     private String instruction;
 
-    @ManyToMany (mappedBy = "recipe")
-    private Collection <Child> children;
+    @ManyToOne
+    private Child child;
 
-    public Recipe(String ingredient, String instruction, Collection<Child> children) {
+    public Recipe(String recipe, String ingredient, String instruction, Child child) {
         this.ingredient = ingredient;
         this.instruction = instruction;
-        this.children = children;
+        this.child = child;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public String getRecipe() {
+        return recipe;
     }
 
     public String getIngredient() {
@@ -38,8 +42,8 @@ public class Recipe {
         return instruction;
     }
 
-    public Collection<Child> getChildren() {
-        return children;
+    public Child getChild() {
+        return child;
     }
 
     public Recipe() {
@@ -50,12 +54,12 @@ public class Recipe {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Recipe recipe = (Recipe) o;
-        return Objects.equals(id, recipe.id) && Objects.equals(ingredient, recipe.ingredient) && Objects.equals(instruction, recipe.instruction) && Objects.equals(children, recipe.children);
+        Recipe recipe1 = (Recipe) o;
+        return Objects.equals(id, recipe1.id) && Objects.equals(recipe, recipe1.recipe) && Objects.equals(ingredient, recipe1.ingredient) && Objects.equals(instruction, recipe1.instruction) && Objects.equals(child, recipe1.child);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, ingredient, instruction, children);
+        return Objects.hash(id, recipe, ingredient, instruction, child);
     }
 }

@@ -26,7 +26,8 @@ public class Child {
     @JsonIgnore
     private Parent parent;
 
-    @ManyToMany
+    @OneToMany
+    @JsonIgnore
     private Collection<Recipe> recipes;
 
     public Long getId() {
