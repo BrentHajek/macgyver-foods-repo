@@ -10,14 +10,22 @@ export default function navLandingCategories(foodCategories) {
                 <i id="downBtn" class="fas fa-chevron-down"></i>
             </div>
             <div class="body__ingredients_list">
-                <ul class="ingredients__list">
-                    <li class="ingredients__listItem">Apples</li>
-                    <li class="ingredients__listItem">Grapes</li>
-                    <li class="ingredients__listItem">Bananas</li>
-                    <li class="ingredients__listItem">Blueberries</li>
-                    <li class="ingredients__listItem">Strawberries</li>
-                    <li class="ingredients__listItem">Plums</li>
-                </ul>
+                <label class="ingredients__listItem">Apples
+                    <input type="checkbox">
+                    <span class="checkmark-box"></span>
+                </label>
+                <label class="ingredients__listItem">Bananas
+                    <input type="checkbox">
+                    <span class="checkmark-box"></span>
+                </label>
+                <label class="ingredients__listItem">Plums
+                    <input type="checkbox">
+                    <span class="checkmark-box"></span>
+                </label>
+                    <label class="ingredients__listItem">Grapes
+                    <input type="checkbox">
+                    <span class="checkmark-box"></span>
+                </label>
             </div>
         </section>
         `;
