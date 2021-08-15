@@ -44,6 +44,12 @@ public class ChildRestController {
         return childToGetAllergiesFor.get().getAllergies();
     }
 
+    @GetMapping("/children/{id}/preferences")
+    public Collection<Preference> getChildPreferences(@PathVariable Long id) {
+        Optional<Child> childToGetPreferencesFor = Optional.of(childRepo.findById(id).get());
+        return childToGetPreferencesFor.get().getPreferences();
+    }
+
     @PostMapping("/children/{id}/add-preference")
     public Optional<Child> addPreferences(@RequestBody String body, @PathVariable Long id) throws JSONException {
         JSONObject newPreference = new JSONObject(body);

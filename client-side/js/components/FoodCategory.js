@@ -5,10 +5,10 @@ export default function FoodCategory(foodCategory) {
     ${foodCategory.ingredient.map(ingredient => {
         return `
         <label class="preference-container">
-        <div class="ingredient-name"> ${ingredient.ingredient}
-            <input type='checkbox' id='ingredientId' class="checkboxes" value='${ingredient.id}'>${ingredient.ingredient}</label>  
-        </div>
-        
+            <div class="ingredient-name">
+                <input type='checkbox' id='ingredientId${ingredient.id}' class="preferences" value='${ingredient.ingredient}'>${ingredient.ingredient}
+            </div>
+        </label>
         `;
     })
         .join('')}

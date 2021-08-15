@@ -5,10 +5,10 @@ export default function RemovePreferences(preference) {
     ${preference.map(preference => {
         return `
         <label class="preference-container">
-            <input type='checkbox' id='preferenceId' class="checkboxes" value='${preference.id}'>${preference.preference}</label>
-            <div class="preference-name">   
+            <div class="ingredient-name">
+                <input type='checkbox' class="preferences" id='ingredientId${preference.id}' value='${preference.preference}'>${preference.preference}
             </div>
-        
+        </label>
         `;
     })
         .join('')}

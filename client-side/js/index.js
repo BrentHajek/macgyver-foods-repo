@@ -76,7 +76,7 @@ function wireUpParent(parents) {
     // navToDeletePreferencePage();
     // deletePreferenceFromChild();
     toggleChildren();
-    navFoodCategories()
+    // navFoodCategories()
     // navToSignInPage();
 }
 
@@ -247,6 +247,57 @@ function removeAllergiesFromChildProfile(allergy) {
     });
 }
 
+let childIdPreference = 0;
+function navFoodCategories() {
+    const app = document.querySelector('#app');
+    app.addEventListener('click', () => {
+        if(event.target.classList.contains('preference-list-btn')) {
+            childIdPreference = event.target.parentElement.parentElement.querySelector('input').value;
+            // childIdPreference = app.querySelector('#childId').value;
+            apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
+                app.innerHTML = FoodCategories(foodCategories);
+            });
+            renderFoodCategoryIngredients();
+        }
+        else if(event.target.classList.contains('delete_preference_minus')) {
+            childIdPreference = event.target.parentElement.parentElement.querySelector('input').value;
+            // childIdPreference = app.querySelector('#childId').value;
+            apiActions.getRequest(`http://localhost:8080/children/${childIdPreference}/preferences`, preferences => {
+                app.innerHTML = RemovePreferences(preferences);
+            });
+            submitPreferenceSelections();
+        }
+    });
+}
+
+function navLandingCategories() {
+    const categoryElem = document.querySelector('#ingredient__categories');
+    apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
+        console.log(foodCategories);
+        categoryElem.innerHTML = LandingCategories(foodCategories);
+    });
+}
+
+function renderFoodCategoryIngredients() {
+    const app = document.querySelector('#app');
+    app.addEventListener('click', () => {
+        if (event.target.classList.contains('food-category-name')) {
+            const foodCategoryId = event.target.querySelector('#foodCategoryId').value;
+            apiActions.getRequest(`http://localhost:8080/foodCategories/${foodCategoryId}`, foodCategory => {
+                app.innerHTML = FoodCategory(foodCategory);
+            });
+        }
+    });
+    submitPreferenceSelections();
+}
+
+function navToAddIngredientPage() {
+    const navToAddIngredientButton = document.querySelector('.add_ingredient_plus');
+    navToAddIngredientButton.addEventListener('click', () => {
+        app.innerHTML = AddIngredientPage();
+    });
+}
+
 let preferenceCount = 0;
 let preferenceToRemoveCount = 0;
 function submitPreferenceSelections() {
@@ -265,7 +316,7 @@ function submitPreferenceSelections() {
             });
             preferencesToAdd.forEach(addPreferencesToChildProfile);
         }
-        else if (event.target.classList.contains('delete_preference_minus')) {
+        else if (event.target.classList.contains('remove-btn')) {
             var preferencesToRemove = [];
             preferenceToRemoveCount = 0;
             var allPreferencesToRemove = app.querySelectorAll('.preferences');
@@ -307,56 +358,6 @@ function removePreferencesFromChildProfile(preference) {
                 wireUpParent(parents);
             });
         }
-    });
-}
-
-let childIdPreference = 0;
-function navFoodCategories() {
-    const app = document.querySelector('#app');
-    app.addEventListener('click', () => {
-        if(event.target.classList.contains('preference-list-btn')) {
-            childIdPreference = app.querySelector('#childId').value;
-            apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
-                app.innerHTML = FoodCategories(foodCategories);
-            });
-            renderFoodCategoryIngredients();        
-        }
-        else if(event.target.classList.contains('delete_preference_minus')) {
-            childIdPreference = app.querySelector('#childId').value;
-            apiActions.getRequest(`http://localhost:8080/children/${childIdPreference}/preferences`, preference => {
-                app.innerHTML = RemovePreferences(preference);
-            });
-            submitPreferenceSelections();
-        }
-    });
-    
-}
-
-function navLandingCategories() {
-    const categoryElem = document.querySelector('#ingredient__categories');
-    apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
-        console.log(foodCategories);
-        categoryElem.innerHTML = LandingCategories(foodCategories);
-    });
-}
-
-function renderFoodCategoryIngredients() {
-    const app = document.querySelector('#app');
-    app.addEventListener('click', () => {
-        if (event.target.classList.contains('food-category-name')) {
-            const foodCategoryId = event.target.querySelector('#foodCategoryId').value;
-            apiActions.getRequest(`http://localhost:8080/foodCategories/${foodCategoryId}`, foodCategory => {
-                app.innerHTML = FoodCategory(foodCategory);
-            });
-        }
-    });
-    submitPreferenceSelections();
-}
-
-function navToAddIngredientPage() {
-    const navToAddIngredientButton = document.querySelector('.add_ingredient_plus');
-    navToAddIngredientButton.addEventListener('click', () => {
-        app.innerHTML = AddIngredientPage();
     });
 }
 
