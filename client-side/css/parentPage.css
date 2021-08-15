@@ -22,7 +22,8 @@ html {
 
 /* coming from the Parent.js component */
 .parent__name_header {
-    
+   text-decoration: underline;
+   text-decoration-color: rgb(79, 161, 37);
 }
 
 /* coming from the Parent.js component */
@@ -66,7 +67,7 @@ html {
 
 /* coming from the Child.js component */
 .test_child_grid:hover {
-    background-color: rgb(221, 219, 96);
+    background-color: rgb(207, 205, 161);
 }
 
 /* coming from the ParentPage */
@@ -80,23 +81,28 @@ html {
     padding-bottom: 10px
 }
 
-/* coming from the ParentPage */
-.delete_child_minus:hover {
-    background-color: rgb(184, 184, 189);
-}
-
-/* coming from the Parent.js component */
-.add_child_plus:hover {
-    background-color: rgb(184, 184, 189);
-}
-
 /* coming from the Parent.js component */
 .add_ingredient_plus:hover{
     background-color: rgb(184, 184, 189);
 }
 
-.add_child_plus {
-    border-radius: 25px;
+.add_child_plus, .delete_child_minus {
+    background-color: rgb(117, 117, 22);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bolder;
+    margin-top: 40px;
+    padding: 12px 24px;
+}
+    
+.add_child_plus:hover, .delete_child_minus:hover {
+    background-color: lightgrey;
+    color: rgb(117, 117, 22);
+    font-weight: bolder;
 }
 
 .add_ingredient_plus {
@@ -104,9 +110,5 @@ html {
 }
 
 .delete_ingredient_minus {
-    border-radius: 25px;
-}
-
-.delete_child_minus {
     border-radius: 25px;
 }

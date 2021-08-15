@@ -7,6 +7,7 @@ export default function RemovePreferences(preference) {
         <label class="preference-container">
             <div class="ingredient-name">
                 <input type='checkbox' class="preferences" id='ingredientId${preference.id}' value='${preference.preference}'>${preference.preference}
+                <span class="radio-btn"></span>
             </div>
         </label>
         `;
