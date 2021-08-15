@@ -1,7 +1,6 @@
 export default function Terms() {
     return `
     <div class="terms__page">
-        <h2 class="terms__title">Terms & Conditions</h2>
         <style>
   [data-custom-class='body'], [data-custom-class='body'] * {
           background: transparent !important;
