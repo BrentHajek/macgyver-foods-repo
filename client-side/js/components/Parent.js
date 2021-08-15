@@ -17,6 +17,10 @@ export default function Parent(parent) {
     }).join('')}
         <button class="add_ingredient_plus" type="button">+ Add a Favorite Ingredient</button>
         <button class="delete_ingredient_minus" type="button">- Delete from Favorites</button>
+        <div class="add_child_plus_button_container">
+            <button class="add_child_plus" type="button">+ Add a Child</button>
+            <button class="delete_child_minus" type="button">- Remove a Child</button>
+        </div>
     </div>
     <div class='child__info_container'>
     <h2 class="children__name_header">Your Picky Eaters:</h2>
@@ -25,10 +29,6 @@ export default function Parent(parent) {
             <p>${Child(child)}</p>
         `;
     }).join('')}
-    <div class="add_child_plus_button_container">
-    <button class="add_child_plus" type="button">+ Add a Child</button>
-    <button class="delete_child_minus" type="button">- Remove a Child</button>
-    </div>
     </div>
     `;
 }

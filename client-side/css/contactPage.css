@@ -1,0 +1,23 @@
+html {
+    font-family: 'Roboto', sans-serif;
+    margin: auto;
+    max-width: 80rem;
+}
+
+.contact__us_title {
+    text-align: center;
+}
+
+.ways__to__contact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 80rem;
+    margin: 2rem;
+    justify-content: center;
+}
+
+.fillable__form {
+    display: grid;
+    grid-template-columns: 1fr;
+    max-width: 300px;
+}
