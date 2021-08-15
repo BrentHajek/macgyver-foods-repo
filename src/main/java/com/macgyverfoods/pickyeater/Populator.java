@@ -135,7 +135,7 @@ public class Populator implements CommandLineRunner {
         Ingredient beef = new Ingredient("Beef");
         Ingredient chicken = new Ingredient("Chicken");
         Ingredient chickenBreast = new Ingredient("Chicken Breast");
-        Ingredient cod = new Ingredient("cod");
+        Ingredient cod = new Ingredient("Cod");
         Ingredient crab = new Ingredient("Crab");
         Ingredient eggs = new Ingredient("Eggs");
         Ingredient fish = new Ingredient("Fish");

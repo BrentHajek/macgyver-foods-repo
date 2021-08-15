@@ -3,7 +3,16 @@
     font-weight: bolder;
 }
 
-.preference-list-btn {
+.food-category-name {
+    color: rgb(117, 117, 22);
+    font-weight: bold;
+}
+
+.food-category-name:hover {
+    color: lightgray;
+}
+
+.preference-list-btn, .delete_preference_minus {
     background-color: rgb(117, 117, 22);
     border: none;
     border-radius: 8px;
@@ -16,8 +25,74 @@
     padding: 12px 24px;
 }
 
-.preference-list-btn:hover {
+.preference-list-btn:hover, .delete_preference_minus:hover {
     background-color: lightgrey;
     color: rgb(117, 117, 22);
     font-weight: bolder;
+}
+
+
+/* add and remove preference screens */
+
+.preference-container, .ingredient-list {
+    cursor: pointer;
+    display: block;
+    font-size: 25px;
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 15px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.ingredient-name {
+    color: rgb(117, 117, 22);
+    font-weight: bold;
+}
+
+.preference-container input, .ingredient-list input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.radio-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: rgb(247, 214, 154);
+    border-radius: 50%;
+}
+
+.preference-container:hover input ~ .radio-btn {
+    background-color: lightgray;
+}
+
+.preference-container input:checked ~ .radio-btn {
+    background-color: rgb(117, 117, 22);
+}
+
+.radio-btn:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.preference-container input:checked ~ .radio-btn:after {
+    display: block;
+}
+
+.preference-container .radio-btn:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: orange;
 }

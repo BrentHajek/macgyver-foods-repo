@@ -15,8 +15,8 @@ export default function Parent(parent) {
                 <p>${ingredient.ingredient}</p>
             `;
     }).join('')}
-        <button class="add_ingredient_plus" type="button">+ Add a Favorite Ingredient</button>
-        <button class="delete_ingredient_minus" type="button">- Delete from Favorites</button>
+        <button class="add_ingredient_plus" type="button">+ Add Ingredient to Pantry</button>
+        <button class="delete_ingredient_minus" type="button">- Delete Ingredient from Pantry</button>
         <div class="add_child_plus_button_container">
             <button class="add_child_plus" type="button">+ Add a Child</button>
             <button class="delete_child_minus" type="button">- Remove a Child</button>
