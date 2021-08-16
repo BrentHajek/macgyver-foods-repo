@@ -6,26 +6,19 @@ export default function navLandingCategories(foodCategories) {
     return`
         <section class="body__ingredients">
             <div class="body__category_list">
-                <h2 class="body__spices_title">${foodCategory.foodCategoryName}</h2>
+                <h2 class="body__category_title">${foodCategory.foodCategoryName}</h2>
                 <i id="downBtn" class="fas fa-chevron-down"></i>
             </div>
             <div class="body__ingredients_list">
-                <label class="ingredients__listItem">Apples
-                    <input type="checkbox">
+            ${foodCategory.ingredient.map(ingredient => {
+            return `
+                <label class="ingredients__listItem">${ingredient.ingredient}
+                    <input type="checkbox" id="ingredientId" value="${ingredient.id}">
                     <span class="checkmark-box"></span>
                 </label>
-                <label class="ingredients__listItem">Bananas
-                    <input type="checkbox">
-                    <span class="checkmark-box"></span>
-                </label>
-                <label class="ingredients__listItem">Plums
-                    <input type="checkbox">
-                    <span class="checkmark-box"></span>
-                </label>
-                    <label class="ingredients__listItem">Grapes
-                    <input type="checkbox">
-                    <span class="checkmark-box"></span>
-                </label>
+            `;    
+            })
+            .join('')}                
             </div>
         </section>
         `;

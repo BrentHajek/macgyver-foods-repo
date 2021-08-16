@@ -117,6 +117,7 @@
 .body__category_list {
     background: rgb(255, 56, 0);
     color: white;
+    cursor: pointer;
     display: flex;
     font-family: 'Roboto', sans-serif;
     grid-column-gap: 0;
