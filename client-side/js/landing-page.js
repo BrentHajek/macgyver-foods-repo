@@ -80,5 +80,17 @@ dotsNav.addEventListener('click', e => {
 
 });
 
+// var dropDownBtn = document.querySelector('.body__category_title');
+// var dropDownMenu = document.querySelector('.body__ingredients_list')
 
-const catagoryBtn = document.querySelector('.body__ingredient_testing');
+// function openDropDown() {
+//     dropDownMenu.style.display = 'block';
+// }
+
+// function closeDropDown() {
+//     dropDownMenu.style.display = 'none';
+// }
+
+// dropDownBtn.addEventListener('click', () => {
+//     openDropDown();
+// });
