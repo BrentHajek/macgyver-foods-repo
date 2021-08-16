@@ -1,0 +1,8 @@
+.dropdown_content a {
+    display: none;
+}
+
+.dropdown:hover .dropdown_content a {
+    display: block;
+}
+

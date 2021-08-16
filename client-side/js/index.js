@@ -12,16 +12,12 @@ import DeleteIngredientPage from './pages/DeleteIngredientPage.js';
 import AddPreferencePage from './pages/AddPreferencePage.js';
 import Child from './components/Child.js';
 import DeletePreferencePage from './pages/DeletePreferencePage.js';
-<<<<<<< HEAD
 import About from './pages/About.js';
-=======
 import ContactPage from './pages/ContactPage.js';
 import LandingCategories from './components/LandingCategories.js';
-import AboutUs from './pages/AboutUs.js';
 import FaqPage from './pages/Faq.js';
 import Terms from './pages/Terms.js';
 import Privacy from './pages/Privacy.js';
->>>>>>> main
 
 buildPage();
 
@@ -30,16 +26,13 @@ function buildPage() {
     navAllergies();
     navFoodCategories();
     test();
-<<<<<<< HEAD
-    navToAboutPage();
-=======
     navigateToContactPage();
     navLandingCategories();
-    navAbout();
+    navToAboutPageFooter();
+    navToAboutPageMenu();
     navFaq();
     navTerms();
     navPrivacy();
->>>>>>> main
 }
 
 const app = document.querySelector('#app');
@@ -426,13 +419,13 @@ function deletePreferenceFromChild() {
     })
 }
 
-function navAbout() {
-    const aboutElem = document.querySelector('.footer__about_listItem');
-    aboutElem.addEventListener('click', () => {
-        const app = document.querySelector('#app');
-        app.innerHTML = AboutUs();
-    });
-}
+// function navAbout() {
+//     const aboutElem = document.querySelector('#about');
+//     aboutElem.addEventListener('click', () => {
+//         const app = document.querySelector('#app');
+//         app.innerHTML = AboutUs();
+//     });
+// }
 
 function navFaq() {
     const faqElem = document.querySelector('.footer__faq_listItem');
@@ -466,9 +459,18 @@ function navigateToContactPage() {
     });
 }
 
-function navToAboutPage() {
+function navToAboutPageMenu() {
     const navToAboutPageButton = document.querySelector('#about')
     navToAboutPageButton.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        app.innerHTML = About()
+    })
+}
+
+function navToAboutPageFooter() {
+    const navToAboutPageButton = document.querySelector('.footer__about_listItem')
+    navToAboutPageButton.addEventListener('click', () => {
+        const app = document.querySelector('#app');
         app.innerHTML = About()
     })
 }
