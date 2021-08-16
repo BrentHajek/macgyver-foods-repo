@@ -14,8 +14,8 @@ import RecipeIngredientsListPage from './pages/RecipeIngredientsListPage.js';
 import RecipePage from './pages/RecipePage.js'
 import ContactPage from './pages/ContactPage.js';
 // import Ingredients from './components/Ingredients.js';
-// import SignInPage from './pages/SignInPage.js';
-// import SignInJs from './signin';
+import SignInPage from './pages/SignInPage.js';
+import SignInJs from './signin';
 import LandingCategories from './components/LandingCategories.js';
 import AboutUs from './pages/AboutUs.js';
 import FaqPage from './pages/Faq.js';
@@ -33,7 +33,7 @@ function buildPage() {
     navFoodCategories();
     navigateToContactPage();
     navLandingCategories();
-    // navToSignInPage();
+    navToSignInPage();
     navAbout();
     navFaq();
     navTerms();
@@ -480,13 +480,13 @@ function navigateToContactPage() {
 //     })
 // }
 
-// function navToSignInPage() {
-//     const navToSignInButton = document.querySelector('#sign_in');
-//     navToSignInButton.addEventListener('click', () => {
-//         app.innerHTML = SignInPage();
-//         SignInJs();
-//     })
-// }
+function navToSignInPage() {
+    const navToSignInButton = document.querySelector('#sign_in');
+    navToSignInButton.addEventListener('click', () => {
+        app.innerHTML = SignInPage();
+        SignInJs();
+    })
+}
 
 function navHome() {
     const homeElem = document.querySelector('#home-button');
