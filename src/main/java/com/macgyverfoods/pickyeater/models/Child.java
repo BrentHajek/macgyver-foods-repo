@@ -26,6 +26,10 @@ public class Child {
     @JsonIgnore
     private Parent parent;
 
+    @OneToMany
+    @JsonIgnore
+    private Collection<Recipe> recipes;
+
     public Long getId() {
         return id;
     }
@@ -70,6 +74,12 @@ public class Child {
         allergies.remove(allergyToRemove);
     }
 
+    public void addRecipe(Recipe recipeToAdd) {recipes.add(recipeToAdd);
+    }
+
+    public void removeRecipe(Recipe recipeToRemove) {recipes.remove(recipeToRemove);
+    }
+
     public Child(String firstName, String lastName, String age, Parent parent) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -93,4 +103,6 @@ public class Child {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+
 }

@@ -29,6 +29,9 @@ public class Populator implements CommandLineRunner {
     @Resource
     private PreferenceRepository preferenceRepo;
 
+    @Resource
+    private RecipeRepository recipeRepo;
+
     @Override
     public void run(String... args) throws Exception {
 
@@ -132,7 +135,7 @@ public class Populator implements CommandLineRunner {
         Ingredient beef = new Ingredient("Beef");
         Ingredient chicken = new Ingredient("Chicken");
         Ingredient chickenBreast = new Ingredient("Chicken Breast");
-        Ingredient cod = new Ingredient("cod");
+        Ingredient cod = new Ingredient("Cod");
         Ingredient crab = new Ingredient("Crab");
         Ingredient eggs = new Ingredient("Eggs");
         Ingredient fish = new Ingredient("Fish");
@@ -466,5 +469,7 @@ public class Populator implements CommandLineRunner {
         childRepo.save(testChild);
         childRepo.save(testChild2);
 
+        Recipe testRecipe = new Recipe("Toast", "Bread", "Put in toaster", testChild);
+        recipeRepo.save(testRecipe);
     }
 }

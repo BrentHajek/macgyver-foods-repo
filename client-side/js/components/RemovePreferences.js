@@ -1,12 +1,12 @@
-export default function FoodCategory(foodCategory) {
+export default function RemovePreferences(preference) {
     return `
     <h1 class="preference-list-title">Food Preferences</h1>
     <div class="ingredient-list">
-    ${foodCategory.ingredient.map(ingredient => {
+    ${preference.map(preference => {
         return `
         <label class="preference-container">
             <div class="ingredient-name">
-                <input type='checkbox' id='ingredientId${ingredient.id}' class="preferences" value='${ingredient.ingredient}'>${ingredient.ingredient}
+                <input type='checkbox' class="preferences" id='ingredientId${preference.id}' value='${preference.preference}'>${preference.preference}
                 <span class="radio-btn"></span>
             </div>
         </label>
@@ -15,8 +15,8 @@ export default function FoodCategory(foodCategory) {
         .join('')}
         </div>
 
-        <section class='add-preferences'>
-            <button class='submit-btn'>Submit</button>
+        <section class='remove-preferences'>
+            <button class='remove-btn'>Submit</button>
         </section>
     `;
 }
