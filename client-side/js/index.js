@@ -10,7 +10,6 @@ import RecipeIngredients from './components/RecipeIngredients.js';
 import AddIngredientPage from './pages/AddIngredientPage.js';
 import DeleteIngredientPage from './pages/DeleteIngredientPage.js';
 import Child from './components/Child.js';
-// import DeletePreferencePage from './pages/DeletePreferencePage.js';
 import About from './pages/About.js';
 import RecipeIngredientsListPage from './pages/RecipeIngredientsListPage.js';
 import RecipePage from './pages/RecipePage.js'
@@ -475,16 +474,7 @@ function addPreferenceToChild() {
     });
 }
 
-// function navToDeletePreferencePage() {
-//     const navToDeletePreferencePageButton = document.querySelectorAll('.delete_preference_minus');
-//     for(const navToDeletePreferencePageButton of navToDeletePreferencePageButton) {
-//         navToDeletePreferencePageButton.addEventListener('click', (event) => {
-//             childId = event.target.parentElement.parentElement.querySelector('input').value;
-//             console.log(childId);
-//             app.innerHTML = DeletePreferencePage();
-//         });
-//     }
-// }
+
 
 function deletePreferenceFromChild() {
     app.addEventListener('click', (event) => {
