@@ -1,3 +1,10 @@
+DELETE http://localhost:8080/children/205/delete-recipe
+content-Type: application/json
+
+{
+    "recipe": "SUPER UPPERCUT"
+}
+
 GET http://localhost:8080/preferences
 ###
 GET http://localhost:8080/foodCategories
@@ -10,6 +17,9 @@ GET http://localhost:8080/children
 ###
 GET http://localhost:8080/parents
 ###
+GET http://localhost:8080/recipes
+
+
 
 # GET https://api.spoonacular.com/recipes/findByIngredients
 

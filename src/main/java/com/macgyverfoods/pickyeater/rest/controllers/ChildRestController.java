@@ -118,11 +118,11 @@ public class ChildRestController {
         JSONObject newRecipe = new JSONObject(body);
         String recipe = newRecipe.getString("recipe");
         Optional<Recipe> recipeToAddOpt = recipeRepo.findByRecipe(recipe);
-        if (recipeToAddOpt.isPresent()) {
-            Optional<Child> childToAddRecipeToOpt = childRepo.findById(id);
-            Child childToAddRecipeTo = childToAddRecipeToOpt.get();
-            childToAddRecipeTo.addRecipe(recipeToAddOpt.get());
-            childRepo.save(childToAddRecipeTo);
+        if (recipeToAddOpt.isEmpty()) {
+            Child childToAddRecipeToOpt = childRepo.findById(id).get();
+            Recipe recipeToAdd = new Recipe(recipe,childToAddRecipeToOpt);
+            recipeRepo.save(recipeToAdd);
+            childRepo.save(childToAddRecipeToOpt);
         }
 
         return childRepo.findById(id);
@@ -134,9 +134,8 @@ public class ChildRestController {
         String recipe = removedRecipe.getString("recipe");
         Optional<Recipe> recipeToRemoveOpt = recipeRepo.findByRecipe(recipe);
         if (recipeToRemoveOpt.isPresent()){
-            Optional<Child> childToRemoveRecipeFromOpt = childRepo.findById(id);
-            Child childToRemoveRecipeFrom = childToRemoveRecipeFromOpt.get();
-            childToRemoveRecipeFrom.removeRecipe(recipeToRemoveOpt.get());
+            Child childToRemoveRecipeFrom = childRepo.findById(id).get();
+            recipeRepo.delete(recipeToRemoveOpt.get());
             childRepo.save(childToRemoveRecipeFrom);
         }
         return childRepo.findById(id);
