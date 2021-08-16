@@ -139,6 +139,7 @@ section i {
 
 .body__ingredients_list {
     border: 1px solid rgb(255, 56, 0);
+    display: none;
 }
 
 label {
