@@ -16,6 +16,7 @@ public class Preference {
     private String preference;
 
     @ManyToOne
+    @JsonIgnore
     private FoodCategory foodCategory;
 
     @ManyToMany(mappedBy = "preferences")
