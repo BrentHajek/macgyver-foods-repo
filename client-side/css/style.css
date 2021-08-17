@@ -89,14 +89,14 @@
     border: 0;
     border-radius: 50%;
     cursor: pointer;
-    width: 15px;
-    height: 15px;
-    background: rgba(0, 0, 0, .3);
-    margin: 0 12px;
+    width: 12px;
+    height: 12px;
+    background: #ccc;
+    margin: 0 10px;
 }
 
 .body__carousel_indicator.current-slide {
-    background: rgba(0, 0, 0, .75);
+    background: #777;
 }
 
 .is-hidden {
@@ -114,9 +114,10 @@
     width: 90%;
 }
 
-.body__ingredient_groups section {
+.body__category_list {
     background: rgb(255, 56, 0);
     color: white;
+    cursor: pointer;
     display: flex;
     font-family: 'Roboto', sans-serif;
     grid-column-gap: 0;
@@ -134,4 +135,89 @@ section i {
     font-size: 1.75rem;
     padding: .6rem;
     padding-right: 1rem;
+}
+
+.body__ingredients_list {
+    border: 1px solid rgb(255, 56, 0);
+    display: none;
+}
+
+label {
+    margin: .5rem;
+}
+
+.ingredients__listItem {
+    display: block;
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-size: 17px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.ingredients__listItem input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+}
+
+.ingredients__listItem:hover input ~ .checkmark-box {
+    background-color: #ccc;
+}
+
+.ingredients__listItem input:checked ~ .checkmark-box {
+    background-color: rgb(255, 56, 0);
+}
+
+.checkmark-box:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.ingredients__listItem input:checked ~ .checkmark-box:after {
+    display: block;
+}
+
+.ingredients__listItem .checkmark-box:after {
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.ingredient__submit {
+    display: flex;
+    justify-content: center;
+}
+
+.ingredients__submitBtn {
+    background: rgb(255, 56, 0);
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 2rem;
+    padding: .5rem;
+    text-align: center;
+    width: 200px;
 }
