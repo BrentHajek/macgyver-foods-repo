@@ -1,10 +1,10 @@
 .preference-list-title {
-    color: rgb(117, 117, 22);
+    color: #4FA125;
     font-weight: bolder;
 }
 
 .food-category-name {
-    color: rgb(117, 117, 22);
+    color: #4FA125;
     font-weight: bold;
 }
 
@@ -13,7 +13,7 @@
 }
 
 .preference-list-btn, .delete_preference_minus {
-    background-color: rgb(117, 117, 22);
+    background-color: #2E284D;
     border: none;
     border-radius: 8px;
     color: white;
@@ -27,7 +27,7 @@
 
 .preference-list-btn:hover, .delete_preference_minus:hover {
     background-color: lightgrey;
-    color: rgb(117, 117, 22);
+    color: #2E284D;
     font-weight: bolder;
 }
 
@@ -48,7 +48,7 @@
 }
 
 .ingredient-name {
-    color: rgb(117, 117, 22);
+    color: #4FA125;
     font-weight: bold;
 }
 
@@ -75,7 +75,7 @@
 }
 
 .preference-container input:checked ~ .radio-btn {
-    background-color: rgb(117, 117, 22);
+    background-color: #4FA125;
 }
 
 .radio-btn:after {
@@ -94,5 +94,5 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: orange;
+    background: #FF3800;
 }
