@@ -80,17 +80,62 @@ dotsNav.addEventListener('click', e => {
 
 });
 
-// var dropDownBtn = document.querySelector('.body__category_title');
-// var dropDownMenu = document.querySelector('.body__ingredients_list')
+var dropDownBtn = document.querySelectorAll('.body__category_list');
+var categoryTitle = document.querySelectorAll('.body__category_title');
+var downButton = document.querySelectorAll('#downBtn');
+var dropDownMenu = document.querySelectorAll('.body__ingredients_list');
 
-// function openDropDown() {
-//     dropDownMenu.style.display = 'block';
-// }
+function bindButtons() {
+    dropDownBtn.forEach((ingredientBtn) => {
+        ingredientBtn.addEventListener('click', (event) => {
+            if (event.target.classList.contains('body__category_list')) {
+                let ingredientList = event.target.parentElement.querySelector('.body__ingredients_list');
+                if (ingredientList.style.display !== 'block') {
+                    ingredientList.style.display = 'block';
+                } else {
+                    ingredientList.style.display = 'none';
+                }
+            }
+        });
+    });
+}
 
-// function closeDropDown() {
-//     dropDownMenu.style.display = 'none';
-// }
+function bindTitleButton() {
+    categoryTitle.forEach((ingredientBtn) => {
+        ingredientBtn.addEventListener('click', (event) => {
+            if (event.target.classList.contains('body__category_title')) {
+                let ingredientList = event.target.parentElement.parentElement.querySelector('.body__ingredients_list');
+                if (ingredientList.style.display !== 'block') {
+                    ingredientList.style.display = 'block';
+                } else {
+                    ingredientList.style.display = 'none';
+                }
+            }
+        });
+    });
+}
 
-// dropDownBtn.addEventListener('click', () => {
-//     openDropDown();
-// });
+function bindDownButton() {
+    downButton.forEach((ingredientBtn) => {
+        ingredientBtn.addEventListener('click', (event) => {
+            if (event.target.classList.contains('fa-chevron-down')) {
+                let ingredientList = event.target.parentElement.parentElement.querySelector('.body__ingredients_list');
+                if (ingredientList.style.display !== 'block') {
+                    ingredientList.style.display = 'block';
+                } else {
+                    ingredientList.style.display = 'none';
+                }
+            }
+        });
+    });
+}
+
+export default function startSite() {
+    dropDownBtn = document.querySelectorAll('.body__category_list');
+    dropDownMenu = document.querySelectorAll('.body__ingredients_list');
+    categoryTitle = document.querySelectorAll('.body__category_title');
+    downButton = document.querySelectorAll('#downBtn');
+    bindButtons();
+    bindTitleButton();
+    bindDownButton();
+}

@@ -24,6 +24,7 @@ import Privacy from './pages/Privacy.js';
 import RemoveAllergy from './components/RemoveAllergy.js';
 // import LandingPage from './index.html';
 import RemovePreferences from './components/RemovePreferences.js';
+import startSite from './landing-page.js';
 
 buildPage();
 
@@ -254,6 +255,7 @@ function navLandingCategories() {
     apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
         console.log(foodCategories);
         categoryElem.innerHTML = LandingCategories(foodCategories);
+        startSite();
     });
 }
 
@@ -512,5 +514,25 @@ function navHome() {
     const homeElem = document.querySelector('#home-button');
     homeElem.addEventListener('click', () => {
         location.href='index.html';
+    });
+}
+
+let ingredientCount = 0;
+function submitIngredientSelections() {
+    const app = document.querySelector('#app');
+    app.addEventListener('click', (event) => {
+        if (event.target.classList.contains('ingredients__submitBtn')) {
+            var ingredientsToAdd = [];
+            ingredientCount = 0;
+            var allIngredients = app.querySelectorAll('.ingredients');
+            allIngredients.forEach((currentIngredient) => {
+                if (currentIngredient.checked) {
+                    var checkedIngredient = currentIngredient.value;
+                    ingredientsToAdd.push(checkedIngredient);
+                    ingredientCount++;
+                }
+            });
+            ingredientsToAdd.forEach(addIngredientsToParent);
+        }
     });
 }
