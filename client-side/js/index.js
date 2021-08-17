@@ -387,39 +387,39 @@ function navToRecipesPage() {
                         const parsedString = stringInclude.substring(0, stringInclude.length - 1);
 
                         apiActions.getRequest(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKeyNum}&includeIngredients=${parsedString}&intolerances=${stringExclude}&fillIngredients=true&number=10`, (recipes) => {
-                            console.log(recipes);   
+                            console.log(recipes);
                             app.innerHTML = RecipeIngredientsListPage(recipes);
                             // const recipeId = recipes.results[0].id;
                             // apiActions.getRequest(`https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=${apiKeyNum}`, (recipeInstructions) => {
                             //     // console.log(recipeInstructions);
                             //     app.innerHTML += RecipeInstructions(recipeInstructions);
-                            // })       
-                        })
+                            // });
+                        });
                         navToSpecificRecipePage();
-                    })
-                })
-            })
-        })
+                    });
+                });
+            });
+        });
     }
 }
 
 function navToSpecificRecipePage() {
     app.addEventListener('click', (event) => {
         if (event.target.classList.contains('nav_full_recipe')) {
-           singleRecipe = event.target.parentElement.parentElement.querySelector("input").value;
+            singleRecipe = event.target.parentElement.parentElement.querySelector('input').value;
             apiActions.getRequest(`https://api.spoonacular.com/recipes/${singleRecipe}/card?apiKey=${apiKeyNum}&backgroundImage=background1`, (recipe) => {
                 console.log(recipe);
                 app.innerHTML = RecipePage(recipe);
-            })
+            });
             saveRecipeToChild();
         }
-    })
+    });
 }
 
-function saveRecipeToChild() { 
+function saveRecipeToChild() {
     app.addEventListener('click', (event) => {
         if (event.target.classList.contains('save_recipe_to_child')) {
-                console.log(childId);
+            console.log(childId);
             // const recipe = `https://api.spoonacular.com/recipes/${singleRecipe}/card?apiKey=${apiKeyNum}&backgroundImage=background1`;
             // apiActions.postRequest(`http://localhost:8080/children/${childId}/add-recipe`, {
             //     "recipe": recipe
@@ -427,10 +427,10 @@ function saveRecipeToChild() {
             //     Child(child);
             //     apiActions.getRequest('http://localhost/8080/parents/203', (parents) => {
             //         wireUpParent(parents);
-            //     })
-            // })
+            //     });
+            // });
         }
-    })
+    });
 }
 
 function navToDeleteIngredientPage() {
@@ -455,79 +455,6 @@ function deleteIngredientFromParent() {
 
 let singleRecipe = 0;
 let childId = 0;
-
-function navToAddPreferencePage() {
-    const navToAddPreferencePageButton = document.querySelectorAll('.add_preference_plus');
-    for (const navToAddPreferencePageButton of navToAddPreferencePageButton) {
-        navToAddPreferencePageButton.addEventListener('click', (event) => {
-            childId = event.target.parentElement.parentElement.querySelector("input").value;
-            console.log(childId);
-            app.innerHTML = AddPreferencePage();
-        });
-    }
-}
-
-function addPreferenceToChild() {
-    app.addEventListener('click', (event) => {
-        if (event.target.classList.contains('add_preference_submit')) {
-            const preference = event.target.parentElement.querySelector('#add_preference_name').value;
-            console.log(childId);
-            apiActions.postRequest(`http://localhost:8080/children/${childId}/add-preference`, {
-                'preference': preference
-            }, (child) => {
-                Child(child);
-                apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
-                    app.innerHTML = ParentPage(parents);
-                    navToAddChildPage();
-                    navToDeleteChildPage();
-                    createChild();
-                    deleteChild();
-                    AddIngredientToParent();
-                    navToAddIngredientPage();
-                    navToDeleteIngredientPage();
-                    deleteIngredientFromParent();
-                    navToAddPreferencePage();
-                    addPreferenceToChild();
-                    // navToDeletePreferencePage();
-                    deletePreferenceFromChild();
-                    toggleChildren();
-                });
-            })
-        }
-    });
-}
-
-
-
-function deletePreferenceFromChild() {
-    app.addEventListener('click', (event) => {
-        if (event.target.classList.contains('delete_preference_submit')) {
-            const preference = event.target.parentElement.querySelector('#delete_preference_name').value;
-            console.log(childId);
-            apiActions.deleteRequest(`http://localhost:8080/children/${childId}/delete-preference`, {
-                'preference': preference
-            }, (child) => {
-                Child(child);
-                apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
-                    app.innerHTML = ParentPage(parents);
-                    navToAddChildPage();
-                    navToDeleteChildPage();
-                    createChild();
-                    deleteChild();
-                    AddIngredientToParent();
-                    navToAddIngredientPage();
-                    navToDeleteIngredientPage();
-                    deleteIngredientFromParent();
-                    navToAddPreferencePage();
-                    addPreferenceToChild();
-                    navToDeletePreferencePage();
-                    deletePreferenceFromChild();
-                    toggleChildren();
-                });
-            })
-        }
-    })
-}
 
 function navFaq() {
     const faqElem = document.querySelector('.footer__faq_listItem');
@@ -565,31 +492,31 @@ function navToAboutPageMenu() {
     const navToAboutPageButton = document.querySelector('#about')
     navToAboutPageButton.addEventListener('click', () => {
         const app = document.querySelector('#app');
-        app.innerHTML = About()
-    })
+        app.innerHTML = About();
+    });
 }
 
 function navToAboutPageFooter() {
     const navToAboutPageButton = document.querySelector('.footer__about_listItem')
     navToAboutPageButton.addEventListener('click', () => {
         const app = document.querySelector('#app');
-        app.innerHTML = About()
-    })
+        app.innerHTML = About();
+    });
 }
 
-    function navToSignInPage() {
-        const navToSignInButton = document.querySelector('#sign_in');
-        navToSignInButton.addEventListener('click', () => {
-            app.innerHTML = SignInPage();
-            SignInJs();
-        })
-    }
+function navToSignInPage() {
+    const navToSignInButton = document.querySelector('#sign_in');
+    navToSignInButton.addEventListener('click', () => {
+        app.innerHTML = SignInPage();
+        SignInJs();
+    });
+}
 
 // function navToAboutPage() {
 //     const navToAboutPageButton = document.querySelector('#about')
 //     navToAboutPageButton.addEventListener('click', () => {
 //         app.innerHTML = About()
-//     })
+//     });
 // }
 
 function navHome() {
