@@ -24,6 +24,7 @@ import Privacy from './pages/Privacy.js';
 import RemoveAllergy from './components/RemoveAllergy.js';
 // import LandingPage from './index.html';
 import RemovePreferences from './components/RemovePreferences.js';
+import SavedRecipesToChildPage from './pages/SavedRecipesToChildPage.js';
 import startSite from './landing-page.js';
 
 buildPage();
@@ -51,6 +52,7 @@ const apiKeyNum = '985a2080f8094fdea57cb96fa855b0dd';
 // const apiKeyNum = '4d2f51bba03b42a59ba6d0843ac5b5f9';
 // const apiKeyNum = '733246d3691c4203855fd5063ee214b6';
 // const apiKeyNum = '00f757b09028492da86c30d8109241c0';
+// const apiKeyNum = '985a2080f8094fdea57cb96fa855b0dd';
 
 function renderProfileInfo() {
     const profileButton = document.querySelector('#profile_button');
@@ -73,6 +75,7 @@ function wireUpParent(parents) {
     deleteIngredientFromParent();
     toggleChildren();
     navToRecipesPage();
+    viewSavedRecipes();
     navToSpecificRecipePage();
     navToSignInPage();
 }
@@ -366,7 +369,7 @@ function navToRecipesPage() {
 
     for (const navToRecipesPageButton of navToRecipesPageButton) {
         navToRecipesPageButton.addEventListener('click', (event) => {
-            const childId = event.target.parentElement.parentElement.querySelector('input').value;
+            childId = event.target.parentElement.querySelector('input').value;
             apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
                 let stringName = '';
                 for (let i = 0; i < parents.ingredients.length; i++) {
@@ -384,9 +387,9 @@ function navToRecipesPage() {
                         }
                         let stringInclude = stringName + stringName3;
                         let stringExclude = stringName2;
-                        const parsedString = stringInclude.substring(0, stringInclude.length - 1);
-
-                        apiActions.getRequest(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKeyNum}&includeIngredients=${parsedString}&intolerances=${stringExclude}&fillIngredients=true&number=10`, (recipes) => {
+                        const parsedString = stringInclude.substring(0,stringInclude.length -1) ;
+    
+                        apiActions.getRequest(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKeyNum}&includeIngredients=${parsedString}&intolerances=${stringExclude}&fillIngredients=true&number=10&sort=popularity&limitLicense=true`, (recipes) => {
                             console.log(recipes);
                             app.innerHTML = RecipeIngredientsListPage(recipes);
                             // const recipeId = recipes.results[0].id;
@@ -419,18 +422,37 @@ function navToSpecificRecipePage() {
 function saveRecipeToChild() {
     app.addEventListener('click', (event) => {
         if (event.target.classList.contains('save_recipe_to_child')) {
-            console.log(childId);
-            // const recipe = `https://api.spoonacular.com/recipes/${singleRecipe}/card?apiKey=${apiKeyNum}&backgroundImage=background1`;
-            // apiActions.postRequest(`http://localhost:8080/children/${childId}/add-recipe`, {
-            //     "recipe": recipe
-            // }, (child) => {
-            //     Child(child);
-            //     apiActions.getRequest('http://localhost/8080/parents/203', (parents) => {
-            //         wireUpParent(parents);
-            //     });
-            // });
+            const recipe = singleRecipe;
+            console.log(singleRecipe);
+            apiActions.postRequest(`http://localhost:8080/children/${childId}/add-recipe`, {
+                "recipe": recipe
+            }, (child) => {
+                console.log(child);
+                apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
+                   wireUpParent(parents);
+                });
+            })
         }
     });
+}
+
+function viewSavedRecipes() {
+    const viewSavedRecipesButton = document.querySelectorAll('.view_saved_recipes');
+    for (const viewSavedRecipesButton of viewSavedRecipesButton) {
+        viewSavedRecipesButton.addEventListener('click', (event) => {
+            childId = event.target.parentElement.querySelector('input').value;
+            apiActions.getRequest(`http://localhost:8080/children/${childId}`, (savedRecipes) => {
+                let stringName4 = '';
+                for (let i = 0; i < savedRecipes.recipes.length; i++) {
+                    stringName4 += savedRecipes.recipes[i].recipe + ',';
+                }
+                apiActions.getRequest(`https://api.spoonacular.com/recipes/informationBulk?ids=${stringName4}&apiKey=${apiKeyNum}&includeNutrition=false`, (recipe) => {
+                    app.innerHTML = SavedRecipesToChildPage(recipe);
+                })
+
+            })
+         })
+    }
 }
 
 function navToDeleteIngredientPage() {

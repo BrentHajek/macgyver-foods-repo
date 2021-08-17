@@ -33,7 +33,7 @@ export default function Child(child) {
                 <button class="delete_preference_minus" id="childId" value="${child.id}" type="button">- Remove a Preference</button>
             </div>
             <button class="search_recipes_button">Search Recipes</button>
-
+            <button class="view_saved_recipes">My Recipes</button>
         </div>
         `;
 }

@@ -469,7 +469,7 @@ public class Populator implements CommandLineRunner {
         childRepo.save(testChild);
         childRepo.save(testChild2);
 
-        Recipe testRecipe = new Recipe("Toast", testChild);
-        recipeRepo.save(testRecipe);
+//        Recipe testRecipe = new Recipe("Toast", testChild);
+//        recipeRepo.save(testRecipe);
     }
 }
