@@ -26,9 +26,8 @@ public class Child {
     @JsonIgnore
     private Parent parent;
 
-    @OneToMany
-    @JsonIgnore
-    private Collection<Recipe> recipes;
+    @OneToMany (mappedBy = "child")
+    private Set<Recipe> recipes;
 
     public Long getId() {
         return id;
@@ -56,6 +55,10 @@ public class Child {
 
     public Collection<Preference> getPreferences() {
         return preferences;
+    }
+
+    public Collection<Recipe> getRecipes() {
+        return recipes;
     }
 
     public void addPreference(Preference preferenceToAdd) {
@@ -86,6 +89,7 @@ public class Child {
         this.age = age;
         this.allergies = new HashSet<>();
         this.preferences = new HashSet<>();
+        this.recipes = new HashSet<>();
         this.parent = parent;
     }
 
