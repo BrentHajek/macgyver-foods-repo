@@ -14,15 +14,13 @@ public class Recipe {
     private Long id;
 
     private String recipe;
-    private String ingredient;
-    private String instruction;
 
     @ManyToOne
+    @JsonIgnore
     private Child child;
 
-    public Recipe(String recipe, String ingredient, String instruction, Child child) {
-        this.ingredient = ingredient;
-        this.instruction = instruction;
+    public Recipe(String recipe, Child child) {
+        this.recipe = recipe;
         this.child = child;
     }
 
@@ -32,14 +30,6 @@ public class Recipe {
 
     public String getRecipe() {
         return recipe;
-    }
-
-    public String getIngredient() {
-        return ingredient;
-    }
-
-    public String getInstruction() {
-        return instruction;
     }
 
     public Child getChild() {
@@ -54,12 +44,12 @@ public class Recipe {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Recipe recipe1 = (Recipe) o;
-        return Objects.equals(id, recipe1.id) && Objects.equals(recipe, recipe1.recipe) && Objects.equals(ingredient, recipe1.ingredient) && Objects.equals(instruction, recipe1.instruction) && Objects.equals(child, recipe1.child);
+        Recipe recipe = (Recipe) o;
+        return Objects.equals(id, recipe.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, recipe, ingredient, instruction, child);
+        return Objects.hash(id);
     }
 }
