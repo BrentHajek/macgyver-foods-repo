@@ -1,5 +1,5 @@
 .allergy-list-title {
-    color: rgb(117, 117, 22);
+    color: #2E284D;
     font-weight: bolder;
 }
 
@@ -17,7 +17,7 @@
 }
 
 .allergen-name {
-    color: rgb(117, 117, 22);
+    color: #2E284D;
     font-weight: bold;
 }
 
@@ -44,7 +44,7 @@
 }
 
 .allergy-container input:checked ~ .radio-btn {
-    background-color: rgb(117, 117, 22);
+    background-color: #4FA125;
 }
 
 .radio-btn:after {
@@ -63,5 +63,5 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: orange;
+    background: #FF3800;
 }

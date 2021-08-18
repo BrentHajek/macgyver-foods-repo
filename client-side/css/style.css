@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
-.allergy-list-btn, .delete__allergy_minus {
-    background-color: rgb(117, 117, 22);
+.allergy-list-btn, .delete__allergy_minus, .add_ingredient_plus, .delete_ingredient_minus, .search_recipes_button {
+    background-color: #2E284D;
     border: none;
     border-radius: 8px;
     color: white;
@@ -13,9 +13,9 @@
     padding: 12px 24px;
 }
 
-.allergy-list-btn:hover, .delete__allergy_minus:hover {
+.allergy-list-btn:hover, .delete__allergy_minus:hover, .add_ingredient_plus:hover, .delete_ingredient_minus:hover, .search_recipes_button:hover {
     background-color: lightgrey;
-    color: rgb(117, 117, 22);
+    color: #2E284D;
     font-weight: bolder;
 }
 
@@ -120,7 +120,7 @@
     right: -40px;
 }
 
-.body__carousel_btnLeft img, 
+.body__carousel_btnLeft img,
 .body__carousel_btnRight img {
     width: 12px;
 }
