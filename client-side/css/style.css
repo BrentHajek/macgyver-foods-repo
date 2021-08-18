@@ -66,6 +66,7 @@
     background:#FF3800;
 }
 
+/*carousel*/
 .body__carousel {
     position: relative;
     height: 350px;
@@ -150,6 +151,13 @@
     display: none;
 }
 
+/*landing page*/
+.ingredient__textChoice {
+    font-weight: bold;
+    margin-top: 3rem;
+    text-align: center;
+}
+
 .body__ingredient_groups {
     display: grid;
     grid-template-columns: 50% 50%;
@@ -157,7 +165,7 @@
     grid-row-gap: 1rem;
     justify-content: center;
     margin: auto;
-    margin-top: 4rem;
+    margin-top: 1.5rem;
     width: 90%;
 }
 
@@ -193,7 +201,8 @@ label {
     margin: .5rem;
 }
 
-.ingredients__listItem {
+.ingredients__listItem,
+.preferences__listItem {
     display: block;
     position: relative;
     padding-left: 28px;
@@ -206,7 +215,8 @@ label {
     user-select: none;
 }
 
-.ingredients__listItem input {
+.ingredients__listItem input,
+.preferences__listItem input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -223,11 +233,13 @@ label {
     background-color: #eee;
 }
 
-.ingredients__listItem:hover input ~ .checkmark-box {
+.ingredients__listItem:hover input ~ .checkmark-box,
+.preferences__listItem:hover input ~ .checkmark-box {
     background-color: #ccc;
 }
 
-.ingredients__listItem input:checked ~ .checkmark-box {
+.ingredients__listItem input:checked ~ .checkmark-box
+.preferences__listItem input:checked ~ .checkmark-box {
     background-color: rgb(255, 56, 0);
 }
 
@@ -237,11 +249,13 @@ label {
     display: none;
 }
 
-.ingredients__listItem input:checked ~ .checkmark-box:after {
+.ingredients__listItem input:checked ~ .checkmark-box:after,
+.preferences__listItem input:checked ~ .checkmark-box:after {
     display: block;
 }
 
-.ingredients__listItem .checkmark-box:after {
+.ingredients__listItem .checkmark-box:after,
+.preferences__listItem .checkmark-box:after {
     left: 6px;
     top: 2px;
     width: 5px;
@@ -251,6 +265,52 @@ label {
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
+}
+
+.preference__textChoice {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.body__preferences_group {
+    margin: auto;
+    margin-top: 1.5rem;
+    text-align: center;
+    width: 92%;
+}
+
+.body__preferences {
+    background: rgb(255, 56, 0);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+    justify-content: space-between;
+    margin: 0;
+    padding-left: 1rem;
+}
+
+.body__preferences h2 {
+    margin: 0;
+    padding-top: .6rem;
+    padding-bottom: .6rem;
+}
+
+.body__preferences i {
+    font-size: 1.75rem;
+    padding: .6rem;
+    padding-right: 1rem;
+}
+
+.preference__categories {
+    display: none;
+}
+
+.preferences__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: left;
 }
 
 .ingredient__submit {

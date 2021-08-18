@@ -80,6 +80,7 @@ dotsNav.addEventListener('click', e => {
 
 });
 
+//ingredient categories
 var dropDownBtn = document.querySelectorAll('.body__category_list');
 var categoryTitle = document.querySelectorAll('.body__category_title');
 var downButton = document.querySelectorAll('#downBtn');
@@ -130,12 +131,69 @@ function bindDownButton() {
     });
 }
 
+//preference categories
+var prefDropDownBtn = document.querySelectorAll('.body__preferences');
+var prefDownButton = document.querySelectorAll('#downBtn');
+var preferenceTitle = document.querySelectorAll('.choose__preferences_title');
+var preferenceMenu = document.querySelector('.preference__categories')
+
+function bindPrefButtons() {
+    prefDropDownBtn.forEach((ingredientBtn) => {
+        ingredientBtn.addEventListener('click', (event) => {
+            if (event.target.classList.contains('body__preferences')) {
+                let ingredientList = event.target.parentElement.querySelector('.preference__categories');
+                if (ingredientList.style.display !== 'block') {
+                    ingredientList.style.display = 'block';
+                } else {
+                    ingredientList.style.display = 'none';
+                }
+            }
+        });
+    });
+}
+
+function bindPrefTitleButton() {
+    preferenceTitle.forEach((ingredientBtn) => {
+        ingredientBtn.addEventListener('click', (event) => {
+            if (event.target.classList.contains('choose__preferences_title')) {
+                let ingredientList = event.target.parentElement.parentElement.querySelector('.preference__categories');
+                if (ingredientList.style.display !== 'block') {
+                    ingredientList.style.display = 'block';
+                } else {
+                    ingredientList.style.display = 'none';
+                }
+            }
+        });
+    });
+}
+
+function bindPrefDownButton() {
+    prefDownButton.forEach((ingredientBtn) => {
+        ingredientBtn.addEventListener('click', (event) => {
+            if (event.target.classList.contains('fa-chevron-down')) {
+                let ingredientList = event.target.parentElement.parentElement.querySelector('.preference__categories');
+                if (ingredientList.style.display !== 'block') {
+                    ingredientList.style.display = 'block';
+                } else {
+                    ingredientList.style.display = 'none';
+                }
+            }
+        });
+    });
+}
+
 export default function startSite() {
     dropDownBtn = document.querySelectorAll('.body__category_list');
     dropDownMenu = document.querySelectorAll('.body__ingredients_list');
     categoryTitle = document.querySelectorAll('.body__category_title');
     downButton = document.querySelectorAll('#downBtn');
+    prefDropDownBtn = document.querySelectorAll('.body__preferences');
+    preferenceTitle = document.querySelectorAll('.choose__preferences_title');
+    preferenceMenu = document.querySelector('.preference__categories')
     bindButtons();
     bindTitleButton();
     bindDownButton();
+    bindPrefButtons();
+    bindPrefTitleButton();
+    bindPrefDownButton();
 }

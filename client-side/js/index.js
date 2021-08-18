@@ -26,7 +26,8 @@ import RemoveAllergy from './components/RemoveAllergy.js';
 import RemovePreferences from './components/RemovePreferences.js';
 import SavedRecipesToChildPage from './pages/SavedRecipesToChildPage.js';
 import startSite from './landing-page.js';
-import SavedSingleRecipePage from './pages/SavedSingleRecipePage.js'
+import SavedSingleRecipePage from './pages/SavedSingleRecipePage.js';
+import LandingPreferences from './components/LandingPagePreferences.js';
 
 buildPage();
 
@@ -36,6 +37,7 @@ function buildPage() {
     navFoodCategories();
     navigateToContactPage();
     navLandingCategories();
+    renderLandingPreferences();
     navFaq();
     navTerms();
     navPrivacy();
@@ -284,6 +286,14 @@ function navLandingCategories() {
     apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
         console.log(foodCategories);
         categoryElem.innerHTML = LandingCategories(foodCategories);
+        startSite();
+    });
+}
+
+function renderLandingPreferences() {
+    const preferenceElem = document.querySelector('#preference__categories');
+    apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
+        preferenceElem.innerHTML = LandingPreferences(foodCategories);
         startSite();
     });
 }
