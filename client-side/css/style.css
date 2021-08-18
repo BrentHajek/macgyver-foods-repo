@@ -19,6 +19,53 @@
     font-weight: bolder;
 }
 
+.child-to-remove-container {
+    cursor: pointer;
+    display: block;
+    font-size: 25px;
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 15px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.child-name-to-remove {
+    color: #2E284D;
+    font-weight: bold;
+}
+
+.child-to-remove-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.child-to-remove-container:hover input ~ .radio-btn {
+    background-color: lightgray;
+}
+
+.child-to-remove-container input:checked ~ .radio-btn {
+    background-color: #4FA125;
+}
+
+.child-to-remove-container input:checked ~ .radio-btn:after {
+    display: block;
+}
+
+.child-to-remove-container .radio-btn:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background:#FF3800;
+}
+
 .body__carousel {
     position: relative;
     height: 350px;
