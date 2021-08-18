@@ -72,8 +72,6 @@ function wireUpParent(parents) {
     app.innerHTML = ParentPage(parents);
     navToAddChildPage();
     navToDeleteChildPage();
-    createChild();
-    deleteChild();
     AddIngredientToParent();
     navToAddIngredientPage();
     navToDeleteIngredientPage();
@@ -110,6 +108,7 @@ function navToAddChildPage() {
     const navToAdd = document.querySelector('.add_child_plus');
     navToAdd.addEventListener('click', () => {
         app.innerHTML = AddChildPage();
+        createChild();
     });
 }
 
@@ -119,17 +118,20 @@ function navToDeleteChildPage() {
         parentId = event.target.parentElement.parentElement.querySelector('input').value;
         apiActions.getRequest(`http://localhost:8080/parents/${parentId}/children`, children => {
             app.innerHTML = DeleteChildPage(children);
+            deleteChild();
         });
     });
 }
 
 function createChild() {
-    app.addEventListener('click', (event) => {
+    const submitButton = document.querySelector('.add_child_submit');
+    submitButton.addEventListener('click', (event) => {
         if (event.target.classList.contains('add_child_submit')) {
             const firstName = event.target.parentElement.querySelector('#add_child_firstName').value;
             const lastName = event.target.parentElement.querySelector('#add_child_lastName').value;
             const age = event.target.parentElement.querySelector('#add_child_age').value;
-            apiActions.postRequest('http://localhost:8080/parents/203/add-child', {
+            console.log(firstName + lastName + age);
+            apiActions.postRequest(`http://localhost:8080/parents/${parentId}/add-child`, {
                 'firstName': firstName,
                 'lastName': lastName,
                 'age': age
@@ -142,8 +144,8 @@ function createChild() {
 
 let childrenToRemoveCount = 0;
 function deleteChild() {
-    const app = document.querySelector('#app');
-    app.addEventListener('click', (event) => {
+    const deleteButton = document.querySelector('.delete_child_submit');
+    deleteButton.addEventListener('click', (event) => {
         if (event.target.classList.contains('delete_child_submit')) {
             var childrenToRemove = [];
             childrenToRemoveCount = 0;
