@@ -87,7 +87,7 @@ html {
 }
 
 .add_child_plus, .delete_child_minus {
-    background-color: rgb(117, 117, 22);
+    background-color: #2E284D;
     border: none;
     border-radius: 8px;
     color: white;
@@ -101,14 +101,14 @@ html {
     
 .add_child_plus:hover, .delete_child_minus:hover {
     background-color: lightgrey;
-    color: rgb(117, 117, 22);
+    color: #2E284D;
     font-weight: bolder;
 }
 
 .add_ingredient_plus {
-    border-radius: 25px;
+    border-radius: 8px;
 }
 
 .delete_ingredient_minus {
-    border-radius: 25px;
+    border-radius: 8px;
 }

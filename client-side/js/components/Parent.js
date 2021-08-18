@@ -9,14 +9,14 @@ export default function Parent(parent) {
         <p>First name: ${parent.parentFirstName}</p>
         <p>Last name: ${parent.parentLastName}</p>
         <p>Email: ${parent.email}</p>
-        <h3>Your Favorite Ingredients:</h3>
+        <h3>Your Ingredients:</h3>
         ${parent.ingredients.map((ingredient) => {
         return `
                 <p>${ingredient.ingredient}</p>
             `;
     }).join('')}
-        <button class="add_ingredient_plus" type="button">+ Add Ingredient to Pantry</button>
-        <button class="delete_ingredient_minus" type="button">- Delete Ingredient from Pantry</button>
+        <button class="add_ingredient_plus" type="button">+ Add To Pantry</button>
+        <button class="delete_ingredient_minus" type="button">- Remove From Pantry</button>
         <div class="add_child_plus_button_container">
             <button class="add_child_plus" type="button">+ Add a Child</button>
             <button class="delete_child_minus" type="button">- Remove a Child</button>
