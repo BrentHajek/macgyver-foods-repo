@@ -3,7 +3,7 @@ export default function Child(child) {
         <div class="test_child_grid">
             <input type='hidden' id='childId${child.id}' value=${child.id} />
             <h2 class='child__name'>${child.firstName}</h2>
-            <p>Age: ${child.age}</p>
+            <p class="child__age">Age: ${child.age}</p>
             <div class="child__allergies_div">
             <h4>List of Allergies:</h4>
             <ul>
@@ -20,7 +20,7 @@ export default function Child(child) {
             </div>
             <div class="child__preferences_div">
             <h4>List of preferences:</h4>
-            <ul>
+            <ul class="child__preferences">
             ${child.preferences.map((preference) => {
         return `
                     <li>

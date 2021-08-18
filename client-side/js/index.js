@@ -26,7 +26,8 @@ import RemoveAllergy from './components/RemoveAllergy.js';
 import RemovePreferences from './components/RemovePreferences.js';
 import SavedRecipesToChildPage from './pages/SavedRecipesToChildPage.js';
 import startSite from './landing-page.js';
-import SavedSingleRecipePage from './pages/SavedSingleRecipePage.js'
+import SavedSingleRecipePage from './pages/SavedSingleRecipePage.js';
+import SearchForRecipesPage from './pages/SearchForRecipesPage.js';
 
 buildPage();
 
@@ -43,6 +44,7 @@ function buildPage() {
     navToAboutPageFooter();
     navToAboutPageMenu();
     navToSignInPage();
+    navToSearchForRecipes();
 }
 
 const app = document.querySelector('#app');
@@ -50,9 +52,9 @@ const app = document.querySelector('#app');
 // const apiKeyNum = '985a2080f8094fdea57cb96fa855b0dd';
 // const apiKeyNum = '78bc7509124db458df764b454c2dc1e57807eff5';
 // const apiKeyNum = 'd16a986f5295496bb236ca7062f1841a';
-const apiKeyNum = '4d2f51bba03b42a59ba6d0843ac5b5f9';
+// const apiKeyNum = '4d2f51bba03b42a59ba6d0843ac5b5f9';
 // const apiKeyNum = '733246d3691c4203855fd5063ee214b6';
-// const apiKeyNum = '00f757b09028492da86c30d8109241c0';
+const apiKeyNum = '00f757b09028492da86c30d8109241c0';
 // const apiKeyNum = '985a2080f8094fdea57cb96fa855b0dd';
 
 let parentId = 203;
@@ -604,4 +606,33 @@ function submitIngredientSelections() {
             ingredientsToAdd.forEach(addIngredientsToParent);
         }
     });
+}
+
+function navToSearchForRecipes() {
+    const searchIcon = document.querySelector('.fas.fa-search');
+    searchIcon.addEventListener('click', () => {
+        app.innerHTML = SearchForRecipesPage();
+        searchForRecipes();
+    })
+}
+
+function searchForRecipes() {
+    app.addEventListener('click', (event) => {
+        if (event.target.classList.contains('search_for_recipes_button')) {
+            const searchedRecipe = event.target.parentElement.querySelector('.search_recipes_name').value;
+            apiActions.getRequest(`https://api.spoonacular.com/recipes/autocomplete?number=10&query=${searchedRecipe}&apiKey=${apiKeyNum}`, (theSearchedRecipes) => {
+                console.log(theSearchedRecipes);
+
+                let stringName5 = '';
+                for (let i = 0; i < theSearchedRecipes.length; i++) {
+                    stringName5 += theSearchedRecipes[i].id + ',';
+                }
+                apiActions.getRequest(`https://api.spoonacular.com/recipes/informationBulk?ids=${stringName5}&apiKey=${apiKeyNum}&includeNutrition=false`, (recipe) => {
+                    app.innerHTML = SavedRecipesToChildPage(recipe);
+                });
+                viewFullSavedRecipe();
+                
+            })
+        }
+    })
 }

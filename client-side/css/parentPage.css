@@ -4,16 +4,29 @@ html {
     max-width: 80rem;
 }
 
-/* coming from the ParentPage */
-.your__profile_header {
-    font-family: 'Roboto', sans-serif;
-    font-size:xx-large;
+.profile__page_header {
+    background-image: url(images/food-image-4.jpg);
+    position: relative;
+    height: 350px;
+    width: 100%;
+    /* margin: 2rem auto; */
     text-align: center;
+    
+}
+
+.your__profile_header {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size:6rem;
+    font-weight: bolder;
+    text-align: center;
+    color: white;
 }
 
 /* coming from the ParentPage */
 .user_info {
-    border: solid rgb(79, 161, 37) 2px;
     border-radius: 25px;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -22,14 +35,23 @@ html {
 
 /* coming from the Parent.js component */
 .parent__name_header {
-   text-decoration: underline;
-   text-decoration-color: rgb(79, 161, 37);
+    font-weight: bolder;
+}
+
+.parent__info_container {
+    color: #2E284D;
+    margin: auto;
+    text-align: center;
+}
+
+.parent__first_name, .parent__last_name, .parent__email {
+    font-weight: bolder;
 }
 
 /* coming from the Parent.js component */
 .child__info_containter {
-    border: solid rgb(255, 56, 0) 2px;
-    border-radius: 25px;
+    /* border: solid rgb(255, 56, 0) 2px;
+    border-radius: 25px; */
     display: flex;
     flex-direction: column;
     padding-left: 20px;
@@ -54,11 +76,16 @@ html {
     align-items: center;
     background-color: rgb(132, 175, 119);
     border-radius: 25px;
+    color: #2E284D;
     display: flex;
     flex-direction: column;
     padding: 10px;
     visibility: hidden;
     height: 20px;
+}
+
+.child__age, .child__allergies, .child__preferences {
+    font-weight: bolder;
 }
 
 .child__name {
@@ -67,7 +94,7 @@ html {
 
 /* coming from the Child.js component */
 .test_child_grid:hover {
-    background-color: rgb(207, 205, 161);
+    background-color: #64924d;
 }
 
 /* coming from the ParentPage */
@@ -83,7 +110,7 @@ html {
 
 /* coming from the Parent.js component */
 .add_ingredient_plus:hover{
-    background-color: rgb(184, 184, 189);
+    background-color: lightgray;
 }
 
 .add_child_plus, .delete_child_minus, .view_saved_recipes {
@@ -95,7 +122,7 @@ html {
     display: inline-block;
     font-size: 18px;
     font-weight: bolder;
-    margin-top: 40px;
+    margin-top: 20px;
     padding: 12px 24px;
 }
     
@@ -111,4 +138,24 @@ html {
 
 .delete_ingredient_minus {
     border-radius: 8px;
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait),
+only screen and (max-device-width: 640px) {
+    .profile__page_header, .your__profile_header {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        line-height: normal;
+        margin: 0;
+        text-align: center;
+    }
+
+    .user_info, .test_child_grid, .parent__info_container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: auto;
+        text-align: center;
+    }
 }
