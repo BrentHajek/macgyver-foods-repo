@@ -6,7 +6,7 @@
 
 .about_us__header, .who_we_are__header {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: orangered;
+    color: #FF3800;
     text-align: center;
     padding-top: 5%;
 }
@@ -46,7 +46,7 @@
 }
 
 .developer__card:hover {
-    border: .25px solid orangered;
+    border: .25px solid #FF3800;
     box-shadow: 1.5px 1.5px 1.5px 1.5px rgba(252, 109, 14, 0.3);
     transition: .5s;
 }

@@ -1,1 +1,48 @@
+/* #2E284D  navy*/
+/* #FF3800  orange*/
+/* #4FA125 green*/
+/* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+/* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
 
+
+.faq__page {
+    margin: 0;
+    padding: 5%;
+}
+
+.faq__title {
+    color: #2e284d;
+}
+
+.faq__page {
+    font-family: 'Roboto', sans-serif;
+}
+
+.browse-topics-container button {
+    background-color: #2e284d;
+    color: white;
+    border: 1px solid black;
+    border-radius: .2rem;
+    padding: .6rem;
+}
+
+.browse-topics-container button:hover {
+    cursor: pointer;
+    background-color: #FF3800;
+    box-shadow: 2.5px 2.5px 5px 3px rgba(0, 0, 0, 0.2);
+}
+
+.faq__h3 {
+    
+    color: #FF3800;
+}
+
+.faq__h4 {
+    
+    font-size:large;
+    color: #2e284d;
+}
+
+p {
+    font-size: 1.05rem;
+}
