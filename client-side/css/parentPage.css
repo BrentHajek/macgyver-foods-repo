@@ -86,7 +86,7 @@ html {
     background-color: rgb(184, 184, 189);
 }
 
-.add_child_plus, .delete_child_minus {
+.add_child_plus, .delete_child_minus, .view_saved_recipes {
     background-color: #2E284D;
     border: none;
     border-radius: 8px;
@@ -99,7 +99,7 @@ html {
     padding: 12px 24px;
 }
     
-.add_child_plus:hover, .delete_child_minus:hover {
+.add_child_plus:hover, .delete_child_minus:hover, .view_saved_recipes:hover {
     background-color: lightgrey;
     color: #2E284D;
     font-weight: bolder;
