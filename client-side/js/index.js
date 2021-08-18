@@ -26,6 +26,7 @@ import RemoveAllergy from './components/RemoveAllergy.js';
 import RemovePreferences from './components/RemovePreferences.js';
 import SavedRecipesToChildPage from './pages/SavedRecipesToChildPage.js';
 import startSite from './landing-page.js';
+import SavedSingleRecipePage from './pages/SavedSingleRecipePage.js'
 
 buildPage();
 
@@ -46,10 +47,10 @@ function buildPage() {
 
 const app = document.querySelector('#app');
 
-const apiKeyNum = '985a2080f8094fdea57cb96fa855b0dd';
+// const apiKeyNum = '985a2080f8094fdea57cb96fa855b0dd';
 // const apiKeyNum = '78bc7509124db458df764b454c2dc1e57807eff5';
 // const apiKeyNum = 'd16a986f5295496bb236ca7062f1841a';
-// const apiKeyNum = '4d2f51bba03b42a59ba6d0843ac5b5f9';
+const apiKeyNum = '4d2f51bba03b42a59ba6d0843ac5b5f9';
 // const apiKeyNum = '733246d3691c4203855fd5063ee214b6';
 // const apiKeyNum = '00f757b09028492da86c30d8109241c0';
 // const apiKeyNum = '985a2080f8094fdea57cb96fa855b0dd';
@@ -78,6 +79,7 @@ function wireUpParent(parents) {
     viewSavedRecipes();
     navToSpecificRecipePage();
     navToSignInPage();
+    viewFullSavedRecipe();
 }
 
 function toggleChildren() {
@@ -449,10 +451,21 @@ function viewSavedRecipes() {
                 apiActions.getRequest(`https://api.spoonacular.com/recipes/informationBulk?ids=${stringName4}&apiKey=${apiKeyNum}&includeNutrition=false`, (recipe) => {
                     app.innerHTML = SavedRecipesToChildPage(recipe);
                 })
-
+                viewFullSavedRecipe();
             })
          })
     }
+}
+
+function viewFullSavedRecipe() {
+    app.addEventListener('click', (event) => {
+        if (event.target.classList.contains('saved_full_recipe')) {
+            singleRecipe = event.target.parentElement.querySelector('input').value;
+            apiActions.getRequest(`https://api.spoonacular.com/recipes/${singleRecipe}/card?apiKey=${apiKeyNum}&backgroundImage=background1`, (recipe) => {
+                app.innerHTML = SavedSingleRecipePage(recipe);          
+            })
+        }
+    })
 }
 
 function navToDeleteIngredientPage() {

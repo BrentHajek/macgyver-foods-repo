@@ -8,7 +8,7 @@ export default function SavedRecipesToChildPage(savedRecipes) {
         <div class="card_recipe">
             <div class="recipe_card_wrapper">
                 <div class="recipe_card_img">
-                    <img src=${recipe.image} alt=""/>
+                    <img src=${recipe.image} alt="" style="width:100%;"/>
                 </div>
                 <div class="recipe_card_box">
                     <h2 class="recipe_card_title">${recipe.title}</h2>
