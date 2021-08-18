@@ -43,6 +43,12 @@ public class ParentRestController {
         return parentRepo.findById(id);
     }
 
+    @GetMapping("/parents/{id}/children")
+    public Collection<Child> getChildren(@PathVariable Long id) {
+        Optional<Parent> parentToGetChildrenFor = Optional.of(parentRepo.findById(id).get());
+        return parentToGetChildrenFor.get().getChild();
+    }
+
     @PostMapping("/parents/{id}/add-ingredient")
     public Optional<Parent> addIngredients(@RequestBody String body, @PathVariable Long id) throws JSONException {
         JSONObject newIngredient = new JSONObject(body);

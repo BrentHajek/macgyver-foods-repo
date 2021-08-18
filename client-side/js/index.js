@@ -54,6 +54,8 @@ const apiKeyNum = '985a2080f8094fdea57cb96fa855b0dd';
 // const apiKeyNum = '00f757b09028492da86c30d8109241c0';
 // const apiKeyNum = '985a2080f8094fdea57cb96fa855b0dd';
 
+let parentId = 203;
+
 function renderProfileInfo() {
     const profileButton = document.querySelector('#profile_button');
     profileButton.addEventListener('click', () => {
@@ -110,7 +112,10 @@ function navToAddChildPage() {
 function navToDeleteChildPage() {
     const deleteChildButton = document.querySelector('.delete_child_minus');
     deleteChildButton.addEventListener('click', () => {
-        app.innerHTML = DeleteChildPage();
+        parentId = event.target.parentElement.parentElement.querySelector('input').value;
+        apiActions.getRequest(`http://localhost:8080/parents/${parentId}/children`, children => {
+            app.innerHTML = DeleteChildPage(children);
+        });
     });
 }
 
@@ -131,13 +136,33 @@ function createChild() {
     });
 }
 
+let childrenToRemoveCount = 0;
 function deleteChild() {
+    const app = document.querySelector('#app');
     app.addEventListener('click', (event) => {
         if (event.target.classList.contains('delete_child_submit')) {
-            const firstName = event.target.parentElement.querySelector('#delete_child_firstName').value;
-            apiActions.deleteRequest('http://localhost:8080/parents/203/delete-child', {
-                'firstName': firstName
-            }, (parents) => {
+            var childrenToRemove = [];
+            childrenToRemoveCount = 0;
+            var allChildrenToRemove = app.querySelectorAll('.childToRemove');
+            allChildrenToRemove.forEach((currentChild) => {
+                if (currentChild.checked) {
+                    var checkedChildToRemove = currentChild.value;
+                    childrenToRemove.push(checkedChildToRemove);
+                    childrenToRemoveCount++;
+                }
+            });
+            childrenToRemove.forEach(removeChildFromParentProfile);
+        }
+    });
+}
+
+let currentChildrenToRemoveCount = 0;
+function removeChildFromParentProfile(firstName) {
+    apiActions.deleteRequest(`http://localhost:8080/parents/${parentId}/delete-child`, {'firstName': firstName}, (children) => {
+        currentChildrenToRemoveCount++;
+        if (currentChildrenToRemoveCount === childrenToRemoveCount) {
+            apiActions.getRequest(`http://localhost:8080/parents/${parentId}`, (parents) => {
+                currentChildrenToRemoveCount = 0;
                 wireUpParent(parents);
             });
         }
@@ -388,7 +413,7 @@ function navToRecipesPage() {
                         let stringInclude = stringName + stringName3;
                         let stringExclude = stringName2;
                         const parsedString = stringInclude.substring(0,stringInclude.length -1) ;
-    
+
                         apiActions.getRequest(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKeyNum}&includeIngredients=${parsedString}&intolerances=${stringExclude}&fillIngredients=true&number=10&sort=popularity&limitLicense=true`, (recipes) => {
                             console.log(recipes);
                             app.innerHTML = RecipeIngredientsListPage(recipes);
@@ -429,9 +454,9 @@ function saveRecipeToChild() {
             }, (child) => {
                 console.log(child);
                 apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
-                   wireUpParent(parents);
+                    wireUpParent(parents);
                 });
-            })
+            });
         }
     });
 }
@@ -448,10 +473,9 @@ function viewSavedRecipes() {
                 }
                 apiActions.getRequest(`https://api.spoonacular.com/recipes/informationBulk?ids=${stringName4}&apiKey=${apiKeyNum}&includeNutrition=false`, (recipe) => {
                     app.innerHTML = SavedRecipesToChildPage(recipe);
-                })
-
-            })
-         })
+                });
+            });
+        });
     }
 }
 
