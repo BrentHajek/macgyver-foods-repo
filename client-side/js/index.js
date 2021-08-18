@@ -653,9 +653,8 @@ function searchForRecipes() {
                 }
                 apiActions.getRequest(`https://api.spoonacular.com/recipes/informationBulk?ids=${stringName5}&apiKey=${apiKeyNum}&includeNutrition=false`, (recipe) => {
                     app.innerHTML = SavedRecipesToChildPage(recipe);
+                    viewFullSavedRecipe();
                 });
-                viewFullSavedRecipe();
-                
             })
         }
     })
