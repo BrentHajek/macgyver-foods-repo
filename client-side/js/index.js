@@ -129,6 +129,7 @@ function navToAddChildPage() {
     navToAdd.addEventListener('click', () => {
         app.innerHTML = AddChildPage();
         createChild();
+        toggleSearchBar();
     });
 }
 
@@ -139,6 +140,7 @@ function navToDeleteChildPage() {
         apiActions.getRequest(`http://localhost:8080/parents/${parentId}/children`, children => {
             app.innerHTML = DeleteChildPage(children);
             deleteChild();
+            toggleSearchBar();
         });
     });
 }
@@ -157,6 +159,7 @@ function createChild() {
                 'age': age
             }, (parents) => {
                 wireUpParent(parents);
+                toggleSearchBar();
             });
         }
     });
@@ -178,6 +181,7 @@ function deleteChild() {
                 }
             });
             childrenToRemove.forEach(removeChildFromParentProfile);
+            toggleSearchBar();
         }
     });
 }
@@ -211,6 +215,7 @@ function navAllergies() {
         }
     });
     submitAllergySelections();
+    toggleSearchBar();
 }
 
 let allergyCount = 0;
@@ -558,6 +563,7 @@ function navFaq() {
     faqElem.addEventListener('click', () => {
         const app = document.querySelector('#app');
         app.innerHTML = FaqPage();
+        toggleSearchBar();
     });
 }
 
@@ -566,6 +572,7 @@ function navTerms() {
     termsElem.addEventListener('click', () => {
         const app = document.querySelector('#app');
         app.innerHTML = Terms();
+        toggleSearchBar();
     });
 }
 
@@ -574,6 +581,7 @@ function navPrivacy() {
     privacyElem.addEventListener('click', () => {
         const app = document.querySelector('#app');
         app.innerHTML = Privacy();
+        toggleSearchBar();
     });
 }
 
@@ -582,6 +590,7 @@ function navigateToContactPage() {
     contactButton.addEventListener('click', () => {
         const app = document.querySelector('#app');
         app.innerHTML = ContactPage();
+        toggleSearchBar();
     });
 }
 
@@ -590,6 +599,7 @@ function navToAboutPageMenu() {
     navToAboutPageButton.addEventListener('click', () => {
         const app = document.querySelector('#app');
         app.innerHTML = About();
+        toggleSearchBar();
     });
 }
 
@@ -598,6 +608,7 @@ function navToAboutPageFooter() {
     navToAboutPageButton.addEventListener('click', () => {
         const app = document.querySelector('#app');
         app.innerHTML = About();
+        toggleSearchBar();
     });
 }
 
@@ -606,6 +617,7 @@ function navToSignInPage() {
     navToSignInButton.addEventListener('click', () => {
         app.innerHTML = SignInPage();
         SignInJs();
+        toggleSearchBar();
     });
 }
 
