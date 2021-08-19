@@ -25,7 +25,9 @@ export default function AddToPantry(foodCategories) {
         .join('')}
         </div>
         <section class='submit-items-to-pantry'>
-            <button class='submit-items-to-pantry-btn'>Submit</button>
+            <div class="ingredient__submit">
+                <p class="ingredients__submitBtn">Add Ingredients to Pantry</p>
+            </div>
         </section>
     `;
 }

@@ -451,7 +451,7 @@ let pantryItemsToRemoveCount = 0;
 function submitIngredientSelections() {
     const app = document.querySelector('#app');
     app.addEventListener('click', (event) => {
-        if (event.target.classList.contains('submit-items-to-pantry-btn')) {
+        if (event.target.classList.contains('ingredients__submitBtn')) {
             var pantryItemsToAdd = [];
             pantryItemsToAddCount = 0;
             let allIngredients = app.querySelectorAll('.pantry-ingredients');
