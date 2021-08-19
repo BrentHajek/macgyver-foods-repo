@@ -540,7 +540,8 @@ function viewFullSavedRecipe() {
                 app.innerHTML = LoadingPage();
                 singleRecipe = event.target.parentElement.querySelector('input').value;
                 apiActions.getRequest(`https://api.spoonacular.com/recipes/${singleRecipe}/card?apiKey=${apiKeyNum}&backgroundImage=background1`, (recipe) => {
-                    app.innerHTML = SavedSingleRecipePage(recipe);          
+                    app.innerHTML = SavedSingleRecipePage(recipe);  
+                    toggleSearchBar();        
                 })
             }
         })
