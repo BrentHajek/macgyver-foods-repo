@@ -27,7 +27,8 @@ import RemovePreferences from './components/RemovePreferences.js';
 import SavedRecipesToChildPage from './pages/SavedRecipesToChildPage.js';
 import startSite from './landing-page.js';
 import SavedSingleRecipePage from './pages/SavedSingleRecipePage.js';
-import LoadingPage from './pages/LoadingPage.js'
+import LoadingPage from './pages/LoadingPage.js';
+import AddToPantry from './pages/AddToPantry.js';
 
 buildPage();
 
@@ -76,7 +77,7 @@ function wireUpParent(parents) {
     navToAddChildPage();
     navToDeleteChildPage();
     AddIngredientToParent();
-    navToAddIngredientPage();
+    // navToAddIngredientPage();
     navToDeleteIngredientPage();
     deleteIngredientFromParent();
     toggleChildren();
@@ -86,6 +87,7 @@ function wireUpParent(parents) {
     navToSignInPage();
     viewFullSavedRecipe();
     toggleSearchBar();
+    navAddToPantryFoodCategories();
 }
 
 function toggleChildren() {
@@ -325,12 +327,12 @@ function renderFoodCategoryIngredients() {
     submitPreferenceSelections();
 }
 
-function navToAddIngredientPage() {
-    const navToAddIngredientButton = document.querySelector('.add_ingredient_plus');
-    navToAddIngredientButton.addEventListener('click', () => {
-        app.innerHTML = AddIngredientPage();
-    });
-}
+// function navToAddIngredientPage() {
+//     const navToAddIngredientButton = document.querySelector('.add_ingredient_plus');
+//     navToAddIngredientButton.addEventListener('click', () => {
+//         app.innerHTML = AddIngredientPage();
+//     });
+// }
 
 let preferenceCount = 0;
 let preferenceToRemoveCount = 0;
@@ -393,6 +395,19 @@ function removePreferencesFromChildProfile(preference) {
             apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
                 currentPreferencesToRemoveCount = 0;
                 wireUpParent(parents);
+            });
+        }
+    });
+}
+
+function navAddToPantryFoodCategories() {
+    const addIngredientToPantryBtn = document.querySelector('.add_ingredient_plus');
+    addIngredientToPantryBtn.addEventListener('click', (event) => {
+        if (event.target.classList.contains('add_ingredient_plus')) {
+            apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
+                console.log(foodCategories);
+                app.innerHTML = AddToPantry(foodCategories);
+                startSite();
             });
         }
     });
@@ -655,7 +670,7 @@ function searchForRecipes() {
                     app.innerHTML = SavedRecipesToChildPage(recipe);
                     viewFullSavedRecipe();
                 });
-            })
+            });
         }
-    })
+    });
 }
