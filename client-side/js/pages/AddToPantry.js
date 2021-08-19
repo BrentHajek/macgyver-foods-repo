@@ -12,7 +12,7 @@ export default function AddToPantry(foodCategories) {
             ${foodCategory.ingredient.map(ingredient => {
         return `
                 <label class="ingredients__listItem">${ingredient.ingredient}
-                    <input type="checkbox" id="ingredientId" value="${ingredient.ingredient}">
+                    <input type="checkbox" class="pantry-ingredients" id="ingredientId${ingredient.id}" value="${ingredient.ingredient}">
                     <span class="checkmark-box"></span>
                 </label>
             `;

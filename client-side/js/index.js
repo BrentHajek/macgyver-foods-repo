@@ -30,6 +30,7 @@ import SavedSingleRecipePage from './pages/SavedSingleRecipePage.js';
 import LoadingPage from './pages/LoadingPage.js';
 import AddToPantry from './pages/AddToPantry.js';
 import PantryPage from './pages/PantryPage.js';
+import Pantry from './components/Pantry.js';
 
 buildPage();
 
@@ -48,7 +49,7 @@ function buildPage() {
     navToSignInPage();
     toggleSearchBar();
     searchForRecipes();
-    navToPantryPage();
+    // navToPantryPage();
 }
 
 const app = document.querySelector('#app');
@@ -78,10 +79,10 @@ function wireUpParent(parents) {
     app.innerHTML = ParentPage(parents);
     navToAddChildPage();
     navToDeleteChildPage();
-    AddIngredientToParent();
+    // AddIngredientToParent();
     // navToAddIngredientPage();
-    navToDeleteIngredientPage();
-    deleteIngredientFromParent();
+    // navToDeleteIngredientPage();
+    // deleteIngredientFromParent();
     toggleChildren();
     navToRecipesPage();
     viewSavedRecipes();
@@ -89,7 +90,7 @@ function wireUpParent(parents) {
     navToSignInPage();
     viewFullSavedRecipe();
     toggleSearchBar();
-    navAddToPantryFoodCategories();
+    navToPantry();
 }
 
 function toggleChildren() {
@@ -125,7 +126,7 @@ function toggleSearchBar() {
                 search.querySelector('button').style.display = 'none';
             }
         }
-    })
+    });
 }
 
 function navToAddChildPage() {
@@ -402,35 +403,117 @@ function removePreferencesFromChildProfile(preference) {
     });
 }
 
-function navAddToPantryFoodCategories() {
-    const addIngredientToPantryBtn = document.querySelector('.add_ingredient_plus');
-    addIngredientToPantryBtn.addEventListener('click', (event) => {
+function navToPantry() {
+    const app = document.querySelector('#app');
+    app.addEventListener('click', (event) => {
         if (event.target.classList.contains('add_ingredient_plus')) {
             apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
                 console.log(foodCategories);
                 app.innerHTML = AddToPantry(foodCategories);
                 startSite();
             });
+        } else if (event.target.classList.contains('delete_ingredient_minus')) {
+            apiActions.getRequest(`http://localhost:8080/parents/${parentId}/ingredients`, ingredients => {
+                app.innerHTML = Pantry(ingredients);
+            });
         }
     });
+    submitIngredientSelections();
 }
 
-function AddIngredientToParent() {
+// function submitIngredientSelections() {
+//     const addIngredientToPantryBtn = document.querySelector('.add_ingredient_plus');
+//     addIngredientToPantryBtn.addEventListener('click', (event) => {
+//         if (event.target.classList.contains('add_ingredient_plus')) {
+//             apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
+//                 console.log(foodCategories);
+//                 app.innerHTML = AddToPantry(foodCategories);
+//                 startSite();
+//             });
+//         }
+//         navToPantryPage();
+//     });
+// }
+
+let pantryItemsToAddCount = 0;
+let pantryItemsToRemoveCount = 0;
+function submitIngredientSelections() {
+    const app = document.querySelector('#app');
     app.addEventListener('click', (event) => {
-        if (event.target.classList.contains('add_ingredient_submit')) {
-            const ingredient = event.target.parentElement.querySelector('#add_ingredient_name').value;
-            makePostToAddIngredient(ingredient);
+        if (event.target.classList.contains('submit-items-to-pantry-btn')) {
+            var pantryItemsToAdd = [];
+            pantryItemsToAddCount = 0;
+            let allIngredients = app.querySelectorAll('.pantry-ingredients');
+            allIngredients.forEach((currentItem) => {
+                if (currentItem.checked) {
+                    var  checkedItem = currentItem.value;
+                    pantryItemsToAdd.push(checkedItem);
+                    pantryItemsToAddCount++;
+                }
+            });
+            pantryItemsToAdd.forEach(addItemsToPantry);
+        } else if (event.target.classList.contains('submit-pantry-items-to-remove')) {
+            var pantryItemsToRemove = [];
+            pantryItemsToRemoveCount = 0;
+            const allIngredientsToRemove = app.querySelectorAll('.pantry-ingredients');
+            allIngredientsToRemove.forEach((currentItem) => {
+                if (currentItem.checked) {
+                    var  checkedItem = currentItem.value;
+                    pantryItemsToRemove.push(checkedItem);
+                    pantryItemsToRemoveCount++;
+                }
+            });
+            pantryItemsToRemove.forEach(removeItemsFromPantry);
         }
     });
 }
 
-function makePostToAddIngredient(ingredient) {
-    apiActions.postRequest('http://localhost:8080/parents/203/add-ingredient', {
+let currentIngredientCount = 0;
+function addItemsToPantry(ingredient) {
+    apiActions.postRequest(`http://localhost:8080/parents/${parentId}/add-ingredient`, {
         'ingredient': ingredient
-    }, (parents) => {
-        wireUpParent(parents);
+    }, ingredients => {
+        currentIngredientCount++;
+        if (currentIngredientCount === pantryItemsToAddCount) {
+            apiActions.getRequest(`http://localhost:8080/parents/${parentId}`, (parents) => {
+                currentIngredientCount = 0;
+                wireUpParent(parents);
+            });
+        }
     });
 }
+
+let currentIngredientToRemoveCount = 0;
+function removeItemsFromPantry(ingredient) {
+    apiActions.deleteRequest(`http://localhost:8080/parents/${parentId}/delete-ingredient`, {
+        'ingredient': ingredient
+    }, ingredients => {
+        currentIngredientToRemoveCount++;
+        if (currentIngredientToRemoveCount === pantryItemsToRemoveCount) {
+            apiActions.getRequest(`http://localhost:8080/parents/${parentId}`, (parents) => {
+                currentIngredientToRemoveCount = 0;
+                wireUpParent(parents);
+            });
+        }
+    });
+}
+
+// function AddIngredientToParent() {
+//     app.addEventListener('click', (event) => {
+//         if (event.target.classList.contains('add_ingredient_submit')) {
+//             const ingredient = event.target.parentElement.querySelector('#add_ingredient_name').value;
+//             makePostToAddIngredient(ingredient);
+//         }
+//     });
+// }
+
+// function makePostToAddIngredient(ingredient) {
+//     apiActions.postRequest('http://localhost:8080/parents/203/add-ingredient', {
+//         'ingredient': ingredient
+//     }, (parents) => {
+//         wireUpParent(parents);
+//     });
+// }
 
 function navToRecipesPage() {
     const navToRecipesPageButton = document.querySelectorAll('.search_recipes_button');
@@ -542,25 +625,25 @@ function viewFullSavedRecipe() {
     }
 }
 
-function navToDeleteIngredientPage() {
-    const navToDeleteIngredientPageButton = document.querySelector('.delete_ingredient_minus');
-    navToDeleteIngredientPageButton.addEventListener('click', () => {
-        app.innerHTML = DeleteIngredientPage();
-    });
-}
+// function navToDeleteIngredientPage() {
+//     const navToDeleteIngredientPageButton = document.querySelector('.delete_ingredient_minus');
+//     navToDeleteIngredientPageButton.addEventListener('click', () => {
+//         app.innerHTML = DeleteIngredientPage();
+//     });
+// }
 
-function deleteIngredientFromParent() {
-    app.addEventListener('click', (event) => {
-        if (event.target.classList.contains('delete_ingredient_submit')) {
-            const ingredient = event.target.parentElement.querySelector('#delete_ingredient_name').value;
-            apiActions.deleteRequest('http://localhost:8080/parents/203/delete-ingredient', {
-                'ingredient': ingredient
-            }, (parents) => {
-                wireUpParent(parents);
-            });
-        }
-    });
-}
+// function deleteIngredientFromParent() {
+//     app.addEventListener('click', (event) => {
+//         if (event.target.classList.contains('delete_ingredient_submit')) {
+//             const ingredient = event.target.parentElement.querySelector('#delete_ingredient_name').value;
+//             apiActions.deleteRequest('http://localhost:8080/parents/203/delete-ingredient', {
+//                 'ingredient': ingredient
+//             }, (parents) => {
+//                 wireUpParent(parents);
+//             });
+//         }
+//     });
+// }
 
 let singleRecipe = 0;
 let childId = 0;
@@ -605,71 +688,6 @@ function navToAboutPageMenu() {
     });
 }
 
-let pantryItemsToAdd = 0;
-let pantryItemsToRemove = 0;
-function navToPantryPage() {
-    const navToPantryButton = document.querySelector('.submit-items-to-pantry-btn');
-    navToPantryButton.addEventListener('click', (event) => {
-        if (event.target.classList.contains('submit-items-to-pantry-btn')) {
-            var pantryItemsToAdd = [];
-            pantryItemsToAdd = 0;
-            const allIngredients = app.querySelectorAll('.ingredientId').value;
-            allIngredients.forEach((currentItem) => {
-                if (currentItem.checked) {
-                    var  checkedItem = currentItem.value;
-                    pantryItemsToAdd.push(checkedItem);
-                    pantryItemsToAdd++;
-                }
-            });
-            pantryItemsToAdd.forEach(addItemsToPantry);
-        } else if (event.target.classList.contains('delete_ingredient_minus')) {
-            var pantryItemsToRemove = [];
-            pantryItemsToRemove = 0;
-            const allIngredientsToRemove = app.querySelectorAll('.ingredientId').value;
-            allIngredientsToRemove.forEach((currentItem) => {
-                if (currentItem.checked) {
-                    var  checkedItem = currentItem.value;
-                    pantryItemsToRemove.push(checkedItem);
-                    pantryItemsToRemove++;
-                }
-            });
-            pantryItemsToRemove.forEach(removeItemsFromPantry);
-        }
-        const app = document.querySelector('#app');
-        app.innerHTML = PantryPage();
-    });
-}
-
-let currentIngredientCount = 0;
-function addItemsToPantry() {
-    apiActions.postRequest(`http://localhost:8080/parents/${parentId}/add-ingredient`, {
-        'ingredient': ingredient
-    }, ingredients => {
-        currentIngredientCount++;
-        if (currentIngredientCount === pantryItemsToAdd) {
-            apiActions.getRequest(`http://localhost:8080/parents/${parentId}`, (parents) => {
-                currentIngredientCount = 0;
-                wireUpParent(parents);
-            });
-        }
-    });
-}
-
-let currentIngredientToRemoveCount = 0;
-function removeItemsFromPantry() {
-    apiActions.deleteRequest(`http://localhost:8080/parents/${parentId}/delete-ingredient`, {
-        'ingredient': ingredient
-    }, ingredients => {
-        currentIngredientToRemoveCount++;
-        if (currentIngredientToRemoveCount === pantryItemsToRemove) {
-            apiActions.getRequest(`http://localhost:8080/parents/${parentId}`, (parents) => {
-                currentIngredientToRemoveCount = 0;
-                wireUpParent(parents);
-            });
-        }
-    });
-}
-
 function navToAboutPageFooter() {
     const navToAboutPageButton = document.querySelector('.footer__about_listItem')
     navToAboutPageButton.addEventListener('click', () => {
@@ -700,25 +718,25 @@ function navHome() {
     });
 }
 
-let ingredientCount = 0;
-function submitIngredientSelections() {
-    const app = document.querySelector('#app');
-    app.addEventListener('click', (event) => {
-        if (event.target.classList.contains('ingredients__submitBtn')) {
-            var ingredientsToAdd = [];
-            ingredientCount = 0;
-            var allIngredients = app.querySelectorAll('.ingredients');
-            allIngredients.forEach((currentIngredient) => {
-                if (currentIngredient.checked) {
-                    var checkedIngredient = currentIngredient.value;
-                    ingredientsToAdd.push(checkedIngredient);
-                    ingredientCount++;
-                }
-            });
-            ingredientsToAdd.forEach(addIngredientsToParent);
-        }
-    });
-}
+// let ingredientCount = 0;
+// function submitIngredientSelections() {
+//     const app = document.querySelector('#app');
+//     app.addEventListener('click', (event) => {
+//         if (event.target.classList.contains('ingredients__submitBtn')) {
+//             var ingredientsToAdd = [];
+//             ingredientCount = 0;
+//             var allIngredients = app.querySelectorAll('.ingredients');
+//             allIngredients.forEach((currentIngredient) => {
+//                 if (currentIngredient.checked) {
+//                     var checkedIngredient = currentIngredient.value;
+//                     ingredientsToAdd.push(checkedIngredient);
+//                     ingredientCount++;
+//                 }
+//             });
+//             ingredientsToAdd.forEach(addIngredientsToParent);
+//         }
+//     });
+// }
 
 function searchForRecipes() {
     const searchButton1 = document.querySelector('.search_for_recipes_button');
