@@ -449,8 +449,8 @@ function navToRecipesPage() {
                             //     // console.log(recipeInstructions);
                             //     app.innerHTML += RecipeInstructions(recipeInstructions);
                             // });
-                        });
-                        navToSpecificRecipePage();
+                            navToSpecificRecipePage();
+                        });    
                     });
                 });
             });
@@ -459,21 +459,26 @@ function navToRecipesPage() {
 }
 
 function navToSpecificRecipePage() {
-    app.addEventListener('click', (event) => {
-        if (event.target.classList.contains('nav_full_recipe')) {
-            app.innerHTML = LoadingPage();
-            singleRecipe = event.target.parentElement.parentElement.querySelector('input').value;
-            apiActions.getRequest(`https://api.spoonacular.com/recipes/${singleRecipe}/card?apiKey=${apiKeyNum}&backgroundImage=background1`, (recipe) => {
-                console.log(recipe);
-                app.innerHTML = RecipePage(recipe);
-            });
-            saveRecipeToChild();
-        }
-    });
+    const nav_full_recipe_button = document.querySelectorAll('.nav_full_recipe');
+    for (const nav_full_recipe_button of nav_full_recipe_button) {
+        nav_full_recipe_button.addEventListener('click', (event) => {
+            if (event.target.classList.contains('nav_full_recipe')) {
+                app.innerHTML = LoadingPage();
+                singleRecipe = event.target.parentElement.parentElement.querySelector('input').value;
+                apiActions.getRequest(`https://api.spoonacular.com/recipes/${singleRecipe}/card?apiKey=${apiKeyNum}&backgroundImage=background1`, (recipe) => {
+                    console.log(recipe);
+                    app.innerHTML = RecipePage(recipe);
+                    saveRecipeToChild();
+                });   
+            }
+        });
+    }
+   
 }
 
 function saveRecipeToChild() {
-    app.addEventListener('click', (event) => {
+    const save_recipe_to_child_button = document.querySelector('.save_recipe_to_child')
+    save_recipe_to_child_button.addEventListener('click', (event) => {
         if (event.target.classList.contains('save_recipe_to_child')) {
             app.innerHTML = LoadingPage();
             const recipe = singleRecipe;
