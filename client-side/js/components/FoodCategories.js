@@ -8,20 +8,20 @@ export default function FoodCategories(foodCategories) {
         <h3 class="preference__category_title">${foodCategory.foodCategoryName}</h3>
         <div class="preference__categories">
             ${foodCategory.ingredient.map(ingredient => {
-                return `
+        return `
                 <div class="preferences__container">
                     <label class="preferences__listItem">${ingredient.ingredient}
-                        <input type="checkbox" id="ingredientId" value="${ingredient.id}">
+                        <input type="checkbox" class="preferences" id="ingredientId" value="${ingredient.ingredient}">
                         <span class="checkmark-box"></span>
                     </label>
                 </div>
                 `;
-            })
-            .join('')}
+    })
+        .join('')}
         </div>
         `;
     })
-    .join('')}
+        .join('')}
         <section class='add-preferences'>
             <button class='submit-btn'>Submit</button>
         </section>
