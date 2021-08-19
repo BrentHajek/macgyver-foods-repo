@@ -49,6 +49,12 @@ public class ParentRestController {
         return parentToGetChildrenFor.get().getChild();
     }
 
+    @GetMapping("/parents/{id}/ingredients")
+    public Collection<Ingredient> getIngredients(@PathVariable Long id) {
+        Optional<Parent> parentToGetIngredientsFor = Optional.of(parentRepo.findById(id).get());
+        return parentToGetIngredientsFor.get().getIngredients();
+    }
+
     @PostMapping("/parents/{id}/add-ingredient")
     public Optional<Parent> addIngredients(@RequestBody String body, @PathVariable Long id) throws JSONException {
         JSONObject newIngredient = new JSONObject(body);
@@ -78,7 +84,7 @@ public class ParentRestController {
     }
 
     @PostMapping("/parents/{id}/add-child")
-    public Parent addChild(@RequestBody String body, @PathVariable Long id) throws JSONException {
+    public Optional<Parent> addChild(@RequestBody String body, @PathVariable Long id) throws JSONException {
         JSONObject newChild = new JSONObject(body);
         String firstName = newChild.getString("firstName");
         String lastName = newChild.getString("lastName");
@@ -87,10 +93,11 @@ public class ParentRestController {
         if (childToAddOpt.isEmpty()) {
                 Parent parentToAddChild2 = parentRepo.findById(id).get();
                 Child childToAdd = new Child(firstName,lastName,age,parentToAddChild2);
+                parentToAddChild2.addChild(childToAdd);
                 childRepo.save(childToAdd);
-                parentRepo.save(parentToAddChild2);
+//                parentRepo.save(parentToAddChild2);
         }
-        return parentRepo.findById(id).get();
+        return parentRepo.findById(id);
     }
 
     @DeleteMapping("/parents/{id}/delete-child")

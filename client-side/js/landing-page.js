@@ -80,6 +80,7 @@ dotsNav.addEventListener('click', e => {
 
 });
 
+//ingredient categories
 var dropDownBtn = document.querySelectorAll('.body__category_list');
 var categoryTitle = document.querySelectorAll('.body__category_title');
 var downButton = document.querySelectorAll('#downBtn');

@@ -99,6 +99,11 @@
     padding-top: .5rem;
 }
 
+.header__logo_img {
+    height: 80px;
+    width: auto;
+}
+
 .header__list {
     display: flex;
     padding-right: 1.5rem;
@@ -107,7 +112,7 @@
 .header__listItems {
     color: white;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 22px;
     list-style: none;
     margin-left: 1.5rem;
     margin-top: .25rem;
@@ -177,4 +182,12 @@
     font-family: 'Roboto', sans-serif;
     justify-content: center;
     padding-top: 1rem;
+}
+
+.search_for_recipes_button {
+    display: none;
+}
+
+.search_for_recipes_input {
+    visibility: hidden;
 }

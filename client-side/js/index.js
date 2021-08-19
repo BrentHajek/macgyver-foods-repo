@@ -7,16 +7,12 @@ import FoodCategories from './components/FoodCategories.js';
 import FoodCategory from './components/FoodCategory.js';
 import RecipeInstructions from './components/RecipeInstructions.js';
 import RecipeIngredients from './components/RecipeIngredients.js';
-import AddIngredientPage from './pages/AddIngredientPage.js';
-import DeleteIngredientPage from './pages/DeleteIngredientPage.js';
-import Child from './components/Child.js';
 import About from './pages/About.js';
 import RecipeIngredientsListPage from './pages/RecipeIngredientsListPage.js';
-import RecipePage from './pages/RecipePage.js'
+import RecipePage from './pages/RecipePage.js';
 import ContactPage from './pages/ContactPage.js';
-// import Ingredients from './components/Ingredients.js';
 import SignInPage from './pages/SignInPage.js';
-import SignInJs from './signin';
+import SignInJs from './signin.js';
 import LandingCategories from './components/LandingCategories.js';
 import FaqPage from './pages/Faq.js';
 import Terms from './pages/Terms.js';
@@ -26,7 +22,13 @@ import RemoveAllergy from './components/RemoveAllergy.js';
 import RemovePreferences from './components/RemovePreferences.js';
 import SavedRecipesToChildPage from './pages/SavedRecipesToChildPage.js';
 import startSite from './landing-page.js';
-import SavedSingleRecipePage from './pages/SavedSingleRecipePage.js'
+import SavedSingleRecipePage from './pages/SavedSingleRecipePage.js';
+import LoadingPage from './pages/LoadingPage.js';
+import AddToPantry from './pages/AddToPantry.js';
+import PantryPage from './pages/PantryPage.js';
+import RemoveFromPantry from './components/RemoveFromPantry.js';
+import LandingPreferences from './components/LandingPagePreferences.js';
+import startPrefSite from './preferences.js';
 
 buildPage();
 
@@ -43,6 +45,14 @@ function buildPage() {
     navToAboutPageFooter();
     navToAboutPageMenu();
     navToSignInPage();
+    toggleSearchBar();
+    searchForRecipes();
+    navToPantry();
+    menuToContactPage();
+    menuToFaq();
+    menuToTerms();
+    menuToPrivacy();
+    renderLandingPreferences();
 }
 
 const app = document.querySelector('#app');
@@ -50,9 +60,9 @@ const app = document.querySelector('#app');
 // const apiKeyNum = '985a2080f8094fdea57cb96fa855b0dd';
 // const apiKeyNum = '78bc7509124db458df764b454c2dc1e57807eff5';
 // const apiKeyNum = 'd16a986f5295496bb236ca7062f1841a';
-const apiKeyNum = '4d2f51bba03b42a59ba6d0843ac5b5f9';
+// const apiKeyNum = '4d2f51bba03b42a59ba6d0843ac5b5f9';
 // const apiKeyNum = '733246d3691c4203855fd5063ee214b6';
-// const apiKeyNum = '00f757b09028492da86c30d8109241c0';
+const apiKeyNum = '00f757b09028492da86c30d8109241c0';
 // const apiKeyNum = '985a2080f8094fdea57cb96fa855b0dd';
 
 let parentId = 203;
@@ -60,9 +70,11 @@ let parentId = 203;
 function renderProfileInfo() {
     const profileButton = document.querySelector('#profile_button');
     profileButton.addEventListener('click', () => {
+        app.innerHTML = LoadingPage();
         apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
             wireUpParent(parents);
         });
+        toggleSearchBar();
     });
 }
 
@@ -70,18 +82,15 @@ function wireUpParent(parents) {
     app.innerHTML = ParentPage(parents);
     navToAddChildPage();
     navToDeleteChildPage();
-    createChild();
-    deleteChild();
-    AddIngredientToParent();
-    navToAddIngredientPage();
-    navToDeleteIngredientPage();
-    deleteIngredientFromParent();
     toggleChildren();
     navToRecipesPage();
     viewSavedRecipes();
     navToSpecificRecipePage();
     navToSignInPage();
     viewFullSavedRecipe();
+    toggleSearchBar();
+    navToPantry();
+    updatePantry();
 }
 
 function toggleChildren() {
@@ -104,10 +113,28 @@ function toggleChildren() {
     });
 }
 
+function toggleSearchBar() {
+    const searchButton = document.querySelector('.fas.fa-search');
+    searchButton.addEventListener('click', (event) => {
+        if (event.target.classList.contains('fa-search')) {
+            const search = document.querySelector('.hidden_search_bar');
+            if (search.querySelector('input').style.visibility !== 'visible') {
+                search.querySelector('input').style.visibility = 'visible';
+                search.querySelector('button').style.display = 'block';
+            } else {
+                search.querySelector('input').style.visibility = 'hidden';
+                search.querySelector('button').style.display = 'none';
+            }
+        }
+    });
+}
+
 function navToAddChildPage() {
     const navToAdd = document.querySelector('.add_child_plus');
     navToAdd.addEventListener('click', () => {
         app.innerHTML = AddChildPage();
+        createChild();
+        toggleSearchBar();
     });
 }
 
@@ -117,17 +144,20 @@ function navToDeleteChildPage() {
         parentId = event.target.parentElement.parentElement.querySelector('input').value;
         apiActions.getRequest(`http://localhost:8080/parents/${parentId}/children`, children => {
             app.innerHTML = DeleteChildPage(children);
+            deleteChild();
+            toggleSearchBar();
         });
     });
 }
 
 function createChild() {
-    app.addEventListener('click', (event) => {
+    const submitButton = document.querySelector('.add_child_submit');
+    submitButton.addEventListener('click', (event) => {
         if (event.target.classList.contains('add_child_submit')) {
             const firstName = event.target.parentElement.querySelector('#add_child_firstName').value;
             const lastName = event.target.parentElement.querySelector('#add_child_lastName').value;
             const age = event.target.parentElement.querySelector('#add_child_age').value;
-            apiActions.postRequest('http://localhost:8080/parents/203/add-child', {
+            apiActions.postRequest(`http://localhost:8080/parents/${parentId}/add-child`, {
                 'firstName': firstName,
                 'lastName': lastName,
                 'age': age
@@ -140,8 +170,8 @@ function createChild() {
 
 let childrenToRemoveCount = 0;
 function deleteChild() {
-    const app = document.querySelector('#app');
-    app.addEventListener('click', (event) => {
+    const deleteButton = document.querySelector('.delete_child_submit');
+    deleteButton.addEventListener('click', (event) => {
         if (event.target.classList.contains('delete_child_submit')) {
             var childrenToRemove = [];
             childrenToRemoveCount = 0;
@@ -232,7 +262,7 @@ function addAllergiesToChildProfile(allergy) {
     }, allergies => {
         currentAllergyCount++;
         if (currentAllergyCount == allergyCount) {
-            apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
+            apiActions.getRequest(`http://localhost:8080/parents/${parentId}`, (parents) => {
                 currentAllergyCount = 0;
                 wireUpParent(parents);
             });
@@ -248,7 +278,7 @@ function removeAllergiesFromChildProfile(allergy) {
     }, allergies => {
         currentAllergiesToRemoveCount++;
         if (currentAllergiesToRemoveCount == allergyToRemoveCount) {
-            apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
+            apiActions.getRequest(`http://localhost:8080/parents/${parentId}`, (parents) => {
                 currentAllergiesToRemoveCount = 0;
                 wireUpParent(parents);
             });
@@ -263,14 +293,12 @@ function navFoodCategories() {
     app.addEventListener('click', () => {
         if (event.target.classList.contains('preference-list-btn')) {
             childIdPreference = event.target.parentElement.parentElement.querySelector('input').value;
-            // childIdPreference = app.querySelector('#childId').value;
             apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
                 app.innerHTML = FoodCategories(foodCategories);
             });
             renderFoodCategoryIngredients();
         } else if (event.target.classList.contains('delete_preference_minus')) {
             childIdPreference = event.target.parentElement.parentElement.querySelector('input').value;
-            // childIdPreference = app.querySelector('#childId').value;
             apiActions.getRequest(`http://localhost:8080/children/${childIdPreference}/preferences`, preferences => {
                 app.innerHTML = RemovePreferences(preferences);
             });
@@ -288,6 +316,14 @@ function navLandingCategories() {
     });
 }
 
+function renderLandingPreferences() {
+    const preferenceElem = document.querySelector('#preference__categories');
+    apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
+        preferenceElem.innerHTML = LandingPreferences(foodCategories);
+        startPrefSite();
+    });
+}
+
 function renderFoodCategoryIngredients() {
     const app = document.querySelector('#app');
     app.addEventListener('click', () => {
@@ -299,13 +335,6 @@ function renderFoodCategoryIngredients() {
         }
     });
     submitPreferenceSelections();
-}
-
-function navToAddIngredientPage() {
-    const navToAddIngredientButton = document.querySelector('.add_ingredient_plus');
-    navToAddIngredientButton.addEventListener('click', () => {
-        app.innerHTML = AddIngredientPage();
-    });
 }
 
 let preferenceCount = 0;
@@ -350,7 +379,7 @@ function addPreferencesToChildProfile(preference) {
     }, preferences => {
         currentPreferenceCount++;
         if (currentPreferenceCount == preferenceCount) {
-            apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
+            apiActions.getRequest(`http://localhost:8080/parents/${parentId}`, (parents) => {
                 currentPreferenceCount = 0;
                 wireUpParent(parents);
             });
@@ -366,7 +395,7 @@ function removePreferencesFromChildProfile(preference) {
     }, preferences => {
         currentPreferencesToRemoveCount++;
         if (currentPreferencesToRemoveCount == preferenceToRemoveCount) {
-            apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
+            apiActions.getRequest(`http://localhost:8080/parents/${parentId}`, (parents) => {
                 currentPreferencesToRemoveCount = 0;
                 wireUpParent(parents);
             });
@@ -374,20 +403,92 @@ function removePreferencesFromChildProfile(preference) {
     });
 }
 
-function AddIngredientToParent() {
+function navToPantry() {
+    let pantryButton = document.querySelector('#pantry-button');
+    pantryButton.addEventListener('click', () => {
+        apiActions.getRequest(`http://localhost:8080/parents/${parentId}/ingredients`, ingredients => {
+            app.innerHTML = PantryPage(ingredients);
+        });
+    });
+}
+
+function updatePantry() {
+    const app = document.querySelector('#app');
     app.addEventListener('click', (event) => {
-        if (event.target.classList.contains('add_ingredient_submit')) {
-            const ingredient = event.target.parentElement.querySelector('#add_ingredient_name').value;
-            makePostToAddIngredient(ingredient);
+        if (event.target.classList.contains('add_ingredient_plus')) {
+            apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
+                app.innerHTML = AddToPantry(foodCategories);
+                startSite();
+            });
+        } else if (event.target.classList.contains('delete_ingredient_minus')) {
+            apiActions.getRequest(`http://localhost:8080/parents/${parentId}/ingredients`, ingredients => {
+                app.innerHTML = RemoveFromPantry(ingredients);
+            });
+        }
+    });
+    submitIngredientSelections();
+}
+
+let pantryItemsToAddCount = 0;
+let pantryItemsToRemoveCount = 0;
+function submitIngredientSelections() {
+    const app = document.querySelector('#app');
+    app.addEventListener('click', (event) => {
+        if (event.target.classList.contains('ingredients__submitBtn')) {
+            var pantryItemsToAdd = [];
+            pantryItemsToAddCount = 0;
+            let allIngredients = app.querySelectorAll('.pantry-ingredients');
+            allIngredients.forEach((currentItem) => {
+                if (currentItem.checked) {
+                    var  checkedItem = currentItem.value;
+                    pantryItemsToAdd.push(checkedItem);
+                    pantryItemsToAddCount++;
+                }
+            });
+            pantryItemsToAdd.forEach(addItemsToPantry);
+        } else if (event.target.classList.contains('submit-pantry-items-to-remove-btn')) {
+            var pantryItemsToRemove = [];
+            pantryItemsToRemoveCount = 0;
+            const allIngredientsToRemove = app.querySelectorAll('.pantry-ingredients-to-remove');
+            allIngredientsToRemove.forEach((currentItemToRemove) => {
+                if (currentItemToRemove.checked) {
+                    var  checkedItem = currentItemToRemove.value;
+                    pantryItemsToRemove.push(checkedItem);
+                    pantryItemsToRemoveCount++;
+                }
+            });
+            pantryItemsToRemove.forEach(removeItemsFromPantry);
         }
     });
 }
 
-function makePostToAddIngredient(ingredient) {
-    apiActions.postRequest('http://localhost:8080/parents/203/add-ingredient', {
+let currentIngredientCount = 0;
+function addItemsToPantry(ingredient) {
+    apiActions.postRequest(`http://localhost:8080/parents/${parentId}/add-ingredient`, {
         'ingredient': ingredient
-    }, (parents) => {
-        wireUpParent(parents);
+    }, ingredients => {
+        currentIngredientCount++;
+        if (currentIngredientCount === pantryItemsToAddCount) {
+            apiActions.getRequest(`http://localhost:8080/parents/${parentId}`, (parents) => {
+                currentIngredientCount = 0;
+                wireUpParent(parents);
+            });
+        }
+    });
+}
+
+let currentIngredientToRemoveCount = 0;
+function removeItemsFromPantry(ingredient) {
+    apiActions.deleteRequest(`http://localhost:8080/parents/${parentId}/delete-ingredient`, {
+        'ingredient': ingredient
+    }, ingredients => {
+        currentIngredientToRemoveCount++;
+        if (currentIngredientToRemoveCount === pantryItemsToRemoveCount) {
+            apiActions.getRequest(`http://localhost:8080/parents/${parentId}`, (parents) => {
+                currentIngredientToRemoveCount = 0;
+                wireUpParent(parents);
+            });
+        }
     });
 }
 
@@ -396,8 +497,9 @@ function navToRecipesPage() {
 
     for (const navToRecipesPageButton of navToRecipesPageButton) {
         navToRecipesPageButton.addEventListener('click', (event) => {
+            app.innerHTML = LoadingPage();
             childId = event.target.parentElement.querySelector('input').value;
-            apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
+            apiActions.getRequest(`http://localhost:8080/parents/${parentId}`, (parents) => {
                 let stringName = '';
                 for (let i = 0; i < parents.ingredients.length; i++) {
                     stringName += parents.ingredients[i].ingredient.toLowerCase() + ',';
@@ -416,7 +518,7 @@ function navToRecipesPage() {
                         let stringExclude = stringName2;
                         const parsedString = stringInclude.substring(0,stringInclude.length -1) ;
 
-                        apiActions.getRequest(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKeyNum}&includeIngredients=${parsedString}&intolerances=${stringExclude}&fillIngredients=true&number=10&sort=popularity&limitLicense=true`, (recipes) => {
+                        apiActions.getRequest(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKeyNum}&includeIngredients=${parsedString}&intolerances=${stringExclude}&fillIngredients=true&number=12&sort=popularity&limitLicense=true`, (recipes) => {
                             console.log(recipes);
                             app.innerHTML = RecipeIngredientsListPage(recipes);
                             // const recipeId = recipes.results[0].id;
@@ -424,8 +526,8 @@ function navToRecipesPage() {
                             //     // console.log(recipeInstructions);
                             //     app.innerHTML += RecipeInstructions(recipeInstructions);
                             // });
-                        });
-                        navToSpecificRecipePage();
+                            navToSpecificRecipePage();
+                        });    
                     });
                 });
             });
@@ -434,28 +536,35 @@ function navToRecipesPage() {
 }
 
 function navToSpecificRecipePage() {
-    app.addEventListener('click', (event) => {
-        if (event.target.classList.contains('nav_full_recipe')) {
-            singleRecipe = event.target.parentElement.parentElement.querySelector('input').value;
-            apiActions.getRequest(`https://api.spoonacular.com/recipes/${singleRecipe}/card?apiKey=${apiKeyNum}&backgroundImage=background1`, (recipe) => {
-                console.log(recipe);
-                app.innerHTML = RecipePage(recipe);
-            });
-            saveRecipeToChild();
-        }
-    });
+    const nav_full_recipe_button = document.querySelectorAll('.nav_full_recipe');
+    for (const nav_full_recipe_button of nav_full_recipe_button) {
+        nav_full_recipe_button.addEventListener('click', (event) => {
+            if (event.target.classList.contains('nav_full_recipe')) {
+                app.innerHTML = LoadingPage();
+                singleRecipe = event.target.parentElement.parentElement.querySelector('input').value;
+                apiActions.getRequest(`https://api.spoonacular.com/recipes/${singleRecipe}/card?apiKey=${apiKeyNum}&backgroundImage=background1`, (recipe) => {
+                    console.log(recipe);
+                    app.innerHTML = RecipePage(recipe);
+                    saveRecipeToChild();
+                });
+            }
+        });
+    }
+   
 }
 
 function saveRecipeToChild() {
-    app.addEventListener('click', (event) => {
+    const save_recipe_to_child_button = document.querySelector('.save_recipe_to_child')
+    save_recipe_to_child_button.addEventListener('click', (event) => {
         if (event.target.classList.contains('save_recipe_to_child')) {
+            app.innerHTML = LoadingPage();
             const recipe = singleRecipe;
             console.log(singleRecipe);
             apiActions.postRequest(`http://localhost:8080/children/${childId}/add-recipe`, {
-                "recipe": recipe
+                'recipe': recipe
             }, (child) => {
                 console.log(child);
-                apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
+                apiActions.getRequest(`http://localhost:8080/parents/${parentId}`, (parents) => {
                     wireUpParent(parents);
                 });
             });
@@ -467,6 +576,7 @@ function viewSavedRecipes() {
     const viewSavedRecipesButton = document.querySelectorAll('.view_saved_recipes');
     for (const viewSavedRecipesButton of viewSavedRecipesButton) {
         viewSavedRecipesButton.addEventListener('click', (event) => {
+            app.innerHTML = LoadingPage();
             childId = event.target.parentElement.querySelector('input').value;
             apiActions.getRequest(`http://localhost:8080/children/${childId}`, (savedRecipes) => {
                 let stringName4 = '';
@@ -475,42 +585,27 @@ function viewSavedRecipes() {
                 }
                 apiActions.getRequest(`https://api.spoonacular.com/recipes/informationBulk?ids=${stringName4}&apiKey=${apiKeyNum}&includeNutrition=false`, (recipe) => {
                     app.innerHTML = SavedRecipesToChildPage(recipe);
+                    viewFullSavedRecipe();
                 });
-                viewFullSavedRecipe();
             });
-         });
+        });
     }
 }
 
 function viewFullSavedRecipe() {
-    app.addEventListener('click', (event) => {
-        if (event.target.classList.contains('saved_full_recipe')) {
-            singleRecipe = event.target.parentElement.querySelector('input').value;
-            apiActions.getRequest(`https://api.spoonacular.com/recipes/${singleRecipe}/card?apiKey=${apiKeyNum}&backgroundImage=background1`, (recipe) => {
-                app.innerHTML = SavedSingleRecipePage(recipe);          
-            })
-        }
-    })
-}
-
-function navToDeleteIngredientPage() {
-    const navToDeleteIngredientPageButton = document.querySelector('.delete_ingredient_minus');
-    navToDeleteIngredientPageButton.addEventListener('click', () => {
-        app.innerHTML = DeleteIngredientPage();
-    });
-}
-
-function deleteIngredientFromParent() {
-    app.addEventListener('click', (event) => {
-        if (event.target.classList.contains('delete_ingredient_submit')) {
-            const ingredient = event.target.parentElement.querySelector('#delete_ingredient_name').value;
-            apiActions.deleteRequest('http://localhost:8080/parents/203/delete-ingredient', {
-                'ingredient': ingredient
-            }, (parents) => {
-                wireUpParent(parents);
-            });
-        }
-    });
+    const savedFullRecipeButton = document.querySelectorAll('.saved_full_recipe');
+    for (const savedFullRecipeButton of savedFullRecipeButton) {
+        savedFullRecipeButton.addEventListener('click', (event) => {
+            if (event.target.classList.contains('saved_full_recipe')) {
+                app.innerHTML = LoadingPage();
+                singleRecipe = event.target.parentElement.querySelector('input').value;
+                apiActions.getRequest(`https://api.spoonacular.com/recipes/${singleRecipe}/card?apiKey=${apiKeyNum}&backgroundImage=background1`, (recipe) => {
+                    app.innerHTML = SavedSingleRecipePage(recipe);  
+                    toggleSearchBar();        
+                })
+            }
+        });
+    }
 }
 
 let singleRecipe = 0;
@@ -524,9 +619,25 @@ function navFaq() {
     });
 }
 
+function menuToFaq() {
+    const menuFaqElem = document.querySelector('#faq');
+    menuFaqElem.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        app.innerHTML = FaqPage();
+    });
+}
+
 function navTerms() {
     const termsElem = document.querySelector('.footer__terms_listItem');
     termsElem.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        app.innerHTML = Terms();
+    });
+}
+
+function menuToTerms() {
+    const menuTermsElem = document.querySelector('#terms');
+    menuTermsElem.addEventListener('click', () => {
         const app = document.querySelector('#app');
         app.innerHTML = Terms();
     });
@@ -540,9 +651,25 @@ function navPrivacy() {
     });
 }
 
+function menuToPrivacy() {
+    const menuPrivacyElem = document.querySelector('#privacy');
+    menuPrivacyElem.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        app.innerHTML = Privacy();
+    });
+}
+
 function navigateToContactPage() {
     const contactButton = document.querySelector('.footer__contact_listItem');
     contactButton.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        app.innerHTML = ContactPage();
+    });
+}
+
+function menuToContactPage() {
+    const contactMenuBtn = document.querySelector('#contact');
+    contactMenuBtn.addEventListener('click', () => {
         const app = document.querySelector('#app');
         app.innerHTML = ContactPage();
     });
@@ -557,7 +684,7 @@ function navToAboutPageMenu() {
 }
 
 function navToAboutPageFooter() {
-    const navToAboutPageButton = document.querySelector('.footer__about_listItem')
+    const navToAboutPageButton = document.querySelector('.footer__about_listItem');
     navToAboutPageButton.addEventListener('click', () => {
         const app = document.querySelector('#app');
         app.innerHTML = About();
@@ -589,13 +716,6 @@ function navToSignInPage() {
     });
 }
 
-// function navToAboutPage() {
-//     const navToAboutPageButton = document.querySelector('#about')
-//     navToAboutPageButton.addEventListener('click', () => {
-//         app.innerHTML = About()
-//     });
-// }
-
 function navHome() {
     const homeElem = document.querySelector('#home-button');
     homeElem.addEventListener('click', () => {
@@ -603,22 +723,24 @@ function navHome() {
     });
 }
 
-let ingredientCount = 0;
-function submitIngredientSelections() {
-    const app = document.querySelector('#app');
-    app.addEventListener('click', (event) => {
-        if (event.target.classList.contains('ingredients__submitBtn')) {
-            var ingredientsToAdd = [];
-            ingredientCount = 0;
-            var allIngredients = app.querySelectorAll('.ingredients');
-            allIngredients.forEach((currentIngredient) => {
-                if (currentIngredient.checked) {
-                    var checkedIngredient = currentIngredient.value;
-                    ingredientsToAdd.push(checkedIngredient);
-                    ingredientCount++;
+function searchForRecipes() {
+    const searchButton1 = document.querySelector('.search_for_recipes_button');
+    searchButton1.addEventListener('click', (event) => {
+        if (event.target.classList.contains('search_for_recipes_button')) {
+            app.innerHTML = LoadingPage();
+            const searchedRecipe = event.target.parentElement.querySelector('.search_for_recipes_input').value;
+            apiActions.getRequest(`https://api.spoonacular.com/recipes/autocomplete?number=12&query=${searchedRecipe}&apiKey=${apiKeyNum}`, (theSearchedRecipes) => {
+                console.log(theSearchedRecipes);
+
+                let stringName5 = '';
+                for (let i = 0; i < theSearchedRecipes.length; i++) {
+                    stringName5 += theSearchedRecipes[i].id + ',';
                 }
+                apiActions.getRequest(`https://api.spoonacular.com/recipes/informationBulk?ids=${stringName5}&apiKey=${apiKeyNum}&includeNutrition=false`, (recipe) => {
+                    app.innerHTML = SavedRecipesToChildPage(recipe);
+                    viewFullSavedRecipe();
+                });
             });
-            ingredientsToAdd.forEach(addIngredientsToParent);
         }
     });
 }

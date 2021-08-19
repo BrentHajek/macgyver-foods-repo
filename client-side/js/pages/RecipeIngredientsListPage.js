@@ -10,7 +10,7 @@ export default function RecipeIngredientsListPage(recipesList) {
             <div class="card_recipe">
                 <div class="recipe_card_wrapper">
                     <div class="recipe_card_img">
-                        <img src=${recipeList.image} alt=""/>
+                        <img src=${recipeList.image} alt="" style="width:100%;"/>
                     </div>
                     <div class="recipe_card_box">
                         <h2 class="recipe_card_title">${recipeList.title}</h2>
