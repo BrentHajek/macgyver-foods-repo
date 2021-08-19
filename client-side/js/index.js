@@ -747,17 +747,12 @@ function navTempChoices() {
         apiActions.getRequest(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKeyNum}&includeIngredients=${stringName6}&fillIngredients=true&number=12&sort=popularity&limitLicense=true`, (recipes) => {
                             console.log(recipes);
                             app.innerHTML = RecipeIngredientsListPage(recipes);
-                            // const recipeId = recipes.results[0].id;
-                            // apiActions.getRequest(`https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=${apiKeyNum}`, (recipeInstructions) => {
-                            //     // console.log(recipeInstructions);
-                            //     app.innerHTML += RecipeInstructions(recipeInstructions);
-                            // });
-                            navToSpecificRecipePage();
+                            navRecipe();
                         });
     });
 }
 
-function navToSpecificRecipePage() {
+function navRecipe() {
     const nav_full_recipe_button = document.querySelectorAll('.nav_full_recipe');
     for (const nav_full_recipe_button of nav_full_recipe_button) {
         nav_full_recipe_button.addEventListener('click', (event) => {
