@@ -41,7 +41,7 @@ export default function AboutPage() {
             </div>
 
             <div class="developer__card">
-            <div id="shuay__image" class="box"></div>
+            <div id="shuayb__image" class="box"></div>
                 <div class="developer__card_content">
                 <h3 class="developer_name">Shuayb Farah</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut

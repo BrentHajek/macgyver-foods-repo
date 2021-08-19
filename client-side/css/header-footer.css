@@ -191,11 +191,22 @@
 }
 
 .search_for_recipes_input {
-    /* margin-top: 15%; */
     visibility: hidden;
+    margin-top: 2.5%;
+    padding: 5px;
+    border-radius: 1em;
 }
 
-.hidden_search_bar input[type=search] {
+.search_for_recipes_input:hover{
+    background-color: white;
+    transition: all .4s;
+}
+
+.search_for_recipes_input:focus{
+    background-color: white;
+}
+
+/* .hidden_search_bar input[type=search] {
 	width: 150px;
 	padding-left: 10px;
 	color: transparent;
@@ -211,8 +222,8 @@
 	color: #000;
 	background-color: #fff;
 	cursor: auto;
-}
-input {
+} */
+/* input {
 	outline: none;
 }
 input[type=search] {
@@ -220,21 +231,21 @@ input[type=search] {
 	-webkit-box-sizing: content-box;
 	font-family: inherit;
 	font-size: 100%;
-}
-input::-webkit-search-decoration,
+} */
+/* input::-webkit-search-decoration,
 input::-webkit-search-cancel-button {
 	display: none; 
-}
+} */
 
 
-input[type=search] {
+/* input[type=search] {
 	border: solid 1px #ccc;
 	padding: 9px 10px 9px 32px;
-	width: 55px;
+	width: 55px; */
 	
 	/* -webkit-border-radius: 10em;
 	-moz-border-radius: 10em; */
-	border-radius: 10em;
+	/* border-radius: 10em;
 	
 	-webkit-transition: all .5s;
 	-moz-transition: all .5s;
@@ -255,4 +266,4 @@ input:-moz-placeholder {
 }
 input::-webkit-input-placeholder {
 	color: #999;
-}
+} */
