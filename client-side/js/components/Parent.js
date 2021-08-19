@@ -9,12 +9,7 @@ export default function Parent(parent) {
         <p class="parent__first_name">First name: ${parent.parentFirstName}</p>
         <p class="parent__last_name">Last name: ${parent.parentLastName}</p>
         <p class="parent__email">Email: ${parent.email}</p>
-        <h3>Your Ingredients:</h3>
-        ${parent.ingredients.map((ingredient) => {
-        return `
-                <li>${ingredient.ingredient}</li>
-            `;
-    }).join('')}
+
         <button class="add_ingredient_plus" type="button">+ Add To Pantry</button>
         <button class="delete_ingredient_minus" type="button">- Remove From Pantry</button>
         <div class="add_child_plus_button_container">
