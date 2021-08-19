@@ -27,7 +27,6 @@ import LoadingPage from './pages/LoadingPage.js';
 import AddToPantry from './pages/AddToPantry.js';
 import PantryPage from './pages/PantryPage.js';
 import RemoveFromPantry from './components/RemoveFromPantry.js';
-import LoadingPage from './pages/LoadingPage.js'
 import LandingPreferences from './components/LandingPagePreferences.js';
 import startPrefSite from './preferences.js';
 
