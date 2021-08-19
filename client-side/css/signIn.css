@@ -57,7 +57,7 @@
     border-radius: 5px;
     color: white;
     font-weight: bold;
-    background-color: #f85509;
+    background-color: #FF3800;
     cursor: pointer;
     outline: none;
     margin-top: 10%;
@@ -79,7 +79,7 @@
     margin-top: 10%;
     background-color: #fefefe;
     padding: 35px;
-    border: 1.5px solid #f85509;
+    border: 1.5px solid #FF3800;
     width: 25%; /* Could be more or less, depending on screen size */
   }
 

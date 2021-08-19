@@ -693,11 +693,15 @@ function navToSignInPage() {
     
             if (username === "user" && password === "teammacgyver") {
                 alert("You have successfully logged in.");
-                window.location.host(apiActions.getRequest('http://localhost:8080/parents/203', (parents) => { wireUpParent(parents)}))
+                apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
+                    wireUpParent(parents);
+                    toggleSearchBar();
+                });
                 // location.reload();
             } else {
                 loginErrorMsg.style.opacity = 1;
             }
+        
             SignInJs();
         })
     });
