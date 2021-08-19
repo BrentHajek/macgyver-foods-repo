@@ -30,7 +30,7 @@ import SavedSingleRecipePage from './pages/SavedSingleRecipePage.js';
 import LoadingPage from './pages/LoadingPage.js';
 import AddToPantry from './pages/AddToPantry.js';
 import PantryPage from './pages/PantryPage.js';
-import Pantry from './components/Pantry.js';
+import RemoveFromPantry from './components/RemoveFromPantry.js';
 
 buildPage();
 
@@ -49,6 +49,7 @@ function buildPage() {
     navToSignInPage();
     toggleSearchBar();
     searchForRecipes();
+    navToPantry();
     // navToPantryPage();
 }
 
@@ -91,6 +92,7 @@ function wireUpParent(parents) {
     viewFullSavedRecipe();
     toggleSearchBar();
     navToPantry();
+    updatePantry();
 }
 
 function toggleChildren() {
@@ -404,6 +406,15 @@ function removePreferencesFromChildProfile(preference) {
 }
 
 function navToPantry() {
+    let pantryButton = document.querySelector('#pantry-button');
+    pantryButton.addEventListener('click', () => {
+        apiActions.getRequest(`http://localhost:8080/parents/${parentId}/ingredients`, ingredients => {
+            app.innerHTML = PantryPage(ingredients);
+        });
+    });
+}
+
+function updatePantry() {
     const app = document.querySelector('#app');
     app.addEventListener('click', (event) => {
         if (event.target.classList.contains('add_ingredient_plus')) {
@@ -414,7 +425,7 @@ function navToPantry() {
             });
         } else if (event.target.classList.contains('delete_ingredient_minus')) {
             apiActions.getRequest(`http://localhost:8080/parents/${parentId}/ingredients`, ingredients => {
-                app.innerHTML = Pantry(ingredients);
+                app.innerHTML = RemoveFromPantry(ingredients);
             });
         }
     });
