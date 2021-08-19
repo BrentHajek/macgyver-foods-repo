@@ -27,6 +27,9 @@ import LoadingPage from './pages/LoadingPage.js';
 import AddToPantry from './pages/AddToPantry.js';
 import PantryPage from './pages/PantryPage.js';
 import RemoveFromPantry from './components/RemoveFromPantry.js';
+import LoadingPage from './pages/LoadingPage.js'
+import LandingPreferences from './components/LandingPagePreferences.js';
+import startPrefSite from './preferences.js';
 
 buildPage();
 
@@ -46,6 +49,7 @@ function buildPage() {
     toggleSearchBar();
     searchForRecipes();
     navToPantry();
+    renderLandingPreferences();
 }
 
 const app = document.querySelector('#app');
@@ -304,6 +308,14 @@ function navLandingCategories() {
         console.log(foodCategories);
         categoryElem.innerHTML = LandingCategories(foodCategories);
         startSite();
+    });
+}
+
+function renderLandingPreferences() {
+    const preferenceElem = document.querySelector('#preference__categories');
+    apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
+        preferenceElem.innerHTML = LandingPreferences(foodCategories);
+        startPrefSite();
     });
 }
 
