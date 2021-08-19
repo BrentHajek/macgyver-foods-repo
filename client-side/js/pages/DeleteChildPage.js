@@ -11,7 +11,7 @@ export default function DeleteChildPage(child) {
             </label>
                 `;
     }).join('')}
-            <button class="delete_child_submit" value='${child.id}' type="button">SAVE</button>
+            <button class="delete_child_submit" value='${child.id}' type="button">Submit</button>
         </section>
     `;
 }
