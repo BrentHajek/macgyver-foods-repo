@@ -682,7 +682,24 @@ function navToSignInPage() {
     const navToSignInButton = document.querySelector('#sign_in');
     navToSignInButton.addEventListener('click', () => {
         app.innerHTML = SignInPage();
-        SignInJs();
+        const loginForm = document.getElementById("login-form");
+        const loginButton = document.getElementById("login-form-submit");
+        const loginErrorMsg = document.getElementById("login-error-msg");
+    
+        loginButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            const username = loginForm.username.value;
+            const password = loginForm.password.value;
+    
+            if (username === "user" && password === "teammacgyver") {
+                alert("You have successfully logged in.");
+                window.location.host(apiActions.getRequest('http://localhost:8080/parents/203', (parents) => { wireUpParent(parents)}))
+                // location.reload();
+            } else {
+                loginErrorMsg.style.opacity = 1;
+            }
+            SignInJs();
+        })
     });
 }
 
