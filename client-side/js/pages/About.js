@@ -6,7 +6,7 @@ export default function AboutPage() {
             <div class="about__banner_content">
             <p>Picky Eater was developed as a means to keep track of the items you have available in your pantry, as
                 well as a way to find your child's favorite recipes based on the items they love.</p>
-                <p>Picky Eater was created by a team of highly talented developers, all of whom graduated from We Can
+                <p>Picky Eater was created by a team of highly talented developers, all of whom graduated from the We Can
                     Code It Software Developer Program.</p>
             </div>
         </section>

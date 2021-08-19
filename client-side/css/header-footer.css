@@ -184,10 +184,14 @@
     padding-top: 1rem;
 }
 
+/** Header Search **/
+
 .search_for_recipes_button {
     display: none;
 }
 
 .search_for_recipes_input {
+    /* margin-top: 15%; */
     visibility: hidden;
 }
+
