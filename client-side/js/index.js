@@ -159,7 +159,6 @@ function createChild() {
                 'age': age
             }, (parents) => {
                 wireUpParent(parents);
-                toggleSearchBar();
             });
         }
     });
@@ -181,7 +180,6 @@ function deleteChild() {
                 }
             });
             childrenToRemove.forEach(removeChildFromParentProfile);
-            toggleSearchBar();
         }
     });
 }
@@ -453,8 +451,8 @@ function navToRecipesPage() {
                             //     // console.log(recipeInstructions);
                             //     app.innerHTML += RecipeInstructions(recipeInstructions);
                             // });
-                            navToSpecificRecipePage();
                         });    
+                        navToSpecificRecipePage();
                     });
                 });
             });
@@ -472,8 +470,8 @@ function navToSpecificRecipePage() {
                 apiActions.getRequest(`https://api.spoonacular.com/recipes/${singleRecipe}/card?apiKey=${apiKeyNum}&backgroundImage=background1`, (recipe) => {
                     console.log(recipe);
                     app.innerHTML = RecipePage(recipe);
-                    saveRecipeToChild();
                 });   
+                saveRecipeToChild();
             }
         });
     }
@@ -562,7 +560,6 @@ function navFaq() {
     faqElem.addEventListener('click', () => {
         const app = document.querySelector('#app');
         app.innerHTML = FaqPage();
-        toggleSearchBar();
     });
 }
 
@@ -571,7 +568,6 @@ function navTerms() {
     termsElem.addEventListener('click', () => {
         const app = document.querySelector('#app');
         app.innerHTML = Terms();
-        toggleSearchBar();
     });
 }
 
@@ -580,7 +576,6 @@ function navPrivacy() {
     privacyElem.addEventListener('click', () => {
         const app = document.querySelector('#app');
         app.innerHTML = Privacy();
-        toggleSearchBar();
     });
 }
 
@@ -589,7 +584,6 @@ function navigateToContactPage() {
     contactButton.addEventListener('click', () => {
         const app = document.querySelector('#app');
         app.innerHTML = ContactPage();
-        toggleSearchBar();
     });
 }
 
@@ -598,7 +592,6 @@ function navToAboutPageMenu() {
     navToAboutPageButton.addEventListener('click', () => {
         const app = document.querySelector('#app');
         app.innerHTML = About();
-        toggleSearchBar();
     });
 }
 
@@ -607,7 +600,6 @@ function navToAboutPageFooter() {
     navToAboutPageButton.addEventListener('click', () => {
         const app = document.querySelector('#app');
         app.innerHTML = About();
-        toggleSearchBar();
     });
 }
 
@@ -616,7 +608,6 @@ function navToSignInPage() {
     navToSignInButton.addEventListener('click', () => {
         app.innerHTML = SignInPage();
         SignInJs();
-        toggleSearchBar();
     });
 }
 
