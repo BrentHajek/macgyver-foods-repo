@@ -215,7 +215,6 @@ function navAllergies() {
         }
     });
     submitAllergySelections();
-    toggleSearchBar();
 }
 
 let allergyCount = 0;
