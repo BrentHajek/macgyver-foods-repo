@@ -463,13 +463,13 @@ function submitIngredientSelections() {
                 }
             });
             pantryItemsToAdd.forEach(addItemsToPantry);
-        } else if (event.target.classList.contains('submit-pantry-items-to-remove')) {
+        } else if (event.target.classList.contains('submit-pantry-items-to-remove-btn')) {
             var pantryItemsToRemove = [];
             pantryItemsToRemoveCount = 0;
-            const allIngredientsToRemove = app.querySelectorAll('.pantry-ingredients');
-            allIngredientsToRemove.forEach((currentItem) => {
-                if (currentItem.checked) {
-                    var  checkedItem = currentItem.value;
+            const allIngredientsToRemove = app.querySelectorAll('.pantry-ingredients-to-remove');
+            allIngredientsToRemove.forEach((currentItemToRemove) => {
+                if (currentItemToRemove.checked) {
+                    var  checkedItem = currentItemToRemove.value;
                     pantryItemsToRemove.push(checkedItem);
                     pantryItemsToRemoveCount++;
                 }

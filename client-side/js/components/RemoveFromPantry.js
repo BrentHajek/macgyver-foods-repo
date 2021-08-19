@@ -6,7 +6,7 @@ export default function Pantry(ingredients) {
         return `
             <label class="pantry-container">
                 <p class="pantry-ingredient-name">${ingredient.ingredient}
-                    <input type='checkbox' class="pantry-ingredients" id='ingredientId${ingredient.id}' value='${ingredient.ingredient}'>
+                    <input type='checkbox' class="pantry-ingredients-to-remove" id='ingredientId${ingredient.id}' value='${ingredient.ingredient}'>
                     <span class="radio-btn"></span>
                 </p>
             </label>
