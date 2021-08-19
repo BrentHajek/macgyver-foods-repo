@@ -22,6 +22,7 @@ export default function AboutPage() {
                         labore et dolore magna aliqua. </p>
                 </div>
             </div>
+
             <div class="developer__card">
             <div id="danielle__image" class="box"></div>
             <div class="developer__card_content">
@@ -30,6 +31,7 @@ export default function AboutPage() {
                         labore et dolore magna aliqua.</p>
                 </div>
             </div>
+
             <div class="developer__card">
             <div id="alicia__image" class="box"></div>
                 <div class="developer__card_content">
@@ -38,10 +40,11 @@ export default function AboutPage() {
                         labore et dolore magna aliqua.</p>
                 </div>
             </div>
+
             <div class="developer__card">
             <div id="shuay__image" class="box"></div>
                 <div class="developer__card_content">
-                <h3 class="developer_name">Shuay Farah</h3>
+                <h3 class="developer_name">Shuayb Farah</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                         labore et dolore magna aliqua.</p>
                 </div>
@@ -54,6 +57,7 @@ export default function AboutPage() {
                         labore et dolore magna aliqua.</p>
                 </div>
             </div>
+
             <div class="developer__card">
             <div id="randy__image" class="box"></div>
             <div class="developer__card_content">
@@ -63,5 +67,6 @@ export default function AboutPage() {
                 </div>
             </div>
         </section>
+
     </section>`;
 }
