@@ -296,41 +296,10 @@ function navFoodCategories() {
             apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
                 app.innerHTML = FoodCategories(foodCategories);
             });
-            renderFoodCategoryIngredients();
         } else if (event.target.classList.contains('delete_preference_minus')) {
             childIdPreference = event.target.parentElement.parentElement.querySelector('input').value;
             apiActions.getRequest(`http://localhost:8080/children/${childIdPreference}/preferences`, preferences => {
                 app.innerHTML = RemovePreferences(preferences);
-            });
-            submitPreferenceSelections();
-        }
-    });
-}
-
-function navLandingCategories() {
-    const categoryElem = document.querySelector('#ingredient__categories');
-    apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
-        console.log(foodCategories);
-        categoryElem.innerHTML = LandingCategories(foodCategories);
-        startSite();
-    });
-}
-
-function renderLandingPreferences() {
-    const preferenceElem = document.querySelector('#preference__categories');
-    apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
-        preferenceElem.innerHTML = LandingPreferences(foodCategories);
-        startPrefSite();
-    });
-}
-
-function renderFoodCategoryIngredients() {
-    const app = document.querySelector('#app');
-    app.addEventListener('click', () => {
-        if (event.target.classList.contains('food-category-name')) {
-            const foodCategoryId = event.target.querySelector('#foodCategoryId').value;
-            apiActions.getRequest(`http://localhost:8080/foodCategories/${foodCategoryId}`, foodCategory => {
-                app.innerHTML = FoodCategory(foodCategory);
             });
         }
     });
@@ -400,6 +369,23 @@ function removePreferencesFromChildProfile(preference) {
                 wireUpParent(parents);
             });
         }
+    });
+}
+
+function navLandingCategories() {
+    const categoryElem = document.querySelector('#ingredient__categories');
+    apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
+        console.log(foodCategories);
+        categoryElem.innerHTML = LandingCategories(foodCategories);
+        startSite();
+    });
+}
+
+function renderLandingPreferences() {
+    const preferenceElem = document.querySelector('#preference__categories');
+    apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
+        preferenceElem.innerHTML = LandingPreferences(foodCategories);
+        startPrefSite();
     });
 }
 
@@ -527,7 +513,7 @@ function navToRecipesPage() {
                             //     app.innerHTML += RecipeInstructions(recipeInstructions);
                             // });
                             navToSpecificRecipePage();
-                        });    
+                        });
                     });
                 });
             });
@@ -550,7 +536,6 @@ function navToSpecificRecipePage() {
             }
         });
     }
-   
 }
 
 function saveRecipeToChild() {
@@ -600,9 +585,9 @@ function viewFullSavedRecipe() {
                 app.innerHTML = LoadingPage();
                 singleRecipe = event.target.parentElement.querySelector('input').value;
                 apiActions.getRequest(`https://api.spoonacular.com/recipes/${singleRecipe}/card?apiKey=${apiKeyNum}&backgroundImage=background1`, (recipe) => {
-                    app.innerHTML = SavedSingleRecipePage(recipe);  
-                    toggleSearchBar();        
-                })
+                    app.innerHTML = SavedSingleRecipePage(recipe);
+                    toggleSearchBar();
+                });
             }
         });
     }
