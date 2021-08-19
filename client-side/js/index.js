@@ -53,6 +53,7 @@ function buildPage() {
     menuToTerms();
     menuToPrivacy();
     renderLandingPreferences();
+    navTempChoices();
 }
 
 const app = document.querySelector('#app');
@@ -688,6 +689,7 @@ function navHome() {
     const homeElem = document.querySelector('#home-button');
     homeElem.addEventListener('click', () => {
         location.href='index.html';
+        navTempChoices();
     });
 }
 
@@ -710,5 +712,37 @@ function searchForRecipes() {
                 });
             });
         }
+    });
+}
+
+function navTempChoices() {
+    const searchForIngredientsBtn = document.querySelector('.ingredients__submitBtn');
+    searchForIngredientsBtn.addEventListener('click', () => {
+        if (event.target.classList.contains('ingredients__submitBtn'))
+            var tempItemsToAdd = [];
+        let allIngredientsToAdd = app.querySelectorAll('.temp-ingredient');
+        allIngredientsToAdd.forEach((currentItem) => {
+            if (currentItem.checked) {
+                var checkedItem = currentItem.value;
+                tempItemsToAdd.push(checkedItem);
+            }
+        });
+        var tempPreferencesToAdd = [];
+        let allTempPreferences = app.querySelectorAll('.temp-preferences');
+        allTempPreferences.forEach((currentItem) => {
+            if (currentItem.checked) {
+                var checkedItem = currentItem.value;
+                tempPreferencesToAdd.push(checkedItem);
+            }
+        });
+        let tempItemsAndPreferences = [];
+        tempItemsAndPreferences.push(tempItemsToAdd);
+        tempItemsAndPreferences.push(tempPreferencesToAdd);
+        let stringName6 = '';
+        for (let i = 0; i < tempItemsAndPreferences.length; i++) {
+            stringName6 += tempItemsAndPreferences[i] + ',';
+        }
+
+        console.log(stringName6);
     });
 }

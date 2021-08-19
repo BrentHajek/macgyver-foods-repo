@@ -13,7 +13,7 @@ export default function navLandingPreferences(foodCategories) {
                     return `
                     <div class="preferences__container">
                         <label class="preferences__listItem">${ingredient.ingredient}
-                            <input type="checkbox" id="ingredientId" value="${ingredient.id}">
+                            <input type="checkbox" class="temp-preferences" id="ingredientId" value="${ingredient.ingredient}">
                             <span class="checkmark-box"></span>
                         </label>
                     </div>
