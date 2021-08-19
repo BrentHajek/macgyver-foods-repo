@@ -69,7 +69,7 @@
 /*carousel*/
 .body__carousel {
     position: relative;
-    height: 350px;
+    height: 300px;
     width: 90%;
     margin: 2rem auto;
 }
@@ -304,12 +304,11 @@ label {
 }
 
 .preference__categories {
-    display: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 .preferences__container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
     text-align: left;
 }
 

@@ -6,8 +6,8 @@ export default function navLandingPreferences(foodCategories) {
         </div>
     ${foodCategories.map(foodCategory => {
         return `
+        <h3 class="preference__category_title">${foodCategory.foodCategoryName}</h3>
         <div class="preference__categories">
-            <h3 class="preference__category_title">${foodCategory.foodCategoryName}</h3>
             ${foodCategory.ingredient.map(ingredient => {
                 return `
                 <div class="preferences__container">
