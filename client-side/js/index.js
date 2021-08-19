@@ -49,6 +49,10 @@ function buildPage() {
     toggleSearchBar();
     searchForRecipes();
     navToPantry();
+    menuToContactPage();
+    menuToFaq();
+    menuToTerms();
+    menuToPrivacy();
     renderLandingPreferences();
 }
 
@@ -59,8 +63,8 @@ const app = document.querySelector('#app');
 // const apiKeyNum = 'd16a986f5295496bb236ca7062f1841a';
 // const apiKeyNum = '4d2f51bba03b42a59ba6d0843ac5b5f9';
 // const apiKeyNum = '733246d3691c4203855fd5063ee214b6';
-// const apiKeyNum = '00f757b09028492da86c30d8109241c0';
-const apiKeyNum = '985a2080f8094fdea57cb96fa855b0dd';
+const apiKeyNum = '00f757b09028492da86c30d8109241c0';
+// const apiKeyNum = '985a2080f8094fdea57cb96fa855b0dd';
 
 let parentId = 203;
 
@@ -131,6 +135,7 @@ function navToAddChildPage() {
     navToAdd.addEventListener('click', () => {
         app.innerHTML = AddChildPage();
         createChild();
+        toggleSearchBar();
     });
 }
 
@@ -141,6 +146,7 @@ function navToDeleteChildPage() {
         apiActions.getRequest(`http://localhost:8080/parents/${parentId}/children`, children => {
             app.innerHTML = DeleteChildPage(children);
             deleteChild();
+            toggleSearchBar();
         });
     });
 }
@@ -521,8 +527,8 @@ function navToRecipesPage() {
                             //     // console.log(recipeInstructions);
                             //     app.innerHTML += RecipeInstructions(recipeInstructions);
                             // });
-                        });
-                        navToSpecificRecipePage();
+                            navToSpecificRecipePage();
+                        });    
                     });
                 });
             });
@@ -531,21 +537,26 @@ function navToRecipesPage() {
 }
 
 function navToSpecificRecipePage() {
-    app.addEventListener('click', (event) => {
-        if (event.target.classList.contains('nav_full_recipe')) {
-            app.innerHTML = LoadingPage();
-            singleRecipe = event.target.parentElement.parentElement.querySelector('input').value;
-            apiActions.getRequest(`https://api.spoonacular.com/recipes/${singleRecipe}/card?apiKey=${apiKeyNum}&backgroundImage=background1`, (recipe) => {
-                console.log(recipe);
-                app.innerHTML = RecipePage(recipe);
-            });
-            saveRecipeToChild();
-        }
-    });
+    const nav_full_recipe_button = document.querySelectorAll('.nav_full_recipe');
+    for (const nav_full_recipe_button of nav_full_recipe_button) {
+        nav_full_recipe_button.addEventListener('click', (event) => {
+            if (event.target.classList.contains('nav_full_recipe')) {
+                app.innerHTML = LoadingPage();
+                singleRecipe = event.target.parentElement.parentElement.querySelector('input').value;
+                apiActions.getRequest(`https://api.spoonacular.com/recipes/${singleRecipe}/card?apiKey=${apiKeyNum}&backgroundImage=background1`, (recipe) => {
+                    console.log(recipe);
+                    app.innerHTML = RecipePage(recipe);
+                    saveRecipeToChild();
+                });
+            }
+        });
+    }
+   
 }
 
 function saveRecipeToChild() {
-    app.addEventListener('click', (event) => {
+    const save_recipe_to_child_button = document.querySelector('.save_recipe_to_child')
+    save_recipe_to_child_button.addEventListener('click', (event) => {
         if (event.target.classList.contains('save_recipe_to_child')) {
             app.innerHTML = LoadingPage();
             const recipe = singleRecipe;
@@ -590,8 +601,9 @@ function viewFullSavedRecipe() {
                 app.innerHTML = LoadingPage();
                 singleRecipe = event.target.parentElement.querySelector('input').value;
                 apiActions.getRequest(`https://api.spoonacular.com/recipes/${singleRecipe}/card?apiKey=${apiKeyNum}&backgroundImage=background1`, (recipe) => {
-                    app.innerHTML = SavedSingleRecipePage(recipe);
-                });
+                    app.innerHTML = SavedSingleRecipePage(recipe);  
+                    toggleSearchBar();        
+                })
             }
         });
     }
@@ -608,9 +620,25 @@ function navFaq() {
     });
 }
 
+function menuToFaq() {
+    const menuFaqElem = document.querySelector('#faq');
+    menuFaqElem.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        app.innerHTML = FaqPage();
+    });
+}
+
 function navTerms() {
     const termsElem = document.querySelector('.footer__terms_listItem');
     termsElem.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        app.innerHTML = Terms();
+    });
+}
+
+function menuToTerms() {
+    const menuTermsElem = document.querySelector('#terms');
+    menuTermsElem.addEventListener('click', () => {
         const app = document.querySelector('#app');
         app.innerHTML = Terms();
     });
@@ -624,9 +652,25 @@ function navPrivacy() {
     });
 }
 
+function menuToPrivacy() {
+    const menuPrivacyElem = document.querySelector('#privacy');
+    menuPrivacyElem.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        app.innerHTML = Privacy();
+    });
+}
+
 function navigateToContactPage() {
     const contactButton = document.querySelector('.footer__contact_listItem');
     contactButton.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        app.innerHTML = ContactPage();
+    });
+}
+
+function menuToContactPage() {
+    const contactMenuBtn = document.querySelector('#contact');
+    contactMenuBtn.addEventListener('click', () => {
         const app = document.querySelector('#app');
         app.innerHTML = ContactPage();
     });
