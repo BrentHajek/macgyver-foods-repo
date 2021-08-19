@@ -28,6 +28,8 @@ import SavedRecipesToChildPage from './pages/SavedRecipesToChildPage.js';
 import startSite from './landing-page.js';
 import SavedSingleRecipePage from './pages/SavedSingleRecipePage.js';
 import LoadingPage from './pages/LoadingPage.js'
+import LandingPreferences from './components/LandingPagePreferences.js';
+import startPrefSite from './preferences.js';
 
 buildPage();
 
@@ -46,6 +48,7 @@ function buildPage() {
     navToSignInPage();
     toggleSearchBar();
     searchForRecipes();
+    renderLandingPreferences();
 }
 
 const app = document.querySelector('#app');
@@ -309,6 +312,14 @@ function navLandingCategories() {
         console.log(foodCategories);
         categoryElem.innerHTML = LandingCategories(foodCategories);
         startSite();
+    });
+}
+
+function renderLandingPreferences() {
+    const preferenceElem = document.querySelector('#preference__categories');
+    apiActions.getRequest('http://localhost:8080/foodCategories', foodCategories => {
+        preferenceElem.innerHTML = LandingPreferences(foodCategories);
+        startPrefSite();
     });
 }
 
