@@ -58,8 +58,8 @@ const app = document.querySelector('#app');
 // const apiKeyNum = 'd16a986f5295496bb236ca7062f1841a';
 // const apiKeyNum = '4d2f51bba03b42a59ba6d0843ac5b5f9';
 // const apiKeyNum = '733246d3691c4203855fd5063ee214b6';
-// const apiKeyNum = '00f757b09028492da86c30d8109241c0';
-const apiKeyNum = '985a2080f8094fdea57cb96fa855b0dd';
+const apiKeyNum = '00f757b09028492da86c30d8109241c0';
+// const apiKeyNum = '985a2080f8094fdea57cb96fa855b0dd';
 
 let parentId = 203;
 
@@ -462,8 +462,8 @@ function navToRecipesPage() {
                             //     // console.log(recipeInstructions);
                             //     app.innerHTML += RecipeInstructions(recipeInstructions);
                             // });
+                            navToSpecificRecipePage();
                         });    
-                        navToSpecificRecipePage();
                     });
                 });
             });
@@ -481,8 +481,8 @@ function navToSpecificRecipePage() {
                 apiActions.getRequest(`https://api.spoonacular.com/recipes/${singleRecipe}/card?apiKey=${apiKeyNum}&backgroundImage=background1`, (recipe) => {
                     console.log(recipe);
                     app.innerHTML = RecipePage(recipe);
-                });   
-                saveRecipeToChild();
+                    saveRecipeToChild();
+                });
             }
         });
     }
