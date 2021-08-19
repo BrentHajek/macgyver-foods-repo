@@ -1,17 +1,30 @@
 export default function FoodCategories(foodCategories) {
     return `
-        <h1 class="preference-list-title">Food Preferences</h1>
-        <ul class="preference-list">
-        ${foodCategories.map(foodCategory => {
+        <div class="body__child_preferences">
+            <h2 class="child__preferences_title">Food Preferences</h2>
+        </div>
+    ${foodCategories.map(foodCategory => {
         return `
-            <div class="preference-container">
-                <p class="food-category-name">${foodCategory.foodCategoryName}
-                    <input type='hidden' id='foodCategoryId' value='${foodCategory.id}'>
-                </p>
-            </div>
-            `;
+        <h3 class="preference__category_title">${foodCategory.foodCategoryName}</h3>
+        <div class="preference__categories">
+            ${foodCategory.ingredient.map(ingredient => {
+                return `
+                <div class="preferences__container">
+                    <label class="preferences__listItem">${ingredient.ingredient}
+                        <input type="checkbox" id="ingredientId" value="${ingredient.id}">
+                        <span class="checkmark-box"></span>
+                    </label>
+                </div>
+                `;
+            })
+            .join('')}
+        </div>
+        `;
     })
-        .join('')}
-        </ul>
+    .join('')}
+        <section class='add-preferences'>
+            <button class='submit-btn'>Submit</button>
+        </section>
     `;
-}
+    
+} 

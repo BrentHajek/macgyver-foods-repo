@@ -34,7 +34,9 @@
                 </ul>
             </div>
         </div>
-        <div class="header__logo"></div>
+        <div class="header__logo">
+            <img class="header__logo_img" src="./images/picky-eater.png" alt="site-logo">
+        </div>
         <div class="hidden_search_bar">
             <input class="search_for_recipes_input" type="text" placeholder="Search Recipe">
             <button class="search_for_recipes_button">Search</button>
@@ -48,7 +50,7 @@
             </ul>
         </div>
     </header>
-    <body>
+    <body class="body__container">
         <div id="app">
             <div class="body__carousel">
                 <button class="body__carousel_btnLeft is-hidden">
@@ -76,9 +78,17 @@
                     <button class="body__carousel_indicator"></button>
                 </div>
             </div>
+            <div class="ingredient__text">
+                <p class="ingredient__textChoice">Select the ingredients you have on hand.</p>
+            </div>
             <div id="ingredient__categories" class="body__ingredient_groups"></div>
+            <div class="ingredient__text">
+                <p class="preference__textChoice">Choose your picky-eater's food preference(s).</p>
+            </div>
+            <div id="preference__categories" class="body__preferences_group"></div>
+            <p class="loggedIn__message">*To add allergies and intolerances, please log in.</p>
             <div class="ingredient__submit">
-                <p class="ingredients__submitBtn">Add Ingredients to Pantry</p>
+                <p class="ingredients__submitBtn">Search for Recipes</p>
             </div>
         </div>
     </body>
@@ -116,5 +126,6 @@
     <script src="./js/header-footer.js"></script>
     <script src="./js/landing-page.js"></script>
     <script src="./js/signin.js"></script>
+    <script src="./js/preferences.js"></script>
 </body>
 </html>

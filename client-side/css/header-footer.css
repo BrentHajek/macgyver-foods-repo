@@ -99,6 +99,11 @@
     padding-top: .5rem;
 }
 
+.header__logo_img {
+    height: 80px;
+    width: auto;
+}
+
 .header__list {
     display: flex;
     padding-right: 1.5rem;
