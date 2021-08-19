@@ -27,7 +27,7 @@ import RemovePreferences from './components/RemovePreferences.js';
 import SavedRecipesToChildPage from './pages/SavedRecipesToChildPage.js';
 import startSite from './landing-page.js';
 import SavedSingleRecipePage from './pages/SavedSingleRecipePage.js';
-import LoadingPage from './pages/LoadingPage.js'
+import LoadingPage from './pages/LoadingPage.js';
 import LandingPreferences from './components/LandingPagePreferences.js';
 import startPrefSite from './preferences.js';
 
@@ -48,6 +48,10 @@ function buildPage() {
     navToSignInPage();
     toggleSearchBar();
     searchForRecipes();
+    menuToContactPage();
+    menuToFaq();
+    menuToTerms();
+    menuToPrivacy();
     renderLandingPreferences();
 }
 
@@ -574,9 +578,25 @@ function navFaq() {
     });
 }
 
+function menuToFaq() {
+    const menuFaqElem = document.querySelector('#faq');
+    menuFaqElem.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        app.innerHTML = FaqPage();
+    });
+}
+
 function navTerms() {
     const termsElem = document.querySelector('.footer__terms_listItem');
     termsElem.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        app.innerHTML = Terms();
+    });
+}
+
+function menuToTerms() {
+    const menuTermsElem = document.querySelector('#terms');
+    menuTermsElem.addEventListener('click', () => {
         const app = document.querySelector('#app');
         app.innerHTML = Terms();
     });
@@ -590,9 +610,25 @@ function navPrivacy() {
     });
 }
 
+function menuToPrivacy() {
+    const menuPrivacyElem = document.querySelector('#privacy');
+    menuPrivacyElem.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        app.innerHTML = Privacy();
+    });
+}
+
 function navigateToContactPage() {
     const contactButton = document.querySelector('.footer__contact_listItem');
     contactButton.addEventListener('click', () => {
+        const app = document.querySelector('#app');
+        app.innerHTML = ContactPage();
+    });
+}
+
+function menuToContactPage() {
+    const contactMenuBtn = document.querySelector('#contact');
+    contactMenuBtn.addEventListener('click', () => {
         const app = document.querySelector('#app');
         app.innerHTML = ContactPage();
     });
