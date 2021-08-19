@@ -29,6 +29,7 @@ import PantryPage from './pages/PantryPage.js';
 import RemoveFromPantry from './components/RemoveFromPantry.js';
 import LandingPreferences from './components/LandingPagePreferences.js';
 import startPrefSite from './preferences.js';
+import NonUserRecipePage from './pages/NonUserRecipePage.js';
 
 buildPage();
 
@@ -743,6 +744,31 @@ function navTempChoices() {
             stringName6 += tempItemsAndPreferences[i] + ',';
         }
 
-        console.log(stringName6);
+        apiActions.getRequest(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKeyNum}&includeIngredients=${stringName6}&fillIngredients=true&number=12&sort=popularity&limitLicense=true`, (recipes) => {
+                            console.log(recipes);
+                            app.innerHTML = RecipeIngredientsListPage(recipes);
+                            // const recipeId = recipes.results[0].id;
+                            // apiActions.getRequest(`https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=${apiKeyNum}`, (recipeInstructions) => {
+                            //     // console.log(recipeInstructions);
+                            //     app.innerHTML += RecipeInstructions(recipeInstructions);
+                            // });
+                            navToSpecificRecipePage();
+                        });
     });
+}
+
+function navToSpecificRecipePage() {
+    const nav_full_recipe_button = document.querySelectorAll('.nav_full_recipe');
+    for (const nav_full_recipe_button of nav_full_recipe_button) {
+        nav_full_recipe_button.addEventListener('click', (event) => {
+            if (event.target.classList.contains('nav_full_recipe')) {
+                app.innerHTML = LoadingPage();
+                singleRecipe = event.target.parentElement.parentElement.querySelector('input').value;
+                apiActions.getRequest(`https://api.spoonacular.com/recipes/${singleRecipe}/card?apiKey=${apiKeyNum}&backgroundImage=background1`, (recipe) => {
+                    console.log(recipe);
+                    app.innerHTML = NonUserRecipePage(recipe);
+                });
+            }
+        });
+    }
 }
