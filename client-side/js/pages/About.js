@@ -18,8 +18,7 @@ export default function AboutPage() {
             <div id="brent__image" class="box"></div>
                 <div class="developer__card_content">
                 <h3 class="developer_name">Brent Hajek</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. </p>
+
                 </div>
             </div>
 
