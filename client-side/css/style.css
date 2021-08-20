@@ -365,8 +365,7 @@ label {
 }
 
 .foodPreferences__container {
-    opacity: 0;
-    max-height: 0;
+    display: none;
 }
 
 .preference__category_title {

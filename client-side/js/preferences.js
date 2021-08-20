@@ -9,14 +9,14 @@ function bindPrefButtons() {
     app.addEventListener('click', (event) => {
         if (event.target.classList.contains('body__preferences')) {
             const foodPreferencesContainer = document.querySelector('.foodPreferences__container');
-            if (foodPreferencesContainer.style.opacity === '1') {
-            foodPreferencesContainer.style.opacity = '0';
+            if (foodPreferencesContainer.style.display === 'block') {
+            foodPreferencesContainer.style.display = 'none';
             foodPreferencesContainer.style.transformOrigin = 'bottom';
             foodPreferencesContainer.style.transform = 'scale(1,0.1);';
             foodPreferencesContainer.style.transition = '300ms';
             foodPreferencesContainer.style.maxHeight = '0';
             } else {
-            foodPreferencesContainer.style.opacity = '1';
+            foodPreferencesContainer.style.display = 'block';
             foodPreferencesContainer.style.transformOrigin = 'top';
             foodPreferencesContainer.style.transform = 'scale(1,0.1);';
             foodPreferencesContainer.style.transition = '300ms';
@@ -31,14 +31,14 @@ function bindPrefTitleButton() {
     app.addEventListener('click', (event) => {
         if (event.target.classList.contains('choose__preferences_title')) {
             const foodPreferencesContainer = document.querySelector('.foodPreferences__container');
-            if (foodPreferencesContainer.style.opacity === '1') {
-                foodPreferencesContainer.style.opacity = '0';
+            if (foodPreferencesContainer.style.display === 'block') {
+                foodPreferencesContainer.style.display = 'none';
                 foodPreferencesContainer.style.transformOrigin = 'bottom';
                 foodPreferencesContainer.style.transform = 'scale(1,0.1);';
                 foodPreferencesContainer.style.transition = '300ms';
                 foodPreferencesContainer.style.maxHeight = '0';
                 } else {
-                foodPreferencesContainer.style.opacity = '1';
+                foodPreferencesContainer.style.display = 'block';
                 foodPreferencesContainer.style.transformOrigin = 'top';
                 foodPreferencesContainer.style.transform = 'scale(1,0.1);';
                 foodPreferencesContainer.style.transition = '300ms';
@@ -55,14 +55,14 @@ function bindPrefDownButton() {
             const foodPreferencesContainer = document.querySelector(
             '.foodPreferences__container'
             );
-            if (foodPreferencesContainer.style.opacity === '1') {
-            foodPreferencesContainer.style.opacity = '0';
+            if (foodPreferencesContainer.style.display === 'block') {
+            foodPreferencesContainer.style.display = 'none';
             foodPreferencesContainer.style.transformOrigin = 'bottom';
             foodPreferencesContainer.style.transform = 'scale(1,0.1);';
             foodPreferencesContainer.style.transition = '300ms';
             foodPreferencesContainer.style.maxHeight = '0';
             } else {
-            foodPreferencesContainer.style.opacity = '1';
+            foodPreferencesContainer.style.display = 'block';
             foodPreferencesContainer.style.transformOrigin = 'top';
             foodPreferencesContainer.style.transform = 'scale(1,0.1);';
             foodPreferencesContainer.style.transition = '300ms';
