@@ -271,10 +271,22 @@
     padding-top: 1rem;
 }
 
+.hidden_search_bar {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
+
 .search_for_recipes_button {
+    background-color: rgb(255, 56, 0);
+    border: none;
+    color: white;
     display: none;
 }
 
 .search_for_recipes_input {
+    margin-right: .5rem;
     visibility: hidden;
+    width: 400px;
 }
