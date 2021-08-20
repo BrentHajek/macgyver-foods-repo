@@ -34,7 +34,7 @@ import NonUserRecipePage from './pages/NonUserRecipePage.js';
 buildPage();
 
 function buildPage() {
-    renderProfileInfo();
+    // renderProfileInfo();
     navAllergies();
     navFoodCategories();
     navigateToContactPage();
@@ -69,16 +69,16 @@ const apiKeyNum = '00f757b09028492da86c30d8109241c0';
 
 let parentId = 203;
 
-function renderProfileInfo() {
-    const profileButton = document.querySelector('#profile_button');
-    profileButton.addEventListener('click', () => {
-        app.innerHTML = LoadingPage();
-        apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
-            wireUpParent(parents);
-        });
-        toggleSearchBar();
-    });
-}
+// function renderProfileInfo() {
+//     const profileButton = document.querySelector('#profile_button');
+//     profileButton.addEventListener('click', () => {
+//         app.innerHTML = LoadingPage();
+//         apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
+//             wireUpParent(parents);
+//         });
+//         toggleSearchBar();
+//     });
+// }
 
 function wireUpParent(parents) {
     app.innerHTML = ParentPage(parents);
@@ -679,32 +679,37 @@ function navToAboutPageFooter() {
 }
 
 function navToSignInPage() {
-    const navToSignInButton = document.querySelector('#sign_in');
+    const navToSignInButton = document.querySelector('#profile_button');
     navToSignInButton.addEventListener('click', () => {
         app.innerHTML = SignInPage();
         const loginForm = document.getElementById("login-form");
         const loginButton = document.getElementById("login-form-submit");
         const loginErrorMsg = document.getElementById("login-error-msg");
-    
+
         loginButton.addEventListener("click", (e) => {
             e.preventDefault();
             const username = loginForm.username.value;
             const password = loginForm.password.value;
-    
+
             if (username === "user" && password === "teammacgyver") {
                 alert("You have successfully logged in.");
                 apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
                     wireUpParent(parents);
                     toggleSearchBar();
+                    const profileButton = document.querySelector('#profile_button');
+                    profileButton.addEventListener('click', () => {
+                        // app.innerHTML = LoadingPage();
+                        apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
+                            wireUpParent(parents);
+                        });
+                    });
                 });
-                // location.reload();
             } else {
                 loginErrorMsg.style.opacity = 1;
             }
-        
-            SignInJs();
-        })
-    });
+        });
+        SignInJs();
+    })
 }
 
 function navHome() {
