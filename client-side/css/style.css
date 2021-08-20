@@ -217,6 +217,13 @@
     width: 90%;
 }
 
+.body__ingredient_groups section:last-child {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    width: 50%;
+    margin: auto;
+}
+
 .body__category_list {
     background: rgb(255, 56, 0);
     color: white;
@@ -227,6 +234,11 @@
     justify-content: space-between;
     padding-left: 1rem;
 }
+
+/* .body__category_list div:last-child {
+    grid-column-start: 1;
+    grid-column-end: 3;
+} */
 
 section h2 {
     margin: 0;
@@ -352,8 +364,9 @@ label {
     padding-right: 1rem;
 }
 
-.preference__topLevel {
-    /* display: none; */
+.foodPreferences__container {
+    opacity: 0;
+    max-height: 0;
 }
 
 .preference__category_title {
@@ -410,6 +423,11 @@ label {
     font-size: 18px;
     padding: .5rem;
     text-align: center;
+}
+
+.recipeList-h2 {
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 .terms__page {
