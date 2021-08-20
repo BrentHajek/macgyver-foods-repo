@@ -689,7 +689,6 @@ function navToSignInPage() {
             e.preventDefault();
             const username = loginForm.username.value;
             const password = loginForm.password.value;
-
             if (username === "teammacgyver" && password === "teammacgyver") {
                 alert("You have successfully logged in.");
                 apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {

@@ -96,6 +96,10 @@
     cursor: pointer;
 }
 
+.header__menu_logo {
+    display: flex;
+}
+
 .header__menu_btn {
     position: relative;
     display: flex;
@@ -106,6 +110,7 @@
     cursor: pointer;
     transition: all .5s ease-in-out;
     padding-left: 1rem;
+    padding-top: 5px;
 }
 
 .header__menu_burger {
@@ -157,14 +162,14 @@
     background: white;
     display: none;
     position: fixed;
-    top: 92px;
+    top: 82px;
     z-index: 1;
 }
 
 .header__menu_content {
     background: rgb(243, 243, 243);
     margin: 0;
-    margin-left: .5rem;
+    margin-left: 9.7rem;
     padding: 1.5rem;
     width: 200px;
 }
@@ -180,7 +185,9 @@
 }
 
 .header__logo_img {
-    height: 80px;
+    height: 65px;
+    padding-left: 1rem;
+    padding-top: 3px;
     width: auto;
 }
 
@@ -192,7 +199,7 @@
 .header__listItems {
     color: white;
     cursor: pointer;
-    font-size: 22px;
+    font-size: 25px;
     list-style: none;
     margin-left: 1.5rem;
     margin-top: .25rem;
