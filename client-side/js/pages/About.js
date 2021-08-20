@@ -57,7 +57,7 @@ export default function AboutPage() {
             <div id="lee__image" class="box"></div>
                 <div class="developer__card_content">
                 <h3 class="developer_name">Lee Powell</h3>
-                    <p>Analytically driven software developer with a high attention to detail , an affinity for problem solving and 
+                    <p>Analytically driven software developer with a high attention to detail, an affinity for problem solving and 
                     versatility to improve productivity.</p>
                 </div>
             </div>
