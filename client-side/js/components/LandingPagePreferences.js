@@ -2,7 +2,7 @@ export default function navLandingPreferences(foodCategories) {
     return `
         <div class="body__preferences">
             <h2 class="choose__preferences_title">Food Preferences</h2>
-            <i id="downPrefBtn" class="fas fa-chevron-down"></i>
+            <i id="downPrefBtn" class="fas fa-chevron-down temp_dropping_pref"></i>
         </div>
         <div class="foodPreferences__container">
         ${foodCategories
