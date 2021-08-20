@@ -696,15 +696,21 @@ function navToSignInPage() {
                 apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
                     wireUpParent(parents);
                     toggleSearchBar();
+                    const profileButton = document.querySelector('#profile_button');
+                    profileButton.addEventListener('click', () => {
+                        // app.innerHTML = LoadingPage();
+                        apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
+                            wireUpParent(parents);
+                        });
+                    });
                 });
-                // location.reload();
             } else {
                 loginErrorMsg.style.opacity = 1;
             }
-            SignInJs();
-        },{once: true});
+        });
+        SignInJs();
     })
-    }
+}
 
 function navHome() {
     const homeElem = document.querySelector('#home-button');
