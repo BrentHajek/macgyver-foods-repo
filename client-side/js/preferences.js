@@ -5,47 +5,70 @@ var preferenceTitle = document.querySelectorAll('.choose__preferences_title');
 var preferenceMenu = document.querySelectorAll('.preference__topLevel')
 
 function bindPrefButtons() {
-    prefDropDownBtn.forEach((ingredientBtn) => {
-        ingredientBtn.addEventListener('click', (event) => {
-            if (event.target.classList.contains('body__preferences')) {
-                let ingredientList = event.target.parentElement.querySelector('.preference__topLevel');
-                if (ingredientList.style.display !== 'block') {
-                    ingredientList.style.display = 'block';
-                } else {
-                    ingredientList.style.display = 'none';
-                }
+    const app = document.querySelector('#app');
+    app.addEventListener('click', (event) => {
+        if (event.target.classList.contains('body__preferences')) {
+            const foodPreferencesContainer = document.querySelector('.foodPreferences__container');
+            if (foodPreferencesContainer.style.opacity === '1') {
+            foodPreferencesContainer.style.opacity = '0';
+            foodPreferencesContainer.style.transformOrigin = 'bottom';
+            foodPreferencesContainer.style.transform = 'scale(1,0.1);';
+            foodPreferencesContainer.style.transition = '300ms';
+            foodPreferencesContainer.style.maxHeight = '0';
+            } else {
+            foodPreferencesContainer.style.opacity = '1';
+            foodPreferencesContainer.style.transformOrigin = 'top';
+            foodPreferencesContainer.style.transform = 'scale(1,0.1);';
+            foodPreferencesContainer.style.transition = '300ms';
+            foodPreferencesContainer.style.maxHeight = '1600px';
             }
-        });
+        }
     });
 }
 
 function bindPrefTitleButton() {
-    preferenceTitle.forEach((ingredientBtn) => {
-        ingredientBtn.addEventListener('click', (event) => {
-            if (event.target.classList.contains('choose__preferences_title')) {
-                let ingredientList = event.target.parentElement.parentElement.querySelector('.preference__topLevel');
-                if (ingredientList.style.display !== 'block') {
-                    ingredientList.style.display = 'block';
+    const app = document.querySelector('#app');
+    app.addEventListener('click', (event) => {
+        if (event.target.classList.contains('choose__preferences_title')) {
+            const foodPreferencesContainer = document.querySelector('.foodPreferences__container');
+            if (foodPreferencesContainer.style.opacity === '1') {
+                foodPreferencesContainer.style.opacity = '0';
+                foodPreferencesContainer.style.transformOrigin = 'bottom';
+                foodPreferencesContainer.style.transform = 'scale(1,0.1);';
+                foodPreferencesContainer.style.transition = '300ms';
+                foodPreferencesContainer.style.maxHeight = '0';
                 } else {
-                    ingredientList.style.display = 'none';
+                foodPreferencesContainer.style.opacity = '1';
+                foodPreferencesContainer.style.transformOrigin = 'top';
+                foodPreferencesContainer.style.transform = 'scale(1,0.1);';
+                foodPreferencesContainer.style.transition = '300ms';
+                foodPreferencesContainer.style.maxHeight = '1600px';
                 }
-            }
-        });
+        }
     });
 }
 
 function bindPrefDownButton() {
-    prefDownButton.forEach((ingredientBtn) => {
-        ingredientBtn.addEventListener('click', (event) => {
-            if (event.target.classList.contains('fa-chevron-down')) {
-                let ingredientList = event.target.parentElement.parentElement.querySelector('.preference__topLevel');
-                if (ingredientList.style.display !== 'block') {
-                    ingredientList.style.display = 'block';
-                } else {
-                    ingredientList.style.display = 'none';
-                }
+    const app = document.querySelector('#app');
+    app.addEventListener('click', (event) => {
+        if (event.target.classList.contains('fa-chevron-down')) {
+            const foodPreferencesContainer = document.querySelector(
+            '.foodPreferences__container'
+            );
+            if (foodPreferencesContainer.style.opacity === '1') {
+            foodPreferencesContainer.style.opacity = '0';
+            foodPreferencesContainer.style.transformOrigin = 'bottom';
+            foodPreferencesContainer.style.transform = 'scale(1,0.1);';
+            foodPreferencesContainer.style.transition = '300ms';
+            foodPreferencesContainer.style.maxHeight = '0';
+            } else {
+            foodPreferencesContainer.style.opacity = '1';
+            foodPreferencesContainer.style.transformOrigin = 'top';
+            foodPreferencesContainer.style.transform = 'scale(1,0.1);';
+            foodPreferencesContainer.style.transition = '300ms';
+            foodPreferencesContainer.style.maxHeight = '1600px';
             }
-        });
+        }
     });
 }
 
