@@ -11,7 +11,6 @@ html {
     width: 100%;
     /* margin: 2rem auto; */
     text-align: center;
-    
 }
 
 .your__profile_header {
@@ -39,9 +38,30 @@ html {
 }
 
 .parent__info_container {
+    display: grid;
     color: #2E284D;
     margin: auto;
     text-align: center;
+}
+
+.parent__info_card {
+    border-color: rgb(255, 56, 0);
+    border-radius: 25px;
+    border-style: solid;
+}
+
+#profile__pic {
+    background-image: url(images/profile-pic.jpg);
+    border-radius: 50%;
+    height: 233px;
+    margin: auto;
+    margin-top: 10px;
+    width: 233px;
+}
+
+.pantry__buttons_container {
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .parent__first_name, .parent__last_name, .parent__email {
@@ -138,6 +158,54 @@ html {
 
 .delete_ingredient_minus {
     border-radius: 8px;
+}
+
+/** Add child form **/
+.add_child__container {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+.welcome__add_picky_eater {
+    text-align: center;
+}
+
+.header_add_your_eater {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+    color: #2E284D;
+}
+
+.add_your_eater__info {
+    color: #FF3800;
+    font-weight: bold;
+    text-align: center;
+}
+
+.add_child {
+    margin-left: 27.5%;
+    margin-right: 20%;
+    margin-bottom: 20%;
+    margin-top: 2.5%;
+}
+
+.add_child_submit {
+    background-color: #2E284D;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 18px;
+    /* font-weight: bolder; */
+    margin-top: 40px;
+    padding: 6px 12px;
+    margin-top: 5%;
+    margin-left: 37.5%;
+}
+
+.test5 {
+    padding: 7.5px;
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait),

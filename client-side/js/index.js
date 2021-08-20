@@ -685,13 +685,20 @@ function navToSignInPage() {
         const loginForm = document.getElementById("login-form");
         const loginButton = document.getElementById("login-form-submit");
         const loginErrorMsg = document.getElementById("login-error-msg");
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5b5db0949690cadc15d55ad442aee114195238df
         loginButton.addEventListener("click", (e) => {
             e.preventDefault();
             const username = loginForm.username.value;
             const password = loginForm.password.value;
+<<<<<<< HEAD
 
             if (username === "teammacgyver" && password === "teammacgyver") {
+=======
+            if (username === "user" && password === "teammacgyver") {
+>>>>>>> 5b5db0949690cadc15d55ad442aee114195238df
                 alert("You have successfully logged in.");
                 apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
                     wireUpParent(parents);
@@ -701,6 +708,10 @@ function navToSignInPage() {
                         // app.innerHTML = LoadingPage();
                         apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
                             wireUpParent(parents);
+<<<<<<< HEAD
+=======
+                            toggleSearchBar();
+>>>>>>> 5b5db0949690cadc15d55ad442aee114195238df
                         });
                     });
                 });
@@ -773,17 +784,12 @@ function navTempChoices() {
         apiActions.getRequest(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKeyNum}&includeIngredients=${stringName6}&fillIngredients=true&number=12&sort=popularity&limitLicense=true`, (recipes) => {
                             console.log(recipes);
                             app.innerHTML = RecipeIngredientsListPage(recipes);
-                            // const recipeId = recipes.results[0].id;
-                            // apiActions.getRequest(`https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=${apiKeyNum}`, (recipeInstructions) => {
-                            //     // console.log(recipeInstructions);
-                            //     app.innerHTML += RecipeInstructions(recipeInstructions);
-                            // });
-                            navToSpecificRecipePage();
+                            navRecipe();
                         });
     });
 }
 
-function navToSpecificRecipePage() {
+function navRecipe() {
     const nav_full_recipe_button = document.querySelectorAll('.nav_full_recipe');
     for (const nav_full_recipe_button of nav_full_recipe_button) {
         nav_full_recipe_button.addEventListener('click', (event) => {
