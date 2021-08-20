@@ -80,9 +80,8 @@ html {
 
 /* coming from the Parent.js component */
 .children__name_header {
-    background-color: rgb(255, 56, 0);
-    border-radius: 25px;
-    color: white;
+    border-bottom: 1px solid rgb(255, 56, 0);
+    color: #2E284D;
     padding: 3px;
     text-align: center;
 }
@@ -109,6 +108,7 @@ html {
 }
 
 .child__name {
+    cursor: pointer;
     visibility: visible;
 }
 
@@ -225,5 +225,12 @@ only screen and (max-device-width: 640px) {
         flex-direction: column;
         padding: auto;
         text-align: center;
+    }
+}
+
+@media screen and (max-width: 730px) {
+    .user_info {
+        display: grid;
+        grid-template-columns: 1fr;
     }
 }

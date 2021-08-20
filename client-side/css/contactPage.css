@@ -21,3 +21,18 @@ html {
     grid-template-columns: 1fr;
     max-width: 300px;
 }
+
+.contact-input {
+    background-color: rgb(255, 56, 0);
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    padding: .5rem;
+}
+
+@media screen and (max-width: 716px) {
+    .ways__to__contact {
+        grid-template-columns: 1fr;
+    }
+}
