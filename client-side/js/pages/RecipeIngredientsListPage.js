@@ -1,7 +1,7 @@
 
 export default function RecipeIngredientsListPage(recipesList) {
     return `
-    <h2 class="recipeList-h2">Recipe Ingredients</h2>
+    <h2 class="recipeList-h2">Recipes</h2>
 
     <div class="recipe_container">
         <div class="recipeList_test">
