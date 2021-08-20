@@ -379,7 +379,8 @@ label {
     justify-content: center;
 }
 
-.ingredients__submitBtn {
+.ingredients__submitBtn, .submit-allergies-to-remove-btn, .remove-btn, .submit-btn,
+.submit-pantry-items-to-remove-btn, .delete_child_submit {
     background: rgb(255, 56, 0);
     color: white;
     cursor: pointer;

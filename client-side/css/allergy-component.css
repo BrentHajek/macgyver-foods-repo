@@ -65,3 +65,15 @@
     border-radius: 50%;
     background: #FF3800;
 }
+
+.submit-allergies-btn {
+    background: rgb(255, 56, 0);
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 2rem;
+    margin-top: 1rem;
+    padding: .5rem;
+    text-align: center;
+    width: 200px;
+}
