@@ -689,13 +689,8 @@ function navToSignInPage() {
             e.preventDefault();
             const username = loginForm.username.value;
             const password = loginForm.password.value;
-<<<<<<< HEAD
 
             if (username === "teammacgyver" && password === "teammacgyver") {
-=======
-            if (username === "teammacgyver" && password === "teammacgyver") {
-                alert("You have successfully logged in.");
->>>>>>> 7f3297d0583e6adbcc660b14f7436299864a8960
                 apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
                     wireUpParent(parents);
                     toggleSearchBar();
@@ -703,10 +698,7 @@ function navToSignInPage() {
                     profileButton.addEventListener('click', () => {
                         apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
                             wireUpParent(parents);
-<<<<<<< HEAD
-=======
                             toggleSearchBar();
->>>>>>> 7f3297d0583e6adbcc660b14f7436299864a8960
                         });
                     });
                 });
