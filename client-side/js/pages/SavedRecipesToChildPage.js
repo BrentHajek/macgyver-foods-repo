@@ -12,7 +12,7 @@ export default function SavedRecipesToChildPage(savedRecipes) {
                 </div>
                 <div class="recipe_card_box">
                     <h2 class="recipe_card_title">${recipe.title}</h2>
-                    <button class="saved_full_recipe">Learn More
+                    <button class="saved_full_recipe">Get Recipe
                     <input type="hidden" id="recipeIngredientId${recipe.id}" value=${recipe.id}>
                     </button>
                 </div>
