@@ -36,7 +36,7 @@ export default function ContactPage() {
                     <input type="text" id="subject" name="subject" placeholder="Subject...">
                     <br><label for="comments__or__questions">Comments or Questions:</label></form>
                     <textarea id="comments__or__questions" name="comments__or__questions" placeholder="Write something..." style="height:250px"></textarea>
-                    <br><input type="submit" value="Submit">
+                    <br><input class="contact-input" type="submit" value="Submit">
                 </form>
             </article>
         </div>
