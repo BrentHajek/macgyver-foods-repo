@@ -10,7 +10,7 @@ export default function Child(child) {
             ${child.allergies.map((allergy) => {
         return `
                     <li>
-                        <span>${allergy.allergy}</span>
+                        <span class="added-allergy-list">${allergy.allergy}</span>
                     </li>
                 `;
     }).join('')}
