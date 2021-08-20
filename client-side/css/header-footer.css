@@ -2,6 +2,7 @@
 .header {
     background-color: rgb(255, 56, 0);
     display: flex;
+    height: 72px;
     justify-content: space-between;
 }
 
@@ -77,6 +78,7 @@
     display: flex;
     margin: 0;
     margin-top: 1rem;
+    padding-left: 0;
     justify-content: center;
 }
 
@@ -251,6 +253,7 @@
     justify-content: space-around;
     list-style: none;
     margin-bottom: 0;
+    padding-left: 0;
 }
 
 .footer__links_list a {
@@ -289,4 +292,27 @@
     margin-right: .5rem;
     visibility: hidden;
     width: 400px;
+}
+
+@media screen and (max-width: 603px) {
+    .header__logo_img {
+        display: none;
+    }
+
+    .footer__links_list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        text-align: center;
+    }
+
+    .footer__privacy_listItem {
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+}
+
+@media screen and (max-width: 479px) {
+    .modal-stepImg {
+        display: none;
+    }
 }

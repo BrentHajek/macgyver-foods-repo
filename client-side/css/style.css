@@ -112,6 +112,7 @@
     background:#FF3800;
 }
 
+/*CAROUSEL*/
 .body__carousel {
     position: relative;
     height: 300px;
@@ -409,4 +410,60 @@ label {
     font-size: 18px;
     padding: .5rem;
     text-align: center;
+}
+
+.terms__page {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.privacy__page {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+@media screen and (max-width: 900px) {
+    .body__carousel {
+        height: 250px;
+    }
+}
+
+@media screen and (max-width: 685px) {
+    .preference__categories {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .preferences__container {
+        margin-left: 1rem;
+    }
+}
+
+@media screen and (max-width: 568px) {
+    .body__carousel {
+        height: 150px;
+    }
+
+    .body__ingredient_groups {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .body__carousel {
+        display: none;
+    }
+
+    .ingredient__textChoice {
+        margin-top: 1rem;
+    }
+}
+
+@media screen and (max-width: 417px) {
+    .preference__categories {
+        grid-template-columns: 1fr;
+    }
+
+    .preferences__container {
+        margin-left: 1rem;
+    }
 }
