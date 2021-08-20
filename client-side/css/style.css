@@ -491,3 +491,7 @@ label {
         margin-left: 1rem;
     }
 }
+
+.added-allergy-list {
+    font-weight: bold;
+}
