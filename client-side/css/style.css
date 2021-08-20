@@ -396,3 +396,17 @@ label {
     text-align: center;
     width: 200px;
 }
+
+.recipe_card_box {
+    text-align: center;
+}
+
+.saved_full_recipe {
+    background: rgb(255, 56, 0);
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    padding: .5rem;
+    text-align: center;
+}
