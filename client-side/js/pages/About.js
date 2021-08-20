@@ -62,6 +62,7 @@ export default function AboutPage() {
                 </div>
             </div>
 
+            
             <div class="developer__card">
             <div id="randy__image" class="box"></div>
             <div class="developer__card_content">
