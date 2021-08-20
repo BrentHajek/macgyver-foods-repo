@@ -3,12 +3,13 @@ export default function AboutPage() {
     <section id="about_us__container">
         <h1 class="about_us__header">About Us/ Picky Eater</h1>
         <section id="about__banner">
-            <div class="about__banner_content">
-            <p>Picky Eater was developed as a means to keep track of the items you have available in your pantry, as
-                well as a way to find your child's favorite recipes based on the items they love.</p>
-                <p>Picky Eater was created by a team of highly talented developers, all of whom graduated from We Can
-                    Code It Software Developer Program.</p>
-            </div>
+        <div class="about__banner_content">
+        <p><span class="orange_large">Picky Eater</span> was developed as a means to keep track of the items you have available in your pantry, as
+            well as a way to find your child's favorite recipes based on the items they love. We understand that, <span class="franklin_navy_large">sometimes</span>, a child (<span class="pacifico_small_orange">and maybe even yourself..</span>) can be a bit.. <span class="italics">picky</span>.</p>
+            <p>So, we designed our program with both you and your children in mind; whether you're a parent, babysitter, daycare guardian or just somebody looking for recipe ideas, Picky Eater should have you covered.</p>
+            <p>
+        </div>
+
         </section>
 
         <h1 class="who_we_are__header">Who We Are</h1>
