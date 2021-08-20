@@ -14,7 +14,7 @@ export default function RecipeIngredientsListPage(recipesList) {
                     </div>
                     <div class="recipe_card_box">
                         <h2 class="recipe_card_title">${recipeList.title}</h2>
-                        <button class="nav_full_recipe">Learn More
+                        <button class="nav_full_recipe">Get Recipe
                         <input type="hidden" id="recipeIngredientId${recipeList.id}" value=${recipeList.id}>
                         </button>
                     </div>
