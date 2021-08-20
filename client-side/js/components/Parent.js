@@ -7,16 +7,7 @@ export default function Parent(parent) {
     <div class="parent__info_card">
         <input type="hidden" id="parentId" value=${parent.id}/>
         <div id="profile__pic" class="image__box"></div>
-        <h2 class="parent__name_header">Hello ${parent.parentFirstName},</h2>
-        <p class="parent__first_name">First name: ${parent.parentFirstName}</p>
-        <p class="parent__last_name">Last name: ${parent.parentLastName}</p>
-        <p class="parent__email">Email: ${parent.email}</p>
-        <h3>Your Ingredients:</h3>
-        ${parent.ingredients.map((ingredient) => {
-        return `
-                <li>${ingredient.ingredient}</li>
-            `;
-    }).join('')}
+        <h2 class="parent__name_header">Hello ${parent.parentFirstName}</h2>
         <div class="pantry__buttons_container">
         <button class="add_ingredient_plus" type="button">+ Add To Pantry</button>
         <button class="delete_ingredient_minus" type="button">- Remove From Pantry</button>
