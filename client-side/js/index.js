@@ -744,7 +744,7 @@ function searchForRecipes() {
 
 function navTempChoices() {
     const searchForIngredientsBtn = document.querySelector('.ingredients__submitBtn');
-    searchForIngredientsBtn.addEventListener('click', () => {
+    searchForIngredientsBtn.addEventListener('click', (event) => {
         if (event.target.classList.contains('ingredients__submitBtn'))
             var tempItemsToAdd = [];
         let allIngredientsToAdd = app.querySelectorAll('.temp-ingredient');

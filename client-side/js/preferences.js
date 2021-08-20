@@ -51,7 +51,7 @@ function bindPrefTitleButton() {
 function bindPrefDownButton() {
     const app = document.querySelector('#app');
     app.addEventListener('click', (event) => {
-        if (event.target.classList.contains('fa-chevron-down')) {
+        if (event.target.classList.contains('temp_dropping_pref')) {
             const foodPreferencesContainer = document.querySelector(
             '.foodPreferences__container'
             );
