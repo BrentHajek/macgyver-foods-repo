@@ -689,7 +689,7 @@ function navToSignInPage() {
             e.preventDefault();
             const username = loginForm.username.value;
             const password = loginForm.password.value;
-            if (username === "user" && password === "teammacgyver") {
+            if (username === "teammacgyver" && password === "teammacgyver") {
                 alert("You have successfully logged in.");
                 apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
                     wireUpParent(parents);
@@ -735,6 +735,7 @@ function searchForRecipes() {
                 apiActions.getRequest(`https://api.spoonacular.com/recipes/informationBulk?ids=${stringName5}&apiKey=${apiKeyNum}&includeNutrition=false`, (recipe) => {
                     app.innerHTML = SavedRecipesToChildPage(recipe);
                     viewFullSavedRecipe();
+                    toggleSearchBar();
                 });
             });
         }

@@ -94,7 +94,7 @@ html {
     grid-column-gap: 5px; */
     /* grid-template-columns: repeat(2, 1fr); */
     align-items: center;
-    background-color: rgb(132, 175, 119);
+    background-color: #eee;
     border-radius: 25px;
     color: #2E284D;
     display: flex;
