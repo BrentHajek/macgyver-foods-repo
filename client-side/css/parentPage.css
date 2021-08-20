@@ -11,7 +11,6 @@ html {
     width: 100%;
     /* margin: 2rem auto; */
     text-align: center;
-    
 }
 
 .your__profile_header {
@@ -39,9 +38,30 @@ html {
 }
 
 .parent__info_container {
+    display: grid;
     color: #2E284D;
     margin: auto;
     text-align: center;
+}
+
+.parent__info_card {
+    border-color: rgb(255, 56, 0);
+    border-radius: 25px;
+    border-style: solid;
+}
+
+#profile__pic {
+    background-image: url(images/profile-pic.jpg);
+    border-radius: 50%;
+    height: 233px;
+    margin: auto;
+    margin-top: 10px;
+    width: 233px;
+}
+
+.pantry__buttons_container {
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .parent__first_name, .parent__last_name, .parent__email {
