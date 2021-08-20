@@ -464,6 +464,12 @@ label {
     .body__ingredient_groups {
         grid-template-columns: 1fr;
     }
+
+    .body__ingredient_groups section:last-child {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 450px) {

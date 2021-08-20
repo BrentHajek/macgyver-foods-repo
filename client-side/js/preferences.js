@@ -20,7 +20,7 @@ function bindPrefButtons() {
             foodPreferencesContainer.style.transformOrigin = 'top';
             foodPreferencesContainer.style.transform = 'scale(1,0.1);';
             foodPreferencesContainer.style.transition = '300ms';
-            foodPreferencesContainer.style.maxHeight = '1600px';
+            foodPreferencesContainer.style.maxHeight = '3650px';
             }
         }
     });
@@ -42,7 +42,7 @@ function bindPrefTitleButton() {
                 foodPreferencesContainer.style.transformOrigin = 'top';
                 foodPreferencesContainer.style.transform = 'scale(1,0.1);';
                 foodPreferencesContainer.style.transition = '300ms';
-                foodPreferencesContainer.style.maxHeight = '1600px';
+                foodPreferencesContainer.style.maxHeight = '3650px';
                 }
         }
     });
@@ -66,7 +66,7 @@ function bindPrefDownButton() {
             foodPreferencesContainer.style.transformOrigin = 'top';
             foodPreferencesContainer.style.transform = 'scale(1,0.1);';
             foodPreferencesContainer.style.transition = '300ms';
-            foodPreferencesContainer.style.maxHeight = '1600px';
+            foodPreferencesContainer.style.maxHeight = '3650px';
             }
         }
     });
