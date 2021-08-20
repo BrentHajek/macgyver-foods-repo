@@ -263,11 +263,3 @@
     justify-content: center;
     padding-top: 1rem;
 }
-
-.search_for_recipes_button {
-    display: none;
-}
-
-.search_for_recipes_input {
-    visibility: hidden;
-}

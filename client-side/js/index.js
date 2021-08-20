@@ -685,33 +685,19 @@ function navToSignInPage() {
         const loginForm = document.getElementById("login-form");
         const loginButton = document.getElementById("login-form-submit");
         const loginErrorMsg = document.getElementById("login-error-msg");
-<<<<<<< HEAD
-
-=======
->>>>>>> 5b5db0949690cadc15d55ad442aee114195238df
         loginButton.addEventListener("click", (e) => {
             e.preventDefault();
             const username = loginForm.username.value;
             const password = loginForm.password.value;
-<<<<<<< HEAD
 
             if (username === "teammacgyver" && password === "teammacgyver") {
-=======
-            if (username === "user" && password === "teammacgyver") {
->>>>>>> 5b5db0949690cadc15d55ad442aee114195238df
-                alert("You have successfully logged in.");
                 apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
                     wireUpParent(parents);
                     toggleSearchBar();
                     const profileButton = document.querySelector('#profile_button');
                     profileButton.addEventListener('click', () => {
-                        // app.innerHTML = LoadingPage();
                         apiActions.getRequest('http://localhost:8080/parents/203', (parents) => {
                             wireUpParent(parents);
-<<<<<<< HEAD
-=======
-                            toggleSearchBar();
->>>>>>> 5b5db0949690cadc15d55ad442aee114195238df
                         });
                     });
                 });
